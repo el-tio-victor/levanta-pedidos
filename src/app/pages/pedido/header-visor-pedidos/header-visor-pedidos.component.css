@@ -1,0 +1,43 @@
+.wrapper-tallas{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10px,1fr));
+}
+
+.label-header{
+  font-size: 1.08rem;
+  font-weight: 100;
+  padding:  0 5px;
+  
+}
+.cont-header{
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+
+.btn-add-to-cart,.btn-clean{
+  position:absolute;
+  bottom: -47px;
+  right: 153px;
+  z-index: 13;
+
+}
+
+.btn-clean{
+  width: 31px;
+  height: 31px;
+  min-height: 31px;
+  min-width: 31px;
+  bottom: -42px;
+}
+.btn-clean i{
+  line-height:31px!important;
+}
+
+.btn-add-to-cart{
+  right: 13px;
+}
+
+.btn-add-to-cart i{
+  font-size: 1.375rem;
+}

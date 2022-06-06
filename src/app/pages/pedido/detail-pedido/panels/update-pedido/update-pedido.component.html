@@ -1,0 +1,128 @@
+<div class="mt-2 p-3 wrapper-items">
+    <div class="mt-2 mb-1  item" 
+      *ngFor="let group_style of data.items | keyvalue">
+      <header class="p-2 ">
+        <div class="d-flex justify-content-between 
+          align-items-center header-wrapper">
+          <div class="d-flex align-items-center">
+            <h3 class="p-0 color-primario1 m-0
+              d-flex flex-column text-left title-style">
+              <span>
+                {{group_style.key}}
+                <strong 
+                  class=" icon-articulo {{group_style.value.icono}}">
+                </strong>
+              </span>
+              <small class="label-title">
+                {{group_style.value.descripcion}}
+              </small>
+            </h3>
+          </div>
+          <a data-toggle="collapse" 
+            href="#collapse-{{group_style.key}}">
+            <i #el_btn (click)="turnIcon(collapse_cont, el_btn)" 
+              class=" material-icons">
+              expand_more
+            </i>
+          </a>
+        </div>
+      </header>
+      <div #collapse_cont class="p-2 collapse  " 
+        id="collapse-{{group_style.key}}">
+        <div class="wrapper-prods">
+          <header class="d-flex justify-content-between">
+            <strong class="col-4">Color</strong>
+            <strong class="col-3 text-center">Talla</strong>
+            <strong class="col-3 text-center ">Cantidad</strong>
+            <strong class="col-2">.</strong>
+          </header>
+        <div 
+          *ngFor="let item of  group_style.value.prods"
+          class="  item-prod m-1">
+          <div class="d-flex align-items-center 
+            justify-content-between p-1  wrapper-item">
+            <div class="col-4 p-1 d-flex flex-column cont-info-item">
+            <!--><strong class="color-primario1">{{item.ItemCode}}</strong><-->
+              <span class="pl-1">
+                <small>{{item.Color}}</small>
+              </span>
+            </div>
+            <span class="col-3 text-center">{{item.Talla}}</span>
+            <!--<input  [ngModel]="item.Quantity" type="number"
+              (ngModelChange)=
+                "updateCantidad($event,group_style.key,item.ItemCode)"
+              class="col-3 p-0 form-control text-center" 
+              value="{{item.Quantity}}">-->
+            <div>
+            <input #input_current="ngModel"
+              pattern="^[1-9][0-9]*$"
+              min="1"
+              required
+              [ngModel]="item.Quantity" type="number"
+              (ngModelChange)=
+                "updateCantidad(
+                  $event,
+                  group_style.key,
+                  item.ItemCode,
+                  input_current)"
+              class=" p-0 form-control text-center" 
+              value="{{item.Quantity}}">
+              <div class="text-danger"
+                *ngIf="input_current.invalid &&
+                  (input_current.dirty || 
+                input_current.touched)"
+                >
+                <small 
+                  *ngIf="input_current.errors['required']">
+                  campo requerido 
+                </small>
+                <small 
+                  *ngIf="input_current.errors['pattern']"
+                  >
+                  el valor debe ser mayor a 0
+                </small>
+              </div>
+              </div>
+            <div 
+              class="col-2 d-flex  p-0 
+              text-center cont-action-delete">
+              <div #el_mov class="wrapper-action-delete">
+                <div class="cont-btn-delete">
+                  <i
+
+                    matTooltip="Eliminar"
+                    [matTooltipPosition]="'right'"
+                    matTooltipClass="tooltip-r"
+                    (click)="deleteItem(
+                      el_mov
+                    )" 
+                    class="material-icons btn-delete text-danger">
+                    highlight_off
+                  </i>
+                </div>
+                <div class="cont-confirm-delete">
+                  <!--<small>Eliminar artículo</small>-->
+                  <div 
+                    class="wrapper-actions-confirm
+                      d-flex justify-content-around">
+                    <small class="material-icons text-success"
+                      (click)="confirmDeleteItem(
+                        group_style.key,item.ItemCode
+                      )" 
+                    >
+                      check_circle
+                    </small>
+                    <small 
+                      class="material-icons text-danger"
+                      (click)="deleteItem(el_mov)" 
+                    >cancel</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    </div>

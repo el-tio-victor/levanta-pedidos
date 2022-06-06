@@ -1,0 +1,15 @@
+.form ::ng-deep span.mat-form-field-label-wrapper{
+  top: -0.3276em!important;
+  font-family: 'biko_regular'
+}
+.input-group{
+  background-color: red;
+}
+
+::ng-deep .mat-form-field-label{
+  text-align: left;
+}
+
+.login-page{
+  background-size: cover!important;
+}

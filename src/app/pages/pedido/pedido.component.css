@@ -1,0 +1,102 @@
+.body-visor-pedidos{
+  max-height: 480px;
+  overflow-y: scroll;
+}
+h2,h1,h3,h4,h5{
+  font-family: 'Roboto';
+  font-weight: 600;
+  color: #595959;
+}
+.tooltip-q{
+  background-color: #b71c1c;
+  color: white;
+}
+::ng-deep span.mat-select-placeholder{
+  color: white;
+}
+::ng-deep .mat-select-panel{
+  padding-top:0px!important;
+}
+.md-toast.md-success-toast-theme{
+  background-color: green;
+}
+
+.badge-color{
+  width: 80px;
+  white-space: break-spaces;
+  word-break: inherit;
+  padding: 3px 3px!important;
+  display: flex!important;
+  justify-content:center;
+  align-items: center;
+  height: 30px;
+  display: inline-block;
+}
+.label-entrega{
+  border-right: solid 2px #727377;
+}
+
+#input-filter{
+  position: sticky;
+  top:0px;
+  z-index: 10;
+  padding: 1rem .25rem .5rem 1rem;
+}
+#input-filter input{
+  margin-left: .35rem;
+  width: 80%;
+}
+
+.last-search{
+  background-color:#ea5!important;
+}
+.wrapper-colores{
+  display: flex;
+  flex-wrap: wrap;
+}
+.btn-icon{
+  cursor: pointer;
+}
+
+.wrapper-colores .badge{
+  padding: 8px 12px;
+  /*border-radius: 0;*/
+}
+
+.cont-select-estilos{
+  border-right: dotted 5px #a1a7ab;
+}
+
+.descr-prod{
+  font-size: 1.29rem;
+  font-weight: 100;
+}
+.btn-view-cart{
+  position:relative;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+}
+.btn-view-cart .number{
+  line-height: 1;
+  min-width: 15px;
+  min-height: 15px;
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  padding: 3px;
+  border-radius: 100%;
+  font-weight: 700;
+
+  background-color: white;
+}
+.btn-remove-shopping-cart{
+  width: 31px;
+  height: 31px;
+  min-height:31px;
+  min-width: 31px;
+}
+
+.btn-remove-shopping-cart .material-icons{
+  line-height: 31px;
+}

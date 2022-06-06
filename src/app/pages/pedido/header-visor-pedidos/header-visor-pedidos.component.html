@@ -1,0 +1,40 @@
+<div class=" mt-3 pb-3 cont-header">
+  <div class=" bg-primario1 d-flex rounded">
+    <div class="col-2 text-white 
+      d-flex justify-content-center
+      align-items-center " style="border-right:solid 5px white;">
+      <strong class="label-header">COLOR</strong>
+    </div>
+    <!--<div class="col-1 bg-white">
+      <div class="d-flex flex-column">
+      </div>
+    </div>-->
+    <div class="col-10 p-0 m-0   wrapper-tallas">
+      <div class="text-center text-white
+                   d-flex justify-content-center
+                   align-items-center mb-1 mt-1" 
+        *ngFor="let item of tallas">
+        <strong class="label-header">{{item}}</strong>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="show" class="" style="position:relative;">
+  <button 
+    class="btn btn-danger btn-round btn-fab btn-clean"
+    [disabled]="isDisabledBtnSave()"
+    (click)="handleClickClean($event)"
+    matTooltip="Limpiar Pedido"
+    [matTooltipPosition]="'above'"
+    matTooltipClass="tooltip-r"
+  >
+      <i class="material-icons">delete</i>
+  </button>
+  <button  (click)="handleClick($event)"  
+    class=" btn bg-success btn-round btn-add-to-cart">
+    <i class="material-icons">
+      add_shopping_cart
+    </i>
+    Agregar
+  </button>
+  </div>
+</div>

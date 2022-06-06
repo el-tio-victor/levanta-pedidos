@@ -1,0 +1,59 @@
+<div class="wrapper-modal">
+  <div class="
+    ml-3 mt-3 pt-1 mb-3 body-modal">
+    <header 
+      class=" d-flex  mb-3 
+      align-items-center justify-content-between">
+      <h4 class="m-0">Direccion de entrega</h4>
+      <div id="input-filter" 
+        class="col-6 d-flex align-items-center border">
+        <div #el_expand 
+          class="d-flex align-items-center wrapper-input-filter">
+          <i (click)="expand(el_expand, $event)" 
+            class=" p-1  material-icons">
+            search
+          </i>
+          <input
+            autocomplete="off"
+            placeholder="Filtrar por nombre..."
+            class="ml-1  form-control"
+            type="text"
+            #filterAddress
+          />
+        </div>
+      </div>
+    </header>
+    <div class="d-flex flex-wrap  justify-content-around
+      mr-2 mt-2 p-3 wrapper-items-direcciones">
+      <ng-container *ngFor="let item of direcciones">
+        <div #el_click
+          *ngIf="item.AddressName.includes(filterAddress.value.toUpperCase())"
+          (click)="selectDireccion(item, el_click)"
+          mat-button
+          class="m-2 p-1 card d-flex justify-content-between "
+          [class]="item.AddressName == direcc_select ? 'active' : ''"
+        >
+          <strong class="pl-1 pt-2 direccion_name">
+            {{ item.AddressName }}
+          </strong>
+          <small class="pl-2 pt-2 direccion">
+            {{ item.Street }} # {{ item.ZipCode }} {{ item.City }}
+          </small>
+          <div class="text-center pt-3 footer-card">
+            <i class="bg-white material-icons pl-1 pr-1 color-primario2">
+              home
+            </i>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="p-2 mt-2 ml-2  cont-msg">
+    <h4>Comentario</h4>
+    <div class="pl-2 pr-2 rounded bg-white form-group ">
+      <textarea [(ngModel)]="comentario" 
+        (ngModelChange)=changeComentario($event) class="form-control">
+      </textarea>
+    </div>
+  </div>
+</div>

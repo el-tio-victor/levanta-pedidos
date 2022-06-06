@@ -1,0 +1,96 @@
+<div class="cont-panel">
+  <div class="wrapper-panel p-3">
+    <div class=" p-2 border-bottom 
+      border-light cont-direccion-entrega">
+      <h4>Dirección de entrega</h4>
+      <div class="pl-2">
+      <strong>{{direccion_entrega.AddressName}}</strong>
+      <p class="m-0">
+        {{direccion_entrega.Street}} 
+        {{direccion_entrega.ZipCode}}
+        {{direccion_entrega.Block}}
+        {{direccion_entrega.City}}
+      </p>
+      </div>
+    </div>
+    <div class=" p-2 border-bottom border-light
+      cont-comentario">
+      <h4>Comentario</h4>
+      <div class="pl-2">
+        <p class="m-0">
+          {{comentario}}
+        </p>
+      </div>
+    </div>
+    <div class=" pt-2 prods mt-2">
+      <!--<header class="bg-primario1 text-white pr-1 pl-1">
+        <div class="d-flex">
+          <span class="col-2 p-0">Cantidad</span>
+          <span class="col-1 p-0 ">Estilo</span>
+          <span class="col-3 text-center p-0 ">Color</span>
+          <span class="col-1 p-0 text-center ">Talla</span>
+          <span class="col-5 p-0 text-center ">Descripción</span>
+        </div>
+      </header>-->
+        <ng-container *ngFor="let item of pedido | keyvalue">
+          <div class=" pl-1 pr-1 mt-1 item-table">
+          <div class=" header-table d-flex flex-column">
+            <div class="p-1">
+              <strong>{{item.key}}</strong>
+              <small class="line-height-small pl-1">
+                {{item.value.descripcion}}
+              </small>
+            </div>
+            <div class="d-flex  border-bottom titles">
+              <div class="col-2 p-0 text-center "> 
+                <span class="text-center">COLOR</span>
+              </div>
+              <div class="col-10 p-0 grid"> 
+                <span *ngFor="let talla of item.value.tallas"
+                  class="text-center" >
+                  {{talla}}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="body-table">
+          <ng-container 
+            *ngFor="let prod of 
+              groupByKey(item.value.prods,'Color') | keyvalue">
+            <div class="d-flex row-table ">
+              <div class="col-2 p-0 text-center col-color">
+                <small>{{prod.key}}</small>
+              </div>
+              <div class="col-10 p-0 grid ">
+                <span *ngFor="let talla of item.value.tallas" 
+                  class="text-center" >
+                  {{ 
+                    printQuantity( prod.value, talla)
+                  }}
+                </span>
+              </div>
+            </div>
+            <!--<div class="d-flex content-prods pl-1 pr-1">
+            <small class="col-2 text-center p-0">
+              {{prod.Quantity}}
+            </small>
+            <span class="col-1 p-0">
+              <small>{{item.key}}</small>
+            </span>
+            <small class="col-3 p-0 text-center line-height">
+              {{prod.Color}} 
+            </small>
+            <small class="col-1 text-center p-0">
+              {{prod.Talla}} 
+            </small>
+            <small class="col-5 p-0 text-center line-height">
+              {{item.value.descripcion}}
+            </small>
+            </div>-->
+          </ng-container>
+          </div>
+          </div>
+        </ng-container>
+    </div>
+  </div>
+</div>

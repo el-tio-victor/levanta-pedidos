@@ -1,0 +1,51 @@
+<div id="color-{{clave_color}}" 
+  class="d-flex pt-3 pb-3 wrapper-row border-bottom">
+    <div  class="col-2 d-flex justify-content-center
+      align-items-center pr-2">
+      <div class="  d-flex pt-1 flex-column 
+      justify-content-around rounded
+       text-center cont-name-color">
+      <strong class="m-0 color-primario1 label-icon" 
+        >
+        {{nombre_color_esp}}
+      </strong>
+        <!--<app-tshirt-svg [color]="code_exa_color">
+        </app-tshirt-svg>-->
+        <span class=" icon-articulo " 
+          [class]="icono_articulo=='' ? 'icono_otro' :
+                    icono_articulo "
+          [style.color]="code_exa_color">
+        </span>
+        </div>
+    </div>
+    <!--<div class="col-1 p-0 m-0 text-right">
+        <small class="color-primario2">stock</small>
+        <p>&nbsp;</p>
+    </div>-->
+    <div class="col-10  p-0 m-0 wrapper-tallas">
+      <div class="text-center " 
+        *ngFor="let talla of tallas">
+        <div class="p-1">
+          <div class=" d-flex justify-content-center 
+            align-items-center pb-2">
+            <!--<i *ngIf="getStockByTalla(talla) != 'N/A'" 
+              class="material-icons ">store</i>-->
+              <small class="m-0">
+                {{getStockByTalla(talla) > 500 ? '+500' :
+                  getStockByTalla(talla)
+                }}
+            </small>
+          </div>
+          <div  *ngIf="cantidad_stock != 'N/A'" 
+            class="form-group p-1 mt-0 rounded
+            wrapper-input">
+            <input
+              (change)="changeValueInput(talla,$event)"
+              class="form-control input-cantidad"
+              value=""
+              type="number">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

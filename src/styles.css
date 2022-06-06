@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~ngx-toastr/toastr.css';  
+.thead{
+    background-color: rgb(54, 98, 117);
+    color: white;
+}
+

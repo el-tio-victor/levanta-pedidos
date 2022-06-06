@@ -1,0 +1,26 @@
+h1>.text{
+	color: #40808f;
+}
+.cont{
+	height: 100vh;	
+}
+.error-label{
+	font-size: 7rem;
+	margin-bottom: 13px;
+	line-height: 150px;
+}
+i.error-label {
+	font-size: 12rem;
+}
+.btn-home{
+	background-color: #55647e;
+	font-size: 1.15rem;
+	box-shadow: 2px 2px  5px rgba(255,255,255,.2);
+}
+
+.btn-home:hover{
+	color: #55647e; 
+}
+.btn-home i{
+	font-size: 2rem;
+}

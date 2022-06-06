@@ -1,0 +1,73 @@
+
+.rotate{
+  transform: rotate(180deg)
+}
+.cont-info-item span,
+.cont-info-item strong,
+.cont-info-item small,
+.cont-info-item p
+{
+  line-height: 18px;
+}
+.icon-articulo{
+  font-size: 1.25rem;
+}
+.item{
+  background-color: white;
+}
+.item a[data-toggle="collapse"],
+ .item a[data-toggle="collapse"] i{
+  transition: all .25s ease-in;
+}
+.item a[data-toggle="collapse"]:hover{
+  background-color: #737277;
+  color: white;
+  border-radius: 100%;
+  transition: all .35s ease;
+}
+.item .collapse{
+  border-top:solid .1rem #e4e4e4;
+}
+.title-style{
+  line-height: 1;
+}
+.title-style .label-title{
+  font-weight: 100;
+  font-size: .75rem;
+}
+
+.cont-action-delete{
+  overflow-y: hidden;
+  height:31px;
+}
+.wrapper-action-delete{
+  transition: all .5s ease-in; 
+  width:100%;
+}
+
+.wrapper-action-delete .material-icons{
+  width: 20px;
+  cursor: pointer;
+}
+
+.wrapper-action-delete.show-confirm{
+  transition: all .25s ease-in; 
+  transform: translateY(-31px);
+}
+
+.btn-delete{
+  cursor: pointer;
+}
+.wrapper-items{
+  max-height: 510px;
+  min-height: 380px;
+  overflow-y: scroll;
+}
+.wrapper-prods .item-prod{
+  font-size: .835rem;
+}
+.wrapper-prods .item-prod:nth-child(2n-1){
+  background-color: rgba(255,255,255,.2);
+}
+
+

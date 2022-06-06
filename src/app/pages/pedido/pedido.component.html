@@ -1,0 +1,149 @@
+<section class="container-fluid m-0">
+  <header class="col-12 col-xl-11 ml-auto mr-auto mb-5 mt-0">
+    <input type="file"
+      (change)="onFileChange($event)"
+    >
+    <div class="wrapper-header m-auto d-flex col-12">
+      <div class="col-6 pr-5 col-md-4 cont-select-estilos">
+        <h5 class="mb-2">Estilos</h5>
+        <mat-form-field class="">
+          <mat-select
+            [(ngModel)]="estilo_select"
+            placeholder="Selecciona Estilo"
+            (selectionChange)="changeSelectEstilo($event)"
+            ngClass="mat-select simple"
+          >
+            <div id="input-filter" 
+              class="d-flex align-items-center bg-white"
+            >
+              <i class="material-icons">search</i>
+              <input
+                autocomplete="off"
+                placeholder="Filtrar..."
+                class="form-control"
+                type="text"
+                #filterprod
+              />
+            </div>
+            <div *ngFor="let estilo of estilos">
+              <mat-option
+                *ngIf="
+                  estilo.ItmsGrpNam.includes(
+                    filterprod.value.toUpperCase()) ||
+                  estilo.U_DescripcionC.includes(
+                    filterprod.value.toUpperCase())
+                "
+                [value]="estilo.ItmsGrpCod"
+              >
+                {{ estilo.ItmsGrpNam }} --
+                {{ estilo.U_DescripcionC }}
+              </mat-option>
+            </div>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <ng-container *ngIf="colors != null">
+        <div class="d-flex flex-column pl-5 pr-3 wrapper-colors-badges">
+          <h5 class="mb-2">Colores disponibles</h5>
+          <div class="ml-2 wrapper-colores">
+            <span
+              *ngFor="let item of colors"
+              (click)="moveTo('color-' + item)"
+              class="mb-1 mr-1 badge badge-success badge-color"
+              [style.background-color]="getValueColor('exadecimal', item)"
+              [style.color]="item == 'WH' || item == 'WHO' 
+                ? 'black' : 'white'"
+            >
+              {{getValueColor('espaniol',item)}}
+            </span>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </header>
+  <div class="col-12 col-xl-11 m-auto wrapper-body">
+    <div class="card col-12 m-auto visor-pedido p-2 ">
+      <div
+        *ngIf="itemsAgrupados || !isEmptyCart()"
+        class="wrapper-actions d-flex justify-content-between align-items-center"
+      >
+        <small class="pl-2 color-primario1 descr-prod">
+          {{ descripcion_articulo }}
+        </small>
+        <div 
+          *ngIf="!isEmptyCart()"
+          class="d-flex align-items-center">
+          <button 
+            matTooltip="Vaciar Pedido"
+            [matTooltipPosition]="'above'"
+            matTooltipClass="tooltip-r"
+            class=" mr-2 btn-fab btn-round btn btn-danger
+            btn-remove-shopping-cart">
+            <i class="material-icons"
+               (click)="removeShoppingCart()">
+              remove_shopping_cart
+            </i>
+          </button>
+          <div
+            class="d-flex justify-content-center align-items-center
+            rounded-circle mr-4  text-white bg-success
+            btn-view-cart"
+            (click)="save()"
+            matTooltip="Ver Pedido"
+            [matTooltipPosition]="'above'"
+            matTooltipClass="tooltip-g"
+          >
+            <i class="material-icons">
+              shopping_cart
+            </i>
+            <small class="color-primario1 number d-flex
+              justify-content-center">
+              {{countProds()}}
+            </small>
+          </div>
+        </div>
+      </div>
+      <div>
+        <app-header-visor-pedidos 
+          [tallas]="tallas"
+          [show]="!isDisabledBtnSave()"
+          [prods_pedido]="prods_pedido"
+          (handleClickOutput)="addToCart()"
+          (handleClickCleanOutput)="clearProds()"
+          >
+        </app-header-visor-pedidos>
+        <div class="body-visor-pedidos mt-2 mb-2">
+          <ng-container *ngIf="itemsAgrupados">
+            <app-item-visor-pedidos
+              *ngFor="let item of objectKeys(itemsAgrupados)"
+              [item_by_color]="itemsAgrupados[item]"
+              [tallas]="tallas"
+              [clave_color]="item"
+              [nombre_color_esp]="getValueColor('espaniol', item)"
+              [code_exa_color]="getValueColor('exadecimal', item)"
+              (prod_add_emit)="addProd($event)"
+              [descripcion_articulo]="descripcion_articulo"
+              [icono_articulo]="icono_articulo"
+            >
+            </app-item-visor-pedidos>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="is_loading"
+    class="container-loader d-flex justify-content-center align-items-center"
+  >
+    <app-loader [width]="'70'"></app-loader>
+  </div>
+</section>
+<ng-template #dialog_detail_pedido>
+  <app-detail-pedido
+    [is_valid_edicion_ped]="status_edit_prod_detail"
+    >
+  </app-detail-pedido>
+</ng-template>
+

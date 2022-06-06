@@ -1,0 +1,40 @@
+.wrapper-tallas{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10px,1fr));
+}
+.cont-name-color{
+  /*border:solid 2px #D8D2CB;*/
+  width:100px;
+  height: 78px;
+}
+.label-icon{
+  line-height: 1;
+  font-size: .87rem;
+}
+.icon-articulo{
+  font-size: 5rem;
+  text-shadow: 1px 1px 1px #999,
+    -1px -1px 1px #999;
+}
+/*.wrapper-row div{
+  background-color: white;
+}*/
+
+.wrapper-input{
+  background-color: #eaeef0!important;
+}
+.icon-store{
+  font-size: 1.36rem;
+}
+
+.input-cantidad{
+    background-image: 
+    linear-gradient(to top, #9c27b0 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #5b7399 1px, rgba(210, 210, 210, 0) 1px);
+    
+
+}
+
+.wrapper-row.last-search{
+  box-shadow: 0 0 55px #c8d5d9 inset;
+  border-radius: 5px;
+}

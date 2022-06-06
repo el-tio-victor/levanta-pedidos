@@ -1,0 +1,24 @@
+<div class="wrapper">
+  <div
+    class="sidebar"
+    data-color="white"
+    data-background-color="red"
+    data-image="./assets/img/sidebar-1.jpg"
+    style=""
+  >
+    <app-sidebar-cmp></app-sidebar-cmp>
+    <div
+      style="
+      position:absolute;
+      width:100%;height:100vh;
+      background-position: 20%;
+      top:0; background-size: cover;opacity:0.6;"
+		  [style]="resolveImg()"
+    ></div>
+  </div>
+  <div class="main-panel">
+    <app-navbar-cmp></app-navbar-cmp>
+    <router-outlet></router-outlet>
+  </div>
+  <!-- <app-fixedplugin></app-fixedplugin> -->
+</div>

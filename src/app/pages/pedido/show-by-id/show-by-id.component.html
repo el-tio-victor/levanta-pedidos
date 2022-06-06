@@ -1,0 +1,320 @@
+
+<section class="main-content">
+  <div class="col-12">
+    <div class="header-content">
+      <!--<div class="d-flex wrapper-header">
+        <h5>Detalle de pedido en proceso 
+          <strong 
+            style="font-size: 3rem;
+            display:inline-block; 
+            transform:rotate(90deg) translate(10px,-20px)"
+          >
+              :)
+          </strong>
+        </h5>
+      </div>-->
+    </div>
+    <div *ngIf="pedido" class="body-content">
+      <div class="col-12">
+        <!-- Fila info pedido y d-->
+        <div class="row flex-nowrap row-cliente-pedido">
+          <div class="col-md-6  ">
+            <div class="col-12 d-flex flex-row p-0 card">
+              <div class="d-flex align-items-center 
+                card-header">
+                <div class="">
+                  <i class="material-icons">
+                    shopping_cart
+                  </i>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="d-flex  
+                  row-line"
+                >
+                  <h4 class="label-row color-primario1">
+                    ID:
+                  </h4>
+                  <div class="ml-3">
+                    <p class="mb-1">{{pedido.DocNum}}</p>
+                  </div>
+                </div>
+                <div class="d-flex  
+                  row-line"
+                >
+                  <h4 class="label-row color-primario1">
+                    Fecha:
+                  </h4>
+                  <div class="ml-3">
+                    <p class="mb-1">
+                     {{readDate(pedido.DocDate)}}
+                    </p>
+                  </div>
+                </div>
+                <div class=" d-flex
+                  row-line"
+                >
+                  <h4 class="label-row color-primario1">
+                    Comentario:
+                  </h4>
+                  <div class="ml-3">
+                    <p class="mb-1">
+                      {{pedido.Comments}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class=" col-md-6">
+            <div class="col-12 d-flex flex-row p-0 card">
+              <div class="d-flex align-items-center 
+                card-header">
+                <div class="">
+                  <i class="material-icons">
+                    person
+                  </i>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="d-flex  
+                  row-line"
+                >
+                  <h4 class="label-row color-primario1">
+                    ID Cliente:
+                  </h4>
+                  <div class="ml-3">
+                    <p class="mb-1">
+                    {{pedido.CardCode}}
+                    </p>
+                  </div>
+                </div>
+                <div class="d-flex  
+                  row-line"
+                >
+                  <h4 class="label-row color-primario1">
+                    Cliente:
+                  </h4>
+                  <div class="ml-3">
+                    <p class="mb-1">
+                      {{pedido.CardName}}
+                    </p>
+                  </div>
+                </div>
+                <div class=" d-flex
+                  row-line"
+                >
+                  <h4 class="label-row color-primario1">
+                    RFC:
+                  </h4>
+                  <div class="ml-3">
+                    <p class="mb-1">
+                      {{pedido.FederalTaxID}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- fin info pedido y direcciones -->
+
+        <!-- fila direcciones -->
+          <div class="row row-direcciones">
+            <div class="col-12 ">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex flex-nowrap">
+                  <div class="col-6  p-0">
+                    <div class="col-12 p-0 d-flex">
+                      <h4 
+                        class="card-header 
+                        d-flex align-items-center">
+                        <i class="material-icons">
+                          local_shipping
+                        </i>
+                      </h4>
+                      <div class="pl-2 pt-3 pb-3">
+                        <h4 class="color-primario1">
+                          Dirección Entrega
+                        </h4>
+                        <p class="pl-2 pr-2">
+                          {{pedido.Address2}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            </div>
+          </div>
+        <!-- fin fila direcciones -->
+
+      <div class="col-12">
+        <div class="row">
+          <div class="card d-flex flex-row">
+            <div class="d-flex align-items-center
+              justify-content-center card-header">
+              <i class="material-icons">sell</i>
+            </div>
+            <div class="card-body">
+              <header class="d-flex justify-content-between">
+                <h4 class=" 
+                  color-primario1">
+                  Productos
+                </h4>
+                <div>
+                  <ul class="nav nav-tabs" data-tabs="tab">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#grid" 
+                        data-toggle="tab">
+                        <i class="mr-2 material-icons ">
+                          grid_view
+                        </i>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#list"
+                        data-toggle="tab">
+                        <i class="material-icons">
+                          view_list
+                        </i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </header>
+              <div class=" col-md-12 col-lg-10 m-auto table-cont tab-content">
+                <div id="grid" 
+                     data-toggle="tab"
+                  class="active tab-pane">
+                <ng-container *ngFor="let prod of 
+                  products | keyvalue;  index as i">
+                  <div class="m-1 p-1 row-table-cont">
+                  <div class="pl-1 pr-1 d-flex ">
+                    <h5 
+                      class="m-0 mb-1 col-12  title-style">
+                      <strong>{{prod.key}} </strong>
+                      <small>
+                        {{getDescription(prod.value)}}
+                      </small>
+                    </h5>
+                  </div>
+                  <div class="col-12  d-flex border-bottom">
+                    <div class="color col-2"><strong>COLOR</strong></div>
+                    <div  class=" col-10 text-center tallas">
+                      <ng-container 
+                        *ngFor="let talla of 
+                          getTallas(prod.value, prod)">
+                        <h5 class="p-0 m-0">
+                          <strong>{{talla}}</strong>
+                        </h5>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class=" ">
+                    <ng-container *ngFor="
+                      let item of orderByKey(
+                        prod.value, 
+                        'NameColor'
+                        ) |
+                        keyvalue
+                      ">
+                      <div class="col-12 d-flex row-ped">
+                        <div class="col-2  col-color">
+                          <span>
+                            {{item.key}}
+                          </span>
+                        </div>
+                        <div class="col-10 text-center tallas">
+                          <ng-container 
+                            *ngFor="let talla of 
+                            tallas_by_estilo">
+                              <strong class="col-cant">
+                                {{getQuantity(item.value,talla)}}
+                              </strong>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                  </div>
+                </ng-container>
+                </div>
+                <div id="list" class="tab-pane">
+                  
+                  <div class="d-flex bg-light">
+                          <strong class="text-center"
+                            style="width:100px;">
+                            Cantidad
+                          </strong>
+                          <strong class="text-center" 
+                            style="width:100px;">
+                            Estilo
+                          </strong>
+                          <strong 
+                            class="text-center"
+                            style="width:220px;">
+                            Color
+                          </strong>
+                          <strong class="text-center"
+                            style="width:100px;">
+                            Talla
+                          </strong>
+                          <strong class="text-center"
+                            style="width:300px;">
+                            Descripción
+                          </strong>
+                  </div>
+                  <ng-container *ngFor="let prod of 
+                    products | keyvalue;  index as i">
+                    <!--<div class="m-1 p-1 row-table-cont">
+                      <div class="pl-1 pr-1 d-flex flex-column">
+                      </div>
+                    </div>-->
+                    <div class="">
+                      <ng-container 
+                        *ngFor="let item of 
+                          prod.value">
+                        <div class="d-flex pl-5">
+                        <p class="p-0" style="width:100px">
+                          {{item.Quantity}}
+                        </p>
+                        <p class="p-0" style="width:100px">
+                          {{prod.key}}
+                        </p>
+                        
+                        <p class="p-0" style="width:220px">
+                          {{item.NameColor}}
+                        </p>
+                        
+                        <p class="p-0" style="width:100px">
+                          {{item.U_Talla}}
+                        </p>
+                        <p class="p-0" style="width:300px">
+                            {{getDescription(prod.value)}}
+                        </p>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+    </div>
+  </div>
+  <div
+    *ngIf="is_loading"
+    class="container-loader d-flex 
+    justify-content-center align-items-center"
+  >
+    <app-loader [width]="'70'"></app-loader>
+  </div>
+</section>
+    

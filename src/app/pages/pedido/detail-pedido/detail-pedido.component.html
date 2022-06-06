@@ -1,0 +1,108 @@
+<div>
+  <header class="pl-3 pr-3 d-flex align-items-center
+    justify-content-between position-relative">
+    <h3 class="d-flex align-items-center 
+      title-pop-up">
+      <i class="material-icons rounded-circle p-1
+        bg-primario1 text-white mr-2">
+        {{steps[index_step].logo}}
+      </i>
+      {{steps[index_step].title}}
+    </h3>
+    <h4 
+      *ngIf="index_step != 1"
+      class="mt-3 d-flex justify-content-center
+       rounded bg-white cont-counter">
+      <strong class="counter-items">
+        {{countItems()}}
+      </strong>
+      <small class="ml-1 color-primario1 label-counter">
+        Piezas
+      </small>
+    </h4>
+    <button 
+      (click)="onNoClick(false)"
+      class="btn btn-secondary btn-fab btn-round">
+      <i class="material-icons">
+        close
+      </i>
+    </button>
+  </header>
+
+
+  <div class="ml-1  body-panel" style="overflow:hidden"
+    [ngClass]="steps[index_step].current =='confirm_cart' ?
+                'border-panel' : ''"
+    >
+    <ng-container [ngSwitch]="steps[index_step].current">
+
+      <app-update-pedido
+        *ngSwitchCase="'update_cart'"
+        [data]="data"
+        (is_valid_edicion_ped_emit) ="isValidUpdatePed($event)"
+      >
+      </app-update-pedido>
+
+      <app-extra-info *ngSwitchCase="'shipping_address'"
+        [direcciones]="data.direcciones" 
+        [direcciones_select]="data.direcc_select"
+        (direcc_select_emitter)="setDireccionEntrega($event)"
+        (comentario_emitter)="setComentario($event)"
+      >
+      </app-extra-info>
+
+      <app-confirm-order *ngSwitchCase="'confirm_cart'"
+        [comentario]="comentario"
+        [direccion_entrega]="direccion_entrega"
+        [pedido]="data.items"
+        >
+      </app-confirm-order>
+
+    </ng-container>
+  </div>
+  
+  <footer class=" pt-4 pb-2 p-2 
+    footer-pop-up">
+    <div 
+      class="d-flex justify-content-around">
+      <div class="cont-btn">
+        <button *ngIf="index_step>0"
+          class="btn btn-round" 
+          (click)="changeStep(-1)">
+          <i class="material-icons">arrow_back_ios</i>
+          <span class="pl-2">Regresar</span>
+        </button>
+      </div>
+          <button 
+            (click)="onNoClick(false, true)"
+            matTooltip="Vaciar Pedido"
+            [matTooltipPosition]="'above'"
+            matTooltipClass="tooltip-r"
+            class=" mr-2 btn-fab btn-round btn btn-danger
+            btn-remove-shopping-cart">
+            <i class="material-icons"
+               >
+              remove_shopping_cart
+            </i>
+          </button>
+      <div class="cont-btn">
+        <button *ngIf="index_step < 2 ; else templateConfirm" 
+           [disabled]="!validNext()"
+          (click)="changeStep(1)"
+          class="btn btn bg-primario2 btn-round">
+          <span class="pl-2">Siguiente</span>
+          <i class="material-icons">arrow_forward_ios</i>
+        </button>
+        <ng-template #templateConfirm>
+          <button  
+            (click)="onNoClick(true)"
+            class="btn btn bg-success btn-round">
+            <i class="material-icons">save</i>
+            <span class="pl-2">Guardar</span>
+          </button>
+        </ng-template>
+      </div>
+    </div>
+
+  </footer>
+</div>

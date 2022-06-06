@@ -1,0 +1,44 @@
+
+/*header .material-icons{
+  font-size: 1.75rem;
+}*/
+.border-panel{
+  border-right: solid 5px white;
+}
+
+.title-pop-up{
+  font-size: 1.35rem;
+}
+
+.footer-pop-up .material-icons{
+  font-size: 1.4rem;
+}
+.body-panel{
+  background-color: #e4e4e4;
+}
+
+.cont-btn{
+  width: 155px;
+}
+.cont-counter{
+  position: absolute;
+  right: 65px;
+  bottom:-25px;
+  width: 120px;
+  height: 35px;
+}
+
+.counter-items{
+  font-family: 700;
+  font-size: 12px;
+  background-color: #e5e5e5;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border-radius: 100%;
+  padding-top: 2px;
+}
+
+.label-counter{
+
+}

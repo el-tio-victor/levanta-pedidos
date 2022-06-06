@@ -1,0 +1,200 @@
+<div class="wrapper wrapper-full-page">
+	<div
+		class="page-header login-page"
+		filter-color="black"
+		[style]="resolveImg()"
+		style="background-size:cover;transition:all 1s ease;"
+	>
+		<!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-2"></div>
+				<div
+					class="col-lg-4 col-md-8 text-center"
+					style="
+						display: flex;
+						justify-content: center;
+						align-items: center;
+					"
+				>
+					<form class="form col-12" method="" action="">
+            <div *ngIf="getVar('temp_min')"
+              class="rounded p-1"
+              style="background-color: rgba(0,0,0,.2)"
+              >
+              <i 
+                class="material-icons" 
+                style="vertical-align: middle">
+                device_thermostat
+              </i>
+              <span class="pr-1">
+                {{getVar('temp_min')}}° min 
+              </span>
+              <span>{{getVar('temp_max')}}° max</span>
+            </div>
+						<div
+							class=" card card-login"
+							style="
+								height: 429px;
+								/*background-color: #08a3ff;*/
+							"
+						>
+							<div class="card-header bg-primario1 card-header-ros ">
+                <!--><h4 class="card-title">LOGIN</h4>-->
+                <div class=" pb-2 border-bottom">
+                  <img width="120" src="assets/img/logotipoPlayerytees.svg" alt="">
+                </div>
+                <h5 class="d-block m-0 pt-1 text-center">PO Vision</h5>
+							</div>
+							<div
+								class="
+									p-2
+									card-body
+									d-flex
+									flex-column
+									justify-content-center
+									align-items-around
+								"
+							>
+								<span class="bmd-form-group">
+									<div
+										class="
+											mb-3
+											bg-white
+											
+											pr-3
+											input-group
+										"
+										id="grpint1"
+									>
+										<div class="input-group-prepend">
+											<span class="input-group-text">
+												<i
+													class="material-icons"
+													style="font-size: 30px"
+													>face</i
+												>
+											</span>
+										</div>
+										<input
+											type="text"
+											placeholder="USUARIO"
+                      id="usuario"
+											name="login"
+											[(ngModel)]="obj.username"
+											class="form-control"
+											style="
+												background-color: white;
+												border-radius: 10px;
+												text-align: center;
+												font-size: 1rem;
+											"
+											#usuario
+										/>
+									</div>
+								</span>
+								<span class="bmd-form-group">
+									<div
+										class="
+											mb-4
+											bg-white
+											pb-3
+											pr-3
+											input-group
+										"
+										id="grpint2"
+									>
+										<div class="input-group-prepend">
+											<span class="input-group-text">
+												<i
+													class="material-icons"
+													style="font-size: 30px"
+													>lock_outline</i
+												>
+											</span>
+										</div>
+										<input
+											type="password"
+											placeholder="PASSWORD"
+											name="password"
+											[(ngModel)]="obj.password"
+											class="form-control"
+											style="
+												background-color: white;
+												border-radius: 10px;
+												text-align: center;
+												font-size: 1rem;
+											"
+											#password
+										/>
+									</div>
+								</span>
+							<span class="bmd-form-group">
+								<div
+									class="
+										mb-3
+										bg-white
+										input-group
+									"
+									id="grpint1"
+								>
+								<!--><div class="input-group-prepend">
+										<span class="input-group-text">
+											<i
+												class="material-icons"
+												style="font-size: 30px"
+												>home</i
+											>
+										</span>
+                </div>-->
+                  <!--<input
+										type="text"
+										name="id"
+										id="id"
+										[(ngModel)]="obj.id"
+										class="form-control"
+										placeholder="ID"
+										style="
+											background-color: white;
+											border-radius: 10px;
+											text-align: center;
+											font-size: 1rem;
+										"
+										#id
+                    />-->
+                    <mat-form-field 
+                      class="col-11 p-0 mat-form-field pl-4 pr-1">
+                      <mat-select class="mat-select text-center"
+                        [(value)]="empresa_selected_default"
+											  [(ngModel)]="obj.company"
+                        [ngModelOptions]="{standalone:true}"
+                        placeholder="EMPRESA">
+
+                        <mat-option 
+                          *ngFor="let item of empresas"
+                          [value]="item.value">
+                            {{item.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+								</div>
+								</span>
+							</div>
+							<div class="card-footer flex-column justify-content-center">
+                <app-loader [width]="'60'" *ngIf="is_loading"></app-loader>
+								<button
+									class="btn btn-rose btn-link btn-sm p-1"
+									(click)="logIn($event)"
+									[ngStyle]="{'background':'rgba(255,255,255,.3)','color':pinta.C02,'width':'200px','font-size':'1.3rem','border-radius':'10px' }"
+								>
+									LOGIN
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+		</div>
+	</div>
+</div>

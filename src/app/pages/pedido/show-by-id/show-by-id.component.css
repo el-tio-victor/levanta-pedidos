@@ -1,0 +1,66 @@
+h4{
+  font-weight: 400;
+}
+.nav .nav-link{
+  color: #737277!important;
+}
+.label-row{
+  width: 98px;
+}
+
+.card{
+  margin-top: 20px;
+  margin-bottom:20px;
+}
+.card-header{
+  background-color: rgba(0,0,0,.05);
+}
+
+.card-header .material-icons{
+  color: #7f8283;
+}
+
+.row-cliente-pedido .card{
+  margin-bottom: 4px;
+}
+.row-direcciones .card-body{
+  padding: 0!important;
+}
+.row-direcciones .card{
+  margin-top: 2px;
+}
+
+
+.cont-entrega{
+  flex-direction: row-reverse;
+}
+.col-color{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.tallas{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(10px,1fr));
+}
+
+#grid{
+  background-color:#edeaea;
+}
+.table-cont .row-table-cont:nth-child(2n-1){
+  background-color: #d8dbdf;
+  color: black;
+}
+.title-style strong {
+  font-weight: 700;
+}
+.row-ped{
+  /*background-color: rgba(0,0,0,.03);*/
+}
+.col-cant{
+  /*background-color: rgba(0,0,0,.04);
+  display: inline-block;
+  margin: 4px;*/
+}
