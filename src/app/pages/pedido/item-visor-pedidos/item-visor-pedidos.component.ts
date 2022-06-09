@@ -70,7 +70,6 @@ export class ItemVisorPedidosComponent implements OnInit {
   }
 
   changeValueInput(talla:string,el){
-
     let element_by_talla = this.getByTalla(talla);
     console.log(this.prods_pedido);
     element_by_talla = this.getByTalla(talla);

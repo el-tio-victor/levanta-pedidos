@@ -63,6 +63,7 @@ export class PedidoComponent implements OnInit {
     this.data_to_send.CardCode = this.datauser.CardCode;
     this.data_to_send.DocDueDate = `${date.getFullYear()}-${month}-${day}`;
     this.data_to_send.Comments = this.comentario;
+    this.data_to_send.U_ORDENCOMPRA = "";
     this.data_to_send.SalesPersonCode = "-1";
     //this.data_to_send.Series = "101";
     this.data_to_send.ShipToCode = "";
@@ -302,6 +303,8 @@ export class PedidoComponent implements OnInit {
           this.data_to_send.Comments = response.data.comentario;
           this.data_to_send.ShipToCode = 
             response.data.direccion_entrega;
+          this.data_to_send.U_ORDENCOMPRA = response.data
+          .orden_compra;
 
           let items_list = Object.values(this.data_to_view)
           .reduce(function (
@@ -319,7 +322,7 @@ export class PedidoComponent implements OnInit {
           console.log(items_list);
           console.log("data_send", this.data_to_send);
           console.log("pedido...", this.prods_pedido);
-
+          console.log()
           this.catalogosService
           .Post("", "Orders", this.data_to_send).subscribe(
             (response: any) => {

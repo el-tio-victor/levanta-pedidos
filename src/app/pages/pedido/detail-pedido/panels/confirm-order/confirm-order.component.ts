@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-confirm-order',
@@ -9,6 +9,7 @@ export class ConfirmOrderComponent implements OnInit {
 
   @Input() direccion_entrega:any;
   @Input() comentario:any;
+  @Input() orden_compra:any;
   @Input() pedido:any;
 
   constructor() { }

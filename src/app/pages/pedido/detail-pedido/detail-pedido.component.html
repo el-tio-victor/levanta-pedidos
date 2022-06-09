@@ -48,11 +48,13 @@
         [direcciones_select]="data.direcc_select"
         (direcc_select_emitter)="setDireccionEntrega($event)"
         (comentario_emitter)="setComentario($event)"
+        (orden_compra_emitter)="setOrdenCompra($event)"
       >
       </app-extra-info>
 
       <app-confirm-order *ngSwitchCase="'confirm_cart'"
         [comentario]="comentario"
+        [orden_compra]="orden_compra"
         [direccion_entrega]="direccion_entrega"
         [pedido]="data.items"
         >

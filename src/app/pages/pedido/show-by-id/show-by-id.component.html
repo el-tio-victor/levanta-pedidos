@@ -159,7 +159,7 @@
               <i class="material-icons">sell</i>
             </div>
             <div class="card-body">
-              <header class="d-flex justify-content-between">
+              <header class="d-flex justify-content-between mb-3 ">
                 <h4 class=" 
                   color-primario1">
                   Productos
@@ -167,18 +167,18 @@
                 <div>
                   <ul class="nav nav-tabs" data-tabs="tab">
                     <li class="nav-item">
-                      <a class="nav-link active" href="#grid" 
+                      <a class="nav-link active" href="#list"
                         data-toggle="tab">
-                        <i class="mr-2 material-icons ">
-                          grid_view
+                        <i class="material-icons">
+                          view_list
                         </i>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#list"
+                      <a class="nav-link " href="#grid" 
                         data-toggle="tab">
-                        <i class="material-icons">
-                          view_list
+                        <i class=" material-icons ">
+                          grid_view
                         </i>
                       </a>
                     </li>
@@ -188,7 +188,7 @@
               <div class=" col-md-12 col-lg-10 m-auto table-cont tab-content">
                 <div id="grid" 
                      data-toggle="tab"
-                  class="active tab-pane">
+                  class=" tab-pane">
                 <ng-container *ngFor="let prod of 
                   products | keyvalue;  index as i">
                   <div class="m-1 p-1 row-table-cont">
@@ -242,9 +242,13 @@
                   </div>
                 </ng-container>
                 </div>
-                <div id="list" class="tab-pane">
+                <div id="list" class="active tab-pane">
                   
                   <div class="d-flex bg-light">
+                          <strong class="text-center"
+                            style="width:50px;">
+                            
+                          </strong>
                           <strong class="text-center"
                             style="width:100px;">
                             Cantidad
@@ -267,38 +271,44 @@
                             Descripción
                           </strong>
                   </div>
-                  <ng-container *ngFor="let prod of 
-                    products | keyvalue;  index as i">
-                    <!--<div class="m-1 p-1 row-table-cont">
-                      <div class="pl-1 pr-1 d-flex flex-column">
-                      </div>
-                    </div>-->
                     <div class="">
                       <ng-container 
                         *ngFor="let item of 
-                          prod.value">
-                        <div class="d-flex pl-5">
-                        <p class="p-0" style="width:100px">
-                          {{item.Quantity}}
+                        productsList; index as num_row">
+                        <div class="d-flex text-center">
+                        <strong style="width:50px;font-weight:600;">
+                          {{num_row+1}}
+                        </strong>
+                        <p class="p-0 m-0" style="width:100px">
+                        {{
+                            item.Quantity
+                        }}
                         </p>
-                        <p class="p-0" style="width:100px">
-                          {{prod.key}}
+                        <p class="p-0 m-0" style="width:100px">
+                        {{item.ItmsGrpNam}}
                         </p>
                         
-                        <p class="p-0" style="width:220px">
+                        <p class="p-0 m-0" style="width:220px">
                           {{item.NameColor}}
                         </p>
                         
-                        <p class="p-0" style="width:100px">
+                        <p class="p-0 m-0" style="width:100px">
                           {{item.U_Talla}}
                         </p>
-                        <p class="p-0" style="width:300px">
-                            {{getDescription(prod.value)}}
+                        <p class="p-0 m-0 text-ellipsis" style="width:300px">
+                            {{item.ItemDescription}}
                         </p>
                         </div>
                       </ng-container>
+                      <div class="d-flex text-center">
+                        <strong style="width:50px;font-weight:600;">
+                          Totales
+                        </strong>
+                        <p class="p-0 m-0" style="width:100px">
+                          {{ getTotalProds() }} 
+                        </p>
+                      </div>
                     </div>
-                  </ng-container>
                 </div>
               </div>
             </div>

@@ -18,6 +18,8 @@ export class ShowByIdComponent implements OnInit {
   id:string;
   is_loading:boolean = false;
   products:any[];
+  productsList: any[]
+  quantity_total_prods:number = 0;
 
   current_prod:string = "";
 
@@ -28,14 +30,15 @@ export class ShowByIdComponent implements OnInit {
     private router: Router,
     private getParamRoute: ActivatedRoute,
   ) {
+    console.log('construct');
     this.user = this.globalService.getData().username;
     this.id = this.getParamRoute.snapshot.paramMap
     .get('id');
 
-  
       this.getPedido();
     
   }
+
 
   setCurrentProd(value:any):void{
     this.current_prod = value;
@@ -55,6 +58,7 @@ export class ShowByIdComponent implements OnInit {
           
           this.pedido = response.data;
           this.products = this.pedido['DocumentLines'];
+          this.productsList = this.pedido['DocumentLines'];
 
           console.log( this.pedido );
           console.log( this.products );
@@ -65,7 +69,7 @@ export class ShowByIdComponent implements OnInit {
             this.products, "ItmsGrpNam"
           );
 
-          console.log(itemsAgrupados);
+          //console.log(itemsAgrupados);
           this.products = itemsAgrupados;
 
         }
@@ -94,6 +98,14 @@ export class ShowByIdComponent implements OnInit {
 
         return result;
       }, {});
+  }
+
+  getTotalProds():number{
+    return this.productsList.reduce(
+        (result,current) =>{
+          return result +=current.Quantity
+        }
+    ,0);
   }
  
   getTallas(object:any){
@@ -142,7 +154,11 @@ export class ShowByIdComponent implements OnInit {
 
 
   ngOnInit(): void {
+  }
 
+  ngDoCheck(){
+    console.log()
+    console.log('changessss');
   }
 
 }

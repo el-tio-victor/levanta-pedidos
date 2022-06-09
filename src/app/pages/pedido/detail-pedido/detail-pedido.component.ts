@@ -17,6 +17,7 @@ export class DetailPedidoComponent implements OnInit {
   direccion_entrega:any = null;
   is_valid_edicion_ped = true;
   comentario :string = "";
+   orden_compra:string = "";
 
   steps:any[]=[
     {
@@ -86,6 +87,10 @@ export class DetailPedidoComponent implements OnInit {
     this.comentario = value;
   }
 
+  setOrdenCompra(value:string){
+    this.orden_compra = value;
+  }
+
   imprime(el:any){
     console.log(el);
   }
@@ -115,7 +120,9 @@ export class DetailPedidoComponent implements OnInit {
   onNoClick(confirm:boolean ,remove_cart:boolean = false):void{
     let data = confirm ? 
       {
-        direccion_entrega : this.direccion_entrega.AddressName,
+        direccion_entrega : this.direccion_entrega
+        .AddressName,
+        orden_compra :  this.orden_compra,
         comentario : this.comentario,
     } : {};
 

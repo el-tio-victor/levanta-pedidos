@@ -15,6 +15,9 @@ export class ExtraInfoComponent implements OnInit {
   comentario:string  = "";
   @Output() comentario_emitter = new EventEmitter<string>();
 
+  orden_compra:string  = "";
+  @Output() orden_compra_emitter = new EventEmitter<string>();
+
   constructor() { }
 
   selectDireccion(element:any, element_HTML){
@@ -34,6 +37,12 @@ export class ExtraInfoComponent implements OnInit {
 
   changeComentario(value){
     this.comentario_emitter.emit(this.comentario);
+  }
+
+  changeOrdenCompra(value){
+    this.orden_compra_emitter.emit(
+      this.orden_compra
+    );
   }
 
   expand(el, el_click){

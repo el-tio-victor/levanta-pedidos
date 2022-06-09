@@ -49,6 +49,13 @@
     </div>
   </div>
   <div class="p-2 mt-2 ml-2  cont-msg">
+    <h4>Orden de Compra</h4>
+    <div class="pl-2 pr-2 rounded bg-white form-group ">
+      <input type="text" [(ngModel)]="orden_compra" 
+        (ngModelChange)=changeOrdenCompra($event) class="form-control">
+    </div>
+  </div>
+  <div class="p-2 mt-2 ml-2  cont-msg">
     <h4>Comentario</h4>
     <div class="pl-2 pr-2 rounded bg-white form-group ">
       <textarea [(ngModel)]="comentario" 
