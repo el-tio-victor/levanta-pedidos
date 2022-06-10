@@ -167,18 +167,18 @@
                 <div>
                   <ul class="nav nav-tabs" data-tabs="tab">
                     <li class="nav-item">
-                      <a class="nav-link active" href="#list"
+                      <a class="nav-link active " href="#grid" 
                         data-toggle="tab">
-                        <i class="material-icons">
-                          view_list
+                        <i class=" material-icons ">
+                          grid_view
                         </i>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link " href="#grid" 
+                      <a class="nav-link " href="#list"
                         data-toggle="tab">
-                        <i class=" material-icons ">
-                          grid_view
+                        <i class="material-icons">
+                          view_list
                         </i>
                       </a>
                     </li>
@@ -188,7 +188,7 @@
               <div class=" col-md-12 col-lg-10 m-auto table-cont tab-content">
                 <div id="grid" 
                      data-toggle="tab"
-                  class=" tab-pane">
+                  class=" active tab-pane">
                 <ng-container *ngFor="let prod of 
                   products | keyvalue;  index as i">
                   <div class="m-1 p-1 row-table-cont">
@@ -242,33 +242,37 @@
                   </div>
                 </ng-container>
                 </div>
-                <div id="list" class="active tab-pane">
+                <div id="list" class=" tab-pane">
                   
                   <div class="d-flex bg-light">
                           <strong class="text-center"
-                            style="width:50px;">
+                            style="width:50px;font-weight:600;">
                             
                           </strong>
                           <strong class="text-center"
-                            style="width:100px;">
+                            style="width:100px;font-weight:600;">
                             Cantidad
                           </strong>
                           <strong class="text-center" 
-                            style="width:100px;">
+                            style="width:100px;font-weight:600;">
                             Estilo
                           </strong>
                           <strong 
                             class="text-center"
-                            style="width:220px;">
+                            style="width:220px;font-weight:600;">
                             Color
                           </strong>
                           <strong class="text-center"
-                            style="width:100px;">
+                            style="width:100px;font-weight:600;">
                             Talla
                           </strong>
                           <strong class="text-center"
-                            style="width:300px;">
+                            style="width:300px;font-weight:600;">
                             Descripción
+                          </strong>
+                          <strong class="text-center"
+                            style="width:200px;font-weight:600;">
+                            Factura
                           </strong>
                   </div>
                     <div class="">
@@ -297,6 +301,9 @@
                         </p>
                         <p class="p-0 m-0 text-ellipsis" style="width:300px">
                             {{item.ItemDescription}}
+                        </p>
+                        <p class="p-0 m-0 text-ellipsis" style="width:200px">
+                            {{item.BillFolio}}
                         </p>
                         </div>
                       </ng-container>
