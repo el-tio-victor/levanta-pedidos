@@ -60,6 +60,16 @@ export class ItemVisorPedidosComponent implements OnInit {
     return 'N/A';
   }
 
+  getPzasPorCajaByTalla( talla:string ){
+
+    let element_by_talla = this.getByTalla(talla);
+    console.log(element_by_talla, talla);
+    if(element_by_talla)
+    return element_by_talla.SalPackUn;
+    else
+      return 'N/A';
+  }
+
   getCodeByTalla( talla:string ){
 
     let element_by_talla = this.getByTalla(talla);

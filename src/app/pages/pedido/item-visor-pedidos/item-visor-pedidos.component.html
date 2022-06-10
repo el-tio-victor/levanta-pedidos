@@ -30,11 +30,41 @@
             align-items-center pb-2">
             <!--<i *ngIf="getStockByTalla(talla) != 'N/A'" 
               class="material-icons ">store</i>-->
-              <small class="m-0">
-                {{getStockByTalla(talla) > 500 ? '+500' :
-                  getStockByTalla(talla)
-                }}
-            </small>
+              <span 
+                class="m-0 d-flex
+                align-items-center color-primario1"
+                >
+                <small 
+                  class=" d-flex align-items-center"
+                  matTooltip="Disponibilidad"
+                  [matTooltipPosition]="'right'"
+                  >
+                  <i *ngIf="getStockByTalla(talla) != 'N/A'" 
+                    class="material-icons
+                    icono-stock pr-1">
+                    store_front
+                  </i>
+                  {{
+                    getStockByTalla(talla) > 500 ? '+500' :
+                    getStockByTalla(talla)
+                  }}
+                </small>
+                &nbsp;|&nbsp;
+                <small 
+                  class="d-flex align-items-center"
+                  matTooltip="Piezas por caja"
+                  [matTooltipPosition]="'left'"
+                  >
+                  {{
+                    getPzasPorCajaByTalla(talla)
+                  }}
+                  <i *ngIf="getStockByTalla(talla) != 'N/A'" 
+                    class="material-icons 
+                    icono-stock pr-1">
+                    work
+                  </i>
+                </small>
+            </span>
           </div>
           <div  *ngIf="cantidad_stock != 'N/A'" 
             class="form-group p-1 mt-0 rounded

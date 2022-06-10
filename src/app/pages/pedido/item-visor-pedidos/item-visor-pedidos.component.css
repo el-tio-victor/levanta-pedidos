@@ -26,6 +26,11 @@
 .icon-store{
   font-size: 1.36rem;
 }
+.icono-stock{
+  width: 15px;
+  font-size: 15px;
+  color: #adacb3;
+}
 
 .input-cantidad{
     background-image: 
