@@ -83,8 +83,13 @@ export class PedidoComponent implements OnInit {
     } else return codigo_color;
   }
 
+  removeToCart(style:string){
+    delete this.data_to_view[style];
+  }
+
   addToCart() {
     /** data_view **/
+    console.log("estado de prods",this.prods_pedido)
     let estilo = this.prods_pedido[0]
       ? this.prods_pedido[0].ItemCode.split("-")[0]
       : "";
@@ -102,14 +107,9 @@ export class PedidoComponent implements OnInit {
     };
     if (estilo != "") {
       ob_aux.prods = this.prods_pedido;
+
       this.data_to_view[estilo] = ob_aux;
 
-      /** limpio la pantalla */
-      /*this.itemsAgrupados = null;
-      this.clearProds();
-      this.colors = null;
-      this.tallas= null;
-      this.estilo_select = null;*/
       this.toastr.success("Producto Agregado al carrito", "SUCCESS", {
         positionClass: "toast-top-center",
       });
@@ -129,24 +129,6 @@ export class PedidoComponent implements OnInit {
     this.clearProds();
   }
 
-  /*changeDireccionEntrega(){
-    let dialog = this.dialog.open(ModalComponent,
-    {width:'520px',
-      data:{
-        direcciones : this.Addresses ,
-        direcc_select : this.AddressName
-      }}); 
-
-    dialog.afterClosed().subscribe(result =>{
-      console.log(result);
-      if(result)
-        this.AddressName = result;
-    });
-  }*/
-
-  /*
-   * ubicar en un item al hacer click en su color
-   * */
 
 
   onFileChange(ev){
@@ -372,18 +354,42 @@ export class PedidoComponent implements OnInit {
     }
   }
 
+
   addProd(item_add: any) {
     let index = this.prods_pedido.findIndex(
       (item) => item.ItemCode == item_add.ItemCode
     );
+    console.log(this.prods_pedido);
+    let style = this.prods_pedido.length > 0 ?
+        this.prods_pedido[0]
+                .ItemCode.split('-')[0] :
+                  "";
     index == -1 ?
         (
           (item_add.WarehouseCode = "CE01"),
           this.prods_pedido.push(item_add)
         ) : 
         (
-          this.prods_pedido[index]
-          .Quantity = item_add.Quantity
+          ( 
+            isNaN(
+              parseInt(
+                item_add.Quantity
+              )
+            )
+          ) ?
+            (
+ 
+              ( 
+        
+               this.prods_pedido.splice(index,1)
+              ),
+              (this.prods_pedido.length == 0)?
+                this.removeToCart(style):
+                console.log('mmmmm')
+            )
+            :
+              this.prods_pedido[index]
+              .Quantity = item_add.Quantity
         );
     console.log(
       'Consolaso para ver la edicion',

@@ -63,7 +63,7 @@ export class ItemVisorPedidosComponent implements OnInit {
   getPzasPorCajaByTalla( talla:string ){
 
     let element_by_talla = this.getByTalla(talla);
-    console.log(element_by_talla, talla);
+    //console.log(element_by_talla, talla);
     if(element_by_talla)
     return element_by_talla.SalPackUn;
     else
@@ -80,6 +80,9 @@ export class ItemVisorPedidosComponent implements OnInit {
   }
 
   changeValueInput(talla:string,el){
+    console.log(
+      el.target.value
+    );
     let element_by_talla = this.getByTalla(talla);
     console.log(this.prods_pedido);
     element_by_talla = this.getByTalla(talla);
@@ -88,8 +91,17 @@ export class ItemVisorPedidosComponent implements OnInit {
       element_by_talla.ItemCode :
       null;
 
-    if( isNaN(el.target.value) ||
-       el.target.value <= 0 ){
+    console.log(
+      parseInt(el.target.value)
+    );
+    if( 
+       !isNaN(
+         parseInt(
+           el.target.value
+         )
+       ) &&
+       el.target.value <= 0 
+      ){
       
       this.toastr.info("Valor no permitido!!!", "INFO", {
         positionClass: "toast-top-center",
