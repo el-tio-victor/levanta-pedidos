@@ -37,7 +37,7 @@
                 <small 
                   class=" d-flex align-items-center"
                   matTooltip="Disponibilidad"
-                  [matTooltipPosition]="'right'"
+                  [matTooltipPosition]="'left'"
                   >
                   <i *ngIf="getStockByTalla(talla) != 'N/A'" 
                     class="material-icons
@@ -53,7 +53,7 @@
                 <small 
                   class="d-flex align-items-center"
                   matTooltip="Piezas por caja"
-                  [matTooltipPosition]="'left'"
+                  [matTooltipPosition]="'right'"
                   >
                   {{
                     getPzasPorCajaByTalla(talla)

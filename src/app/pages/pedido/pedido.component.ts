@@ -108,7 +108,34 @@ export class PedidoComponent implements OnInit {
     if (estilo != "") {
       ob_aux.prods = this.prods_pedido;
 
-      this.data_to_view[estilo] = ob_aux;
+      if( !this.data_to_view[estilo] )
+        this.data_to_view[estilo] = ob_aux;
+      else{
+        for (const key in this.prods_pedido) {
+          let search = this.prods_pedido[key].ItemCode;
+          let index =this.data_to_view[estilo].prods.findIndex(
+            item => item.ItemCode === search
+          );
+          if(index != -1){
+            this.data_to_view[estilo].prods[index].Quantity =
+              this.prods_pedido[key].Quantity;
+          }
+          else{
+            this.data_to_view[estilo].prods.push(
+              this.prods_pedido[key]
+            );
+
+            if(!this.data_to_view[estilo].tallas.includes(
+              this.prods_pedido[key].Talla
+            )){
+              this.data_to_view[estilo].tallas.push(
+                this.prods_pedido[key].Talla
+              )
+            }
+            console.log(this.data_to_view[estilo])
+          }
+        }
+      }
 
       this.toastr.success("Producto Agregado al carrito", "SUCCESS", {
         positionClass: "toast-top-center",
