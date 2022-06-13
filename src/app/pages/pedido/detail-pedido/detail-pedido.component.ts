@@ -45,7 +45,9 @@ export class DetailPedidoComponent implements OnInit {
     public dialogRef: MatDialogRef<DetailPedidoComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any,
   ) { 
-    console.log(this.data.items)
+
+    this.comentario = localStorage.getItem('Comment');
+    this.orden_compra = localStorage.getItem('orden_compra');
   }
 
   ngOnInit(): void {
@@ -84,6 +86,7 @@ export class DetailPedidoComponent implements OnInit {
   }
 
   setComentario(value:string){
+    console.log('set commenter');
     this.comentario = value;
   }
 

@@ -18,7 +18,10 @@ export class ExtraInfoComponent implements OnInit {
   orden_compra:string  = "";
   @Output() orden_compra_emitter = new EventEmitter<string>();
 
-  constructor() { }
+  constructor() { 
+    this.comentario = localStorage.getItem('Comment');
+    this.orden_compra = localStorage.getItem('orden_compra');
+  }
 
   selectDireccion(element:any, element_HTML){
     
@@ -36,10 +39,12 @@ export class ExtraInfoComponent implements OnInit {
   }
 
   changeComentario(value){
+    localStorage.setItem("Comment",value);
     this.comentario_emitter.emit(this.comentario);
   }
 
   changeOrdenCompra(value){
+    localStorage.setItem("orden_compra",value);
     this.orden_compra_emitter.emit(
       this.orden_compra
     );

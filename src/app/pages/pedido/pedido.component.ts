@@ -331,7 +331,6 @@ export class PedidoComponent implements OnInit {
           console.log(items_list);
           console.log("data_send", this.data_to_send);
           console.log("pedido...", this.prods_pedido);
-          console.log()
           this.catalogosService
           .Post("", "Orders", this.data_to_send).subscribe(
             (response: any) => {
@@ -342,6 +341,8 @@ export class PedidoComponent implements OnInit {
                   `admin/${
                     this.datauser.username.toLowerCase()
                     }/pedidos`;
+              localStorage.removeItem('Comment');
+              localStorage.removeItem('orden_compra');
                 this.toastr.success(
                   "Pedido agregado correctamente.", 
                   "SUCCESS", 
