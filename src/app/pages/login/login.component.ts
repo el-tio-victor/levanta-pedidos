@@ -65,6 +65,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         localStorage.removeItem('nesdata');
         localStorage.removeItem('company');
         localStorage.removeItem('weather');
+        localStorage.removeItem('Comment');
+        localStorage.removeItem('orden_compra');
 
         this.obj.company = this.empresa_selected_default;
         this.getWeather();

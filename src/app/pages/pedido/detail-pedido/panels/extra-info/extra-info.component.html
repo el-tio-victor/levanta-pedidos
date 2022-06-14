@@ -2,7 +2,7 @@
   <div class="
     ml-3 mt-3 pt-1 mb-3 body-modal">
     <header 
-      class=" d-flex  mb-3 
+      class=" d-flex  mb-1
       align-items-center justify-content-between">
       <h4 class="m-0">Direccion de entrega</h4>
       <div id="input-filter" 
@@ -24,7 +24,7 @@
       </div>
     </header>
     <div class="d-flex flex-wrap  justify-content-around
-      mr-2 mt-2 p-3 wrapper-items-direcciones">
+      mr-2 mt-1 p-1 wrapper-items-direcciones">
       <ng-container *ngFor="let item of direcciones">
         <div #el_click
           *ngIf="item.AddressName.includes(filterAddress.value.toUpperCase())"
@@ -48,16 +48,16 @@
       </ng-container>
     </div>
   </div>
-  <div class="p-2 mt-2 ml-2  cont-msg">
+  <div class="d-flex p-2 mt-2 ml-1  cont-msg">
     <h4>Orden de Compra</h4>
-    <div class="pl-2 pr-2 rounded bg-white form-group ">
+    <div class=" col-9 ml-3 pl-2 pr-2 rounded bg-white form-group ">
       <input type="text" [(ngModel)]="orden_compra" 
         (ngModelChange)=changeOrdenCompra($event) class="form-control">
     </div>
   </div>
-  <div class="p-2 mt-2 ml-2  cont-msg">
+  <div class="d-flex p-2 mt-2 ml-1  cont-msg">
     <h4>Comentario</h4>
-    <div class="pl-2 pr-2 rounded bg-white form-group ">
+    <div class=" col-9 ml-3 pl-2 pr-2 rounded bg-white form-group ">
       <textarea [(ngModel)]="comentario" 
         (ngModelChange)=changeComentario($event) class="form-control">
       </textarea>

@@ -7,7 +7,7 @@ h1,h2{
   font-size: 1.8rem;
 }
 .body-modal{
-  max-height: 380px;
+  max-height: 240px;
   overflow-y: scroll;
 }
 .body-modal .card{
@@ -41,6 +41,9 @@ h1,h2{
 
 .cont-msg{
   border-right: solid 7px white;
+}
+.cont-msg h4{
+  width: 95px;
 }
 
 .footer-card {

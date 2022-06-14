@@ -17,9 +17,10 @@
     <div *ngIf="pedido" class="body-content">
       <div class="col-12">
         <!-- Fila info pedido y d-->
-        <div class="row flex-nowrap row-cliente-pedido">
-          <div class="col-md-6  ">
-            <div class="col-12 d-flex flex-row p-0 card">
+        <div class="row flex-lg-nowrap row-cliente-pedido">
+          <div class="col-12 col-lg-6  ">
+            <div 
+              class="col-12 d-flex flex-row p-0 mt-0 mt-lg-3 card">
               <div class="d-flex align-items-center 
                 card-header">
                 <div class="">
@@ -51,6 +52,18 @@
                     </p>
                   </div>
                 </div>
+                <div *ngIf="pedido.BillFolio"
+                  class=" d-flexrow-line"
+                >
+                  <h4 class="label-row color-primario1">
+                    Orden de Compra:
+                  </h4>
+                  <div class="ml-3">
+                    <p class="mb-1">
+                      {{pedido.BillFolio}}
+                    </p>
+                  </div>
+                </div>
                 <div class=" d-flex
                   row-line"
                 >
@@ -66,8 +79,8 @@
               </div>
             </div>
           </div>
-          <div class=" col-md-6">
-            <div class="col-12 d-flex flex-row p-0 card">
+          <div class="col-12 col-lg-6">
+            <div class="col-12 d-flex flex-row p-0 mt-0 mt-lg-3 card">
               <div class="d-flex align-items-center 
                 card-header">
                 <div class="">
@@ -189,6 +202,8 @@
                 <div id="grid" 
                      data-toggle="tab"
                   class=" active tab-pane">
+                <div class="col-pane-grid">
+                <div class="wrapper-pane-grid">
                 <ng-container *ngFor="let prod of 
                   products | keyvalue;  index as i">
                   <div class="m-1 p-1 row-table-cont">
@@ -249,6 +264,8 @@
                     {{getTotalProds()}}
                   </small>
                 </h5>
+                </div>
+                </div>
                 </div>
                 <div id="list" class=" tab-pane">
                   
