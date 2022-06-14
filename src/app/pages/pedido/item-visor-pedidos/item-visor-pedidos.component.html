@@ -39,17 +39,17 @@
                   matTooltip="Disponibilidad"
                   [matTooltipPosition]="'left'"
                   >
-                  <i *ngIf="getStockByTalla(talla) != 'N/A'" 
+                  <!--<i *ngIf="getStockByTalla(talla) != 'N/A'" 
                     class="material-icons
                     icono-stock pr-1">
                     store_front
-                  </i>
+                  </i>-->
                   {{
                     getStockByTalla(talla) > 500 ? '+500' :
                     getStockByTalla(talla)
                   }}
                 </small>
-                &nbsp;|&nbsp;
+                <!--&nbsp;|&nbsp;
                 <small 
                   class="d-flex align-items-center"
                   matTooltip="Piezas por caja"
@@ -63,7 +63,7 @@
                     icono-stock pr-1">
                     work
                   </i>
-                </small>
+                </small>-->
             </span>
           </div>
           <div  *ngIf="cantidad_stock != 'N/A'" 

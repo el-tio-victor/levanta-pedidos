@@ -181,10 +181,10 @@
               <th>&nbsp;</th>
               <th>#Pedido</th>
               <th>Fecha Creación</th>
-              <th>Comentario</th>
               <th>Total Articulos</th>
               <th>$ Total</th>
               <th>Envio A</th>
+              <th>Comentario</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -200,10 +200,10 @@
                         )
                     }}
                 </td>
-                <td>{{ pedido.Comments }}</td>
                 <td>{{ pedido.TotalQty }}</td>
                 <td>{{ pedido.DocTotal | currency}}</td>
                 <td>{{ pedido.ShipToCode }}</td>
+                <td>{{ pedido.Comments }}</td>
                 <td>{{ pedido.DocumentStatus }}</td>
               </tr>
             </ng-container>

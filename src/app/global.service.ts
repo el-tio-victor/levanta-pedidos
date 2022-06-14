@@ -15,13 +15,14 @@ export class GlobalService {
     public interval;
     public escount:number;
 
-    //http://hostaria.sytes.net:8086/api_cubic/
-    public static FOTO='http://hostaria.sytes.net:1310/api_infracciones/';
-  
     
-    //public static HOST='http://hostaria.sytes.net:1314/api_sca/api/';
-    //public static HOST = "https://172.16.0.106:30001/b1s/v2/" ;
-    public static HOST = "http://sap.playerytees.com:8089/b1s/v2/" ;
+    //Prod
+    //public static HOST = "http://sap.playerytees.com:8089/b1s/v2/" ;
+    
+    //Pruebas
+    public static HOST = "http://sap.playerytees.com:8091/b1s/v2/" ;
+
+
 
     
     public static API_UBICACION = "https://api.ipbase.com/v1/json/";

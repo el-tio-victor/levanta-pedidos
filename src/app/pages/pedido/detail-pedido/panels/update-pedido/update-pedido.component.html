@@ -87,12 +87,12 @@
               class="col-2 d-flex  p-0 
               text-center cont-action-delete">
               <div #el_mov class="wrapper-action-delete">
-                <div class="cont-btn-delete">
-                  <i
-
+                <div
                     matTooltip="Eliminar"
-                    [matTooltipPosition]="'right'"
+                    [matTooltipPosition]="'bottom'"
                     matTooltipClass="tooltip-r"
+                  class="cont-btn-delete">
+                  <i
                     (click)="deleteItem(
                       el_mov
                     )" 

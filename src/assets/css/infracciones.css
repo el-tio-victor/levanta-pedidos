@@ -55,6 +55,8 @@
 .tooltip-r{
   background-color: #f44336;
   color:#fff !important;
+  z-index: 15563434!important;
+  position: relative!important;
 }
 .tooltip-gral{
   background-color: #737277;
