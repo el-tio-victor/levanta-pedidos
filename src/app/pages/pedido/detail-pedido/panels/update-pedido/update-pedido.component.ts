@@ -65,11 +65,11 @@ export class UpdatePedidoComponent implements OnInit {
   }
 
   isValidValues(){
-    let status = true
+    
       for (const i in this.data.items) {
         console.log(this.data.items[i].prods);
         let  result = this.data.items[i].prods.find(
-          item => isNaN(item.Quantity) || item.Quantity < 0
+          item => isNaN( parseInt(item.Quantity)) || item.Quantity < 0
         );  
         console.log('aquiiiiii',result);
         if( result ){
@@ -99,6 +99,8 @@ export class UpdatePedidoComponent implements OnInit {
 
     if( this.data.items[estilo].prods.length == 0 )
       delete this.data.items[estilo]
+
+    this.isValidValues();
   }
 
   private findIndex(estilo:string, itemcode:string ):number{

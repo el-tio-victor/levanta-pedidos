@@ -100,7 +100,18 @@ export class DetailPedidoComponent implements OnInit {
 
   isValidUpdatePed(value:boolean){
     this.is_valid_edicion_ped = value;
-    console.log('recibiendo emit')
+    console.log('recibiendo emit',value)
+    console.log(
+      'products',
+      this.data.items,
+    );
+    if(this.is_valid_edicion_ped){
+      if(
+        Object.keys(this.data.items).length == 0
+      )
+        this.is_valid_edicion_ped = false;
+    }
+
   }
 
   validNext(){
