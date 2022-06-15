@@ -38,6 +38,12 @@
             </div>
           </mat-select>
         </mat-form-field>
+        <span *ngIf="descripcion_estilo"
+              class="d-block"
+              style="margin-top:-10px"
+          >
+        <pre>{{descripcion_estilo}}</pre>
+        </span>
       </div>
 
       <ng-container *ngIf="colors != null">

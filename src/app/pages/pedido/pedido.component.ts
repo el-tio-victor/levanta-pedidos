@@ -24,6 +24,7 @@ export class PedidoComponent implements OnInit {
   prods_pedido: any[] = [];
   is_loading = false;
   descripcion_articulo: string = "";
+  descripcion_estilo: string;
   icono_articulo: string = "";
   comentario: string = "";
 
@@ -159,7 +160,6 @@ export class PedidoComponent implements OnInit {
 
 
   onFileChange(ev){
-    alert('lol');
     console.log(ev);
     let workBook = null;
     let jsonData = null;
@@ -199,7 +199,6 @@ export class PedidoComponent implements OnInit {
   }
 
   changeSelectEstilo(event: any) {
-    //console.log(event);
 
     this.tallas = [];
     this.descripcion_articulo = "";
@@ -219,6 +218,12 @@ export class PedidoComponent implements OnInit {
             );
 
             this.descripcion_articulo = this.estilos[index].U_DescripcionC;
+            this.descripcion_estilo = this.estilos[index].U_DescripcionE;
+            if(this.descripcion_estilo){
+            this.descripcion_estilo = 
+              this.descripcion_estilo.replace("\r","\n");
+            }
+            //this.descripcion_estilo = this.estilos[index].U_DescripcionE;
 
             this.icono_articulo = this.estilos[index].U_ICON;
 
