@@ -32,8 +32,10 @@
                 "
                 [value]="estilo.ItmsGrpCod"
               >
+              <small style="font-size:13px"> 
                 {{ estilo.ItmsGrpNam }} --
                 {{ estilo.U_DescripcionC }}
+              </small>
               </mat-option>
             </div>
           </mat-select>
@@ -42,7 +44,12 @@
               class="d-block"
               style="margin-top:-10px"
           >
-        <pre>{{descripcion_estilo}}</pre>
+        <pre 
+          style="
+          overflow:inherit!important;
+          font-size: 10px;
+          ">{{descripcion_estilo}}
+        </pre>
         </span>
       </div>
 

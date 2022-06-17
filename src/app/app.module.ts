@@ -37,6 +37,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
+import {TagInputModule} from "ngx-chips";
 import {ToastrModule} from 'ngx-toastr';
 import {AppComponent} from './app.component';
 import {AppRoutes} from './app.routing';
@@ -63,6 +64,7 @@ import {ShowByIdComponent} from './pages/pedido/show-by-id/show-by-id.component'
 import {PedidosComponent} from './pages/pedidos/pedidos.component';
 import {FooterModule} from './pages/shared/footer/footer.module';
 import {NavbarModule} from './pages/shared/navbar/navbar.module';
+import {SendEmailComponent} from './pages/shared/send-email/send-email.component';
 import {SidebarModule} from './pages/sidebar/sidebar.module';
 import {FormaturlPipe} from './pipes/formaturl.pipe';
 
@@ -131,6 +133,7 @@ export class MaterialModule { }
     FooterModule,
     ToastrModule.forRoot(),
     DragDropModule,
+    TagInputModule,
   ],
   declarations: [
     AppComponent,
@@ -149,6 +152,7 @@ export class MaterialModule { }
     ConfirmOrderComponent, 
     PedidosComponent,
     ShowByIdComponent,
+    SendEmailComponent,
   ],
 
   providers: [

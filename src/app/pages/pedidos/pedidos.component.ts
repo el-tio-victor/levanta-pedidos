@@ -1,9 +1,13 @@
 import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
+import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import * as moment from "moment";
 import {ToastrService} from "ngx-toastr";
 import {GlobalService} from "../../global.service";
 import {CatalogosService} from "../../services/catalogos.service";
+import {
+  SendEmailComponent
+} from "../shared/send-email/send-email.component";
 
 @Component({
   selector: "app-pedidos",
@@ -56,7 +60,8 @@ export class PedidosComponent implements OnInit {
     private catalogosService: CatalogosService,
     private globalService: GlobalService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog,
   ) {
     this.user = this.globalService.getData().username;
     console.log(this.user);
@@ -67,6 +72,59 @@ export class PedidosComponent implements OnInit {
     return moment(date).locale("es").format("DD/MMMM/YYYY");
   }
 
+  loadViewSendMail():void{
+    let emails = this.globalService.getData().EmailAddress
+      .split(";");
+    //console.log(emails);
+    let view = this.dialog.open(
+      SendEmailComponent,
+      {
+        data: {
+          emails
+        },
+        width: '610px'
+      }
+    )
+    .afterClosed()
+    .subscribe(
+      (response:any) =>{
+        console.log(response);
+        if(response){
+          if(response.confirm){
+
+          let params = this.getParamsToFilter();
+          params = params.substring(1);
+          this.sendEmail(
+              "Orders/sendEmail?"+params,
+                response.data.emails
+            );
+          }
+        }
+      }
+    )
+  }
+
+  sendEmail(url:string, email:string){
+    this.is_loading = true;
+    this.catalogosService.Post("",url,{email} )
+    .subscribe(
+      (response:any) => {
+        if(response.status == 200){
+          this.is_loading = false;
+          this.toastr.success( "Email enviado!", "SUCCESS", {
+          positionClass: "toast-top-center",
+          } ) ;
+        }
+      },
+      error =>{
+        console.log(error);
+        this.is_loading = false;
+        let msg = this.errorToken(error);
+        msg = this.errorMsg(msg, error);
+        this.msgToastError(msg);
+      }
+    );
+  }
   
 
   loadAll() {

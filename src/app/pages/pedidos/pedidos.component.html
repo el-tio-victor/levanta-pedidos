@@ -3,6 +3,18 @@
     <div class="header-content">
       <div class="d-flex justify-content-end wrapper-header">
         <div class="cont-actions">
+          <button 
+            class="
+              btn btn-round btn-secondary 
+              btn-just-icon mr-2
+            "
+            (click)="loadViewSendMail()"
+            matTooltip="Reenviar Pedidos"
+          >
+            <i class="material-icons">
+              forward_to_inbox
+            </i> 
+          </button>
           <a 
             [routerLink]="'/admin/'+user.toLowerCase()+'/pedido'">
           <button class="btn btn-round btn-primary">

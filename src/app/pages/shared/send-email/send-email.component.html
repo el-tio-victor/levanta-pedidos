@@ -1,0 +1,33 @@
+<div class="border p-1 ">
+  <header class="pl-2">
+    <h3 class="d-flex align-items-center 
+      title-pop-up">
+      <i class="material-icons rounded-circle p-1
+        bg-primario1 text-white mr-2">
+        mail
+      </i>
+      Reenviar
+    </h3>
+  </header>
+  <div class="pt-3 pr-2 pl-2 pb-3 cont-tags">
+  <tag-input 
+    class="bg-white"
+    [(ngModel)]="emails_items"
+    [validators]="validators"
+     [errorMessages]="errorMessages"
+    >
+  </tag-input>
+  </div>
+  <footer class="p-3 d-flex justify-content-around">
+    <button (click)="onActionClick(true)" 
+      class="btn btn bg-success btn-round">
+      <i class="material-icons">send</i>
+      <span class="pl-2">Enviar</span>
+    </button>
+    <button (click)="onActionClick(false)" 
+      class="btn btn bg-danger btn-round">
+      <i class="material-icons">close</i>
+      <span class="pl-2">Cancelar</span>
+    </button>
+  </footer>
+</div>

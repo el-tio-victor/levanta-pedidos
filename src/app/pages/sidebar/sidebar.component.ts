@@ -162,6 +162,30 @@ export class SidebarComponent implements OnInit {
             ],
             url: "pedidos",
         },
+        {
+            id_seccion: 4,
+            imagen: "receipt",
+            nombre_seccion: "Facturas",
+            modulos: [
+              {
+                s_modulo:"Historial",
+                s_url: "facturas"
+              },
+            ],
+            url: "Facturas",
+        },
+        {
+            id_seccion: 5,
+            imagen: "warehouse",
+            nombre_seccion: "Back Order",
+            modulos: [
+              {
+                s_modulo:"Historial",
+                s_url: "back_order"
+              },
+            ],
+            url: "back_order",
+        }
         /*{
             id_seccion: 4,
             imagen: "local_shipping",
