@@ -68,6 +68,7 @@ import {NavbarModule} from './pages/shared/navbar/navbar.module';
 import {SendEmailComponent} from './pages/shared/send-email/send-email.component';
 import {SidebarModule} from './pages/sidebar/sidebar.module';
 import {FormaturlPipe} from './pipes/formaturl.pipe';
+import { BackorderComponent } from './pages/backorder/backorder.component';
 
 
 
@@ -155,6 +156,7 @@ export class MaterialModule { }
     ShowByIdComponent,
     SendEmailComponent,
     FacturasComponent,
+    BackorderComponent,
   ],
 
   providers: [

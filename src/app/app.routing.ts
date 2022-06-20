@@ -9,6 +9,7 @@ import {PageNotFoundComponent} from './pages/page-not-found/page-not-found.compo
 import {PedidoComponent} from "./pages/pedido/pedido.component";
 import {ShowByIdComponent} from "./pages/pedido/show-by-id/show-by-id.component";
 import {PedidosComponent} from "./pages/pedidos/pedidos.component";
+import { BackorderComponent } from './pages/backorder/backorder.component';
 
 
 
@@ -42,6 +43,11 @@ export const AppRoutes: Routes = [
       {
         path: 'facturas',
         component: FacturasComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'backorder',
+        component: BackorderComponent,
         canActivate: [AuthGuardService]
       }
     ], canActivate: [AuthGuardService]
