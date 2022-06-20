@@ -69,7 +69,7 @@ export class ShowByIdComponent implements OnInit {
             this.products, "ItmsGrpNam"
           );
 
-          //console.log(itemsAgrupados);
+          console.log(itemsAgrupados);
           this.products = itemsAgrupados;
 
         }
@@ -90,12 +90,23 @@ export class ShowByIdComponent implements OnInit {
   }
 
   orderByKey(array,key){
+    //console.log('arr',array);
     return array.reduce(
       (result, currentValue) => {
-        (result[currentValue[key]] =
-          result[currentValue[key]] || [])
-        .push(currentValue);
+        //console.log('currentValue ', currentValue);
+        
+        //este valor se agraga para prevenir que se
+        //agrupe por un valor nulo (caso en que agre
+        //gan un serevicio en el pedido cuando lo 
+        //pasan de sap a retail)
+        
+        let key_not_null = currentValue[key] ?
+          key : 'ItemCode';
 
+        (result[currentValue[key_not_null]] =
+          result[currentValue[key_not_null]] || [])
+        .push(currentValue);
+       // console.log('res',result);
         return result;
       }, {});
   }
@@ -111,12 +122,16 @@ export class ShowByIdComponent implements OnInit {
   getTallas(object:any){
     let tallas = object.reduce((result,current) => { 
       if(Array.isArray(result)){
-        if(!result.includes(current['U_Talla']))
-          result.push(current['U_Talla']);
+        if(!result.includes(current['U_Talla'])){
+          let item_push = current['U_Talla'] ?
+            current['U_Talla'] :
+            current['ItemCode']
+          result.push( item_push );
+        }
       }
       return result;
     },[]);
-
+    //console.log('tallaaaa', tallas)
     this.tallas_by_estilo = tallas;
     return tallas;
   }
@@ -139,9 +154,16 @@ export class ShowByIdComponent implements OnInit {
   }
 
   getQuantity(el:any, talla:string){
-    //console.log(el);
+    console.log('cantidades',el,'talla ', talla);
     let element_found =
         el.find(item => item.U_Talla == talla);
+
+    //se agrega caso para mostrar cuando ingresan
+    //un servicio al pedido
+    if(!element_found){
+      element_found =
+        el.find(item => item.ItemCode == talla);
+    }
     return element_found ?
       element_found.Quantity : '-';
   }

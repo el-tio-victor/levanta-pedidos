@@ -45,6 +45,7 @@ import {AppRoutes} from './app.routing';
 import {GlobalService} from './global.service';
 //INTERCEPTORS
 import {HeaderInterceptor} from "./header.interceptor";
+import {FacturasComponent} from './pages/facturas/facturas.component';
 import {InicioComponent} from './pages/inicio/inicio.component';
 import {AdminLayoutComponent} from './pages/layouts/admin/admin-layout.component';
 import {AuthGuardService} from './pages/layouts/auth/auth-guard.services';
@@ -153,6 +154,7 @@ export class MaterialModule { }
     PedidosComponent,
     ShowByIdComponent,
     SendEmailComponent,
+    FacturasComponent,
   ],
 
   providers: [

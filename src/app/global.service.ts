@@ -17,10 +17,10 @@ export class GlobalService {
 
     
     //Prod
-   //public static HOST = "http://sap.playerytees.com:8089/b1s/v2/" ;
+   public static HOST = "http://sap.playerytees.com:8089/b1s/v2/" ;
     
     //Pruebas
-    public static HOST = "http://sap.playerytees.com:8091/b1s/v2/" ;
+    //public static HOST = "http://sap.playerytees.com:8091/b1s/v2/" ;
 
 
 

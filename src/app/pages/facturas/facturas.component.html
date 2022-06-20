@@ -1,0 +1,220 @@
+<section class="main-content">
+  <div class="col-12">
+    <div class="header-content">
+      <div class="d-flex justify-content-end wrapper-header">
+        <div class="cont-actions">
+          <button 
+            class="
+              btn btn-round btn-secondary 
+              btn-just-icon mr-2
+            "
+            (click)="loadViewSendMail()"
+            matTooltip="Reenviar Pedidos"
+          >
+            <i class="material-icons">
+              forward_to_inbox
+            </i> 
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class=" cont-searchs">
+          <div class="wrapper-searchs d-flex flex-wrap
+            align-items-center justify-content-end">
+            <div class="mr-4 btn-clean-filters" 
+              matTooltip="borrar filtros"
+              (click)="clearFilters('all')">
+              <i class="icono-filter material-icons">
+                filter_list
+              </i>
+              <i class="icono-delete-filter material-icons">
+                close
+              </i>
+            </div>
+            <div #parent_n_ped
+              class="d-flex align-items-center p-1  
+                border-success cont-search-num-ped">
+              <i 
+                (click)="filter()"
+                class="material-icons">
+                search
+              </i>
+              <input #search_num_ped
+                 style="width: 150px"
+                 class="ml-1 mr-1 "
+                (focus)="focusInput(parent_n_ped)"
+                (blur)="blurInput(parent_n_ped)"
+                (keydown.enter)="filter()"
+                 data-param_url="DocNum"
+                type="number"
+                placeholder="Buscar #Pedido">
+            </div>
+
+            <div #parent_dates
+              class="d-flex align-items-center p-1  ml-3 mr-4 
+                 cont-search-dates">
+              <i
+                (click)="filter()"
+                class=" p-1 material-icons">
+                search
+              </i>
+              <span class="ml-2">Del...</span>
+              <input
+                #date_1
+                (focus)="focusInputDate(parent_dates )"
+                (blur)="blurInputDate(parent_dates )"
+                type="date" class=" mr-2" placeholder="Inicio"
+                >
+                <span>Al...</span>
+              <input 
+                #date_2
+                min="{{date_1.value}}"
+                (focus)="focusInputDate(parent_dates)"
+                (blur)="blurInputDate(parent_dates)"
+                type="date" placeholder="Fin">
+            </div>
+            <div #parent_envio
+              class="d-flex align-items-center mr-3 ml-1
+                p-1 border-success cont-search-envio">
+              <i 
+                (click)="filter()"
+                class="material-icons">
+                search
+              </i>
+              <input #search_lugar_envio
+                 style="width: 130px"
+                 class="ml-1 mr-1 "
+                (focus)="focusInput(parent_envio)"
+                (blur)="blurInput(parent_envio)"
+                (keydown.enter)="filter()"
+                 data-param_url="ShipToCode"
+                type="text" placeholder="Buscar lugar envio">
+            </div>
+          <div class="d-flex align-items-center dropdown
+            cont-search-status">
+              <i 
+                (click)="filter()"
+                class=" mr-1 material-icons">
+                search
+              </i>
+            <button  #btn_filter_status href="#" 
+                class="btn  bg-white color-primario1 dropdown-toggle" 
+                data-toggle="dropdown" aria-expanded="true" >
+                {{filterStatus == '' ?
+                'Status...' : filterStatus}}          
+              <b class="caret"></b>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a 
+                  (click)="
+                    setFilterStatus(
+                      '',
+                      '',
+                      btn_filter_status
+                    )">
+                  .....
+                </a>
+              </li>
+              <li>
+                <a 
+                  (click)="
+                    setFilterStatus(
+                      'A',
+                      'Abierto',
+                      btn_filter_status
+                    )">
+                  Abierto
+                </a>
+              </li>
+              <li>
+                <a (click)="setFilterStatus(
+                  'EP',
+                  'En Proceso',
+                  btn_filter_status
+                  )">
+                  En Proceso
+                </a>
+              </li>
+              <li>
+                <a (click)="setFilterStatus(
+                  'FP',
+                  'Facturado Parcialmente',
+                  btn_filter_status)">
+                  Factura Parcial
+                </a>
+              </li>
+              <li>
+                <a 
+                  (click)="setFilterStatus(
+                  'F',
+                  'Facturado',
+                  btn_filter_status
+                  )">
+                  Facturado
+                </a>
+              </li>
+              <li>
+                <a (click)="setFilterStatus(
+                  'C',
+                  'Cancelado',
+                  btn_filter_status
+                  )">
+                  Cancelado
+                </a>
+              </li>
+              <li><a (click)="setFilterStatus(
+                  'CE',
+                  'Cerrado',
+                  btn_filter_status
+                  )">
+                  Cerrado
+                </a>
+              </li>
+            </ul>
+          </div>
+          </div>
+      </div>
+      <div class="wrapper-table">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>&nbsp;</th>
+              <th>Factura</th>
+              <th>Fecha</th>
+              <th># Cliente</th>
+              <th>Cliente</th>
+              <th>Método Pago</th>
+              <th>Sucursal</th>
+              <th>Orden de Compra</th>
+              <th>Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container 
+              *ngFor="let pedido of all_pedidos;
+                let i = index; ">
+              <tr (click)="show(pedido.DocEntry)">
+                <th>{{ i +1 }}</th>
+                <td>{{ pedido.DocNum }}</td>
+                <td>{{ readDate(
+                          pedido.DocDate
+                        )
+                    }}
+                </td>
+                <td>{{ pedido.TotalQty }}</td>
+                <td>{{ pedido.DocTotal | currency}}</td>
+                <td>{{ pedido.ShipToCode }}</td>
+                <td>{{ pedido.Comments }}</td>
+                <td>{{ pedido.DocumentStatus }}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        </div>
+
+    </div>
+  </div>
+</section>
