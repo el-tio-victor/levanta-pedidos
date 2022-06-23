@@ -1,9 +1,13 @@
 import {Component, OnInit} from '@angular/core';
+import {MatDialog} from "@angular/material/dialog";
 import {ActivatedRoute, Router} from "@angular/router";
 import * as moment from "moment";
 import {ToastrService} from "ngx-toastr";
 import {GlobalService} from "../../../global.service";
 import {CatalogosService} from "../../../services/catalogos.service";
+import {
+  SendEmailComponent
+} from "../../shared/send-email/send-email.component";
 
 @Component({
   selector: 'app-show-by-id',
@@ -29,6 +33,7 @@ export class ShowByIdComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router,
     private getParamRoute: ActivatedRoute,
+    public dialog: MatDialog,
   ) {
     console.log('construct');
     this.user = this.globalService.getData().username;
@@ -38,6 +43,68 @@ export class ShowByIdComponent implements OnInit {
       this.getPedido();
     
   }
+
+loadViewSendMail():void{
+  let emails = this.globalService.getData().EmailAddress
+    .split(";");
+  //console.log(emails);
+  let view = this.dialog.open(
+    SendEmailComponent,
+    {
+      data: {
+        emails
+      },
+      width: '610px'
+    }
+  )
+  .afterClosed()
+  .subscribe(
+    (response:any) =>{
+      console.log(response);
+      if(response){
+        if(response.confirm){
+
+        this.sendEmail(
+            "Orders/sendEmail/"+this.id,
+              response.data.emails
+          );
+        }
+      }
+    }
+  )
+}
+
+sendEmail(url:string, email:string){
+  this.is_loading = true;
+  this.catalogosService.Post("",url,{email} )
+  .subscribe(
+    (response:any) => {
+      console.log(response);
+      if(response.status == 200){
+        this.is_loading = false;
+        this.toastr.success( "Email enviado!", "SUCCESS", {
+        positionClass: "toast-top-center",
+        } ) ;
+      }
+    },
+    error =>{
+      console.log(error);
+      this.is_loading = false;
+      let msg = this.errorToken(error);
+      msg = this.errorMsg(msg, error);
+      this.msgToastError(msg);
+    }
+  );
+}
+
+
+errorMsg(msg:any,error:any){
+  return msg =
+    msg == "" ? 
+      `Ocurrio un error al procesar la petición "${error.error.msg}"`
+          : msg;
+}
+
 
 
   setCurrentProd(value:any):void{
@@ -154,7 +221,6 @@ export class ShowByIdComponent implements OnInit {
   }
 
   getQuantity(el:any, talla:string){
-    console.log('cantidades',el,'talla ', talla);
     let element_found =
         el.find(item => item.U_Talla == talla);
 
@@ -178,9 +244,5 @@ export class ShowByIdComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ngDoCheck(){
-    console.log()
-    console.log('changessss');
-  }
 
 }

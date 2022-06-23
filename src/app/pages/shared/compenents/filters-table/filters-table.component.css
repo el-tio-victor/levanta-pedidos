@@ -41,28 +41,28 @@
   background-color: #efefef!important;
   color: #737277;
 }
-.cont-search-num-fac i:first-child,
-.cont-search-envio i:first-child,
-.cont-search-status i:first-child,
-.cont-search-dates i:first-child {
+.cont-search-num-fac >i,
+.cont-search-envio >i,
+.cont-search-status >i,
+.cont-search-dates >i {
   cursor: pointer;
   transition: all .4s ease-in;
   border-radius: 100%;
   position: relative;
   z-index: 3;
 }
-.cont-search-num-fac i:first-child,
-.cont-search-envio i:first-child{
+.cont-search-num-fac >i,
+.cont-search-envio >i{
   padding: 2px;
 }
-.cont-search-dates i:first-child {
+.cont-search-dates >i {
   font-size: 18px;
   padding: 3px;
 }
-.cont-search-num-fac:hover i:first-child,
-.cont-search-envio:hover i:first-child,
-.cont-search-status:hover i:first-child,
-.cont-search-dates:hover i:first-child {
+.cont-search-num-fac:hover >i,
+.cont-search-envio:hover >i,
+.cont-search-status:hover >i,
+.cont-search-dates:hover >i {
   background-color: #737277;
   color:white;
   transition: all .4s ease-in;

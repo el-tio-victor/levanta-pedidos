@@ -1,6 +1,9 @@
 .container-loader{
   z-index: 20;
 }
+tbody{
+  font-size: 13px;
+}
 thead{
   background-color: #eaeaea;
 }

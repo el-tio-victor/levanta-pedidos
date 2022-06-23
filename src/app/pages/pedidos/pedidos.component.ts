@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import * as moment from "moment";
@@ -16,7 +16,7 @@ import {
 })
 
 export class PedidosComponent implements OnInit {
-  @ViewChild('search_num_ped',{static:false}) 
+  /*@ViewChild('search_num_ped',{static:false}) 
     search_num_ped:ElementRef;
 
   @ViewChild('date_1',{static:false}) 
@@ -29,7 +29,7 @@ export class PedidosComponent implements OnInit {
     btn_filter_status:ElementRef;
 
   @ViewChild('search_lugar_envio',{static : true}) 
-    search_lugar_envio:ElementRef;
+    search_lugar_envio:ElementRef;*/
 
   next_link:string ;
   prev_link:string ;
@@ -60,7 +60,7 @@ export class PedidosComponent implements OnInit {
 
   params_to_filter:string = "";
 
-  filterStatus:string = "";
+  /*filterStatus:string = "";
   filter_status_id:string = "";
 
   filters:any = {
@@ -76,7 +76,7 @@ export class PedidosComponent implements OnInit {
     'entrega': () => {
       this.clearEntrega();
     }
-  };
+  };*/
 
   constructor(
     private catalogosService: CatalogosService,
@@ -119,8 +119,7 @@ loadViewSendMail():void{
       if(response){
         if(response.confirm){
 
-        let params = this.getParamsToFilter();
-        params = params.substring(1);
+        let params = this.params_to_filter.substring(1);
         this.sendEmail(
             "Orders/sendEmail?"+params,
               response.data.emails
@@ -247,7 +246,7 @@ show(id: number) {
   this.router.navigateByUrl(url);
 }
 
-focusInput(el: any , el_target = null) {
+/*focusInput(el: any , el_target = null) {
   el.classList.add("border-m");
 }
 
@@ -262,7 +261,7 @@ focusInputDate( el:any ){
 blurInputDate( el:any ){
   if(el.value == "")
     el.classList.remove("border-m");
-}
+}*/
 getValue( element:any ){
   return element.srcElement ?
     element.srcElement.value :
@@ -275,7 +274,7 @@ getData(element:any){
     element.dataset.param_url;
 }
 
-search(event: any) {
+/*search(event: any) {
   
   let value = this.getValue(event);
 
@@ -309,10 +308,10 @@ search(event: any) {
         this.msgToastError(msg);
       }
     );
-  }
+  }*/
 
 
-  getParamsToFilter(){
+  /*getParamsToFilter(){
     let params = ""; 
 
     let ship_to_code = this.
@@ -354,7 +353,7 @@ search(event: any) {
     }`;
 
     return params;
-  }
+  }*/
 
   filter(){
     /*let params = this.getParamsToFilter();
@@ -392,7 +391,7 @@ search(event: any) {
     //}
   }
 
-  searchDate(date_1: any, date_2: string = null) {
+  /*searchDate(date_1: any, date_2: string = null) {
     if (date_1 != "") {
       //this.clearFilters('date');
       if (date_2 == "") {
@@ -483,7 +482,7 @@ search(event: any) {
     if(current_filter == "all"){
       this.loadAll()
     }
-  }
+  }*/
 
   ngOnInit(): void {}
 }

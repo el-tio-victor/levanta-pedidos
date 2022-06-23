@@ -2,17 +2,20 @@
 <section class="main-content">
   <div class="col-12">
     <div class="header-content">
-      <!--<div class="d-flex wrapper-header">
-        <h5>Detalle de pedido en proceso 
-          <strong 
-            style="font-size: 3rem;
-            display:inline-block; 
-            transform:rotate(90deg) translate(10px,-20px)"
-          >
-              :)
-          </strong>
-        </h5>
-      </div>-->
+      <div class="d-flex justify-content-end wrapper-header">
+        <button 
+            class="
+              btn btn-round btn-secondary 
+              btn-just-icon mr-2
+            "
+            (click)="loadViewSendMail()"
+            matTooltip="Reenviar Pedidos"
+        >
+          <i class="material-icons">
+            forward_to_inbox
+          </i> 
+        </button>
+      </div>
     </div>
     <div *ngIf="pedido" class="body-content">
       <div class="col-12">
