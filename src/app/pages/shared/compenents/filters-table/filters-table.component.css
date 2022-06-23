@@ -1,3 +1,4 @@
+
 .cont-searchs{
   padding-bottom: 5px;
   /*margin-bottom: 8px;*/
@@ -20,7 +21,7 @@
 .cont-search-envio,
 .cont-search-dates {
   position: relative;
-  min-width: 205px
+  min-width: 159px
 }
 
 .btn-clean-filters{
