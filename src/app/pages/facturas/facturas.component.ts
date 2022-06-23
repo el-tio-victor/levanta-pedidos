@@ -1,6 +1,6 @@
 import {
   Component,
-  ElementRef, OnInit, ViewChild
+  OnInit
 } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
@@ -19,40 +19,15 @@ import {
 })
 export class FacturasComponent implements OnInit {
 
-  @ViewChild('search_num_fac',{static:false}) 
-    search_num_fac:ElementRef;
-
-  @ViewChild('date_1',{static:false}) 
-    date_1:ElementRef;
-
-  @ViewChild('date_2',{static:false}) 
-    date_2:ElementRef;
-
-  @ViewChild('btn_filter_status',{static : true}) 
-    btn_filter_status:ElementRef;
-
-  @ViewChild('search_lugar_envio',{static : true}) 
-    search_lugar_envio:ElementRef;
   is_loading: boolean = false;
   all_facturas: any[];
   user: string;
-
 
   next_link:string ;
   prev_link:string ;
   current_page:number = 0;
 
-  filters:any = {
-    'doc_number': ()=>{
-      this.clearNumDoc();
-    },
-    'date': () =>{
-      this.clearDate();
-    },
-    'entrega': () => {
-      this.clearEntrega();
-    }
-  };
+  params_to_filter:string = "";
 
   constructor(
     private catalogosService: CatalogosService,
@@ -101,6 +76,7 @@ export class FacturasComponent implements OnInit {
             : msg;
   }
 
+
   errorToken(error: any) {
     let msg = "";
     if (error.error) {
@@ -132,8 +108,8 @@ export class FacturasComponent implements OnInit {
         if(response){
           if(response.confirm){
 
-          let params = this.getParamsToFilter();
-          params = params.substring(1);
+          //let params = this.getParamsToFilter();
+          let params = this.params_to_filter.substring(1);
           this.sendEmail(
               "Invoices/sendEmail?"+params,
                 response.data.emails
@@ -217,95 +193,16 @@ export class FacturasComponent implements OnInit {
       }
     );
   }
+
+  setParamToFilter(value:string){
+    this.params_to_filter = value;
+  }
   
-  focusInput(el: any , el_target = null) {
-    el.classList.add("border-m");
-  }
-
-  blurInput(el: any) {
-    console.log('valor', el.querySelector('input').value);
-    if( el.querySelector('input').value == "")
-      el.classList.remove("border-m");
-  }
-  focusInputDate( el:any ){
-      el.classList.add("border-m");
-  }
-  blurInputDate( el:any ){
-    if(el.value == "")
-      el.classList.remove("border-m");
-  }
-
-  clearFilters(current_filter:string){
-    for(let key in this.filters){
-      if(key  != current_filter)
-        this.filters[key]();
-    }
-    if(current_filter == "all"){
-      this.loadAll()
-    }
-  }
-  clearNumDoc(){
-    this.search_num_fac.nativeElement
-      .parentNode.classList.remove('border-m') ;
-
-    this.search_num_fac.nativeElement.value= "";
-  }
-  clearDate(){
-    console.log('clear date');
-    this.date_1.nativeElement.parentNode
-    .classList.remove('border-m');
-    this.date_1.nativeElement.value= "";
-    this.date_2.nativeElement.value= "";
-  }
-  clearEntrega(){
-    this.search_lugar_envio .nativeElement
-    .parentNode.classList.remove('border-m');
-    this.search_lugar_envio.nativeElement.value="";
-  }
-
-
-  getParamsToFilter(){
-    let params = ""; 
-
-    let ship_to_code = this.
-      search_lugar_envio.nativeElement.value;
-    let param_ship_to_code = ship_to_code == "" ?
-      "" :
-      `&ShipToCode=${ship_to_code}`;
-
-    let date_start = this.date_1.nativeElement.value;
-      let param_date_start = date_start =="" ?
-        "" :
-        `&startDate=${date_start}`;
-
-    let date_end = this.date_2.nativeElement.value;
-    let param_date_end = 
-      date_end == "" || param_date_start == "" ?
-      "" :
-      `&endDate=${date_end}`;
-
-
-    let doc_num = this.search_num_fac.nativeElement.value;
-    let param_doc_num = 
-      doc_num == "" ?
-      "" :
-      `&Folio=${doc_num}`
-    
-    params = `${param_ship_to_code}${
-      param_date_start
-    }${
-      param_date_end
-    }${
-      param_doc_num
-    }`;
-
-    return params;
-  }
   filter(){
-    let params = this.getParamsToFilter();
-    params = params.substring(1);
-    console.log(params)
-    if(params != ""){
+    //let params = this.getParamsToFilter();
+    let params = this.params_to_filter.substring(1);
+    //console.log('params',params)
+    //if(params != ""){
 
     let url =`Invoices?${params}`;
 
@@ -333,5 +230,6 @@ export class FacturasComponent implements OnInit {
         this.msgToastError(msg);
       }
     );
-    }
-  }}
+    //}
+  }
+}

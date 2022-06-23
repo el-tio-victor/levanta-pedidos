@@ -9,82 +9,16 @@
       </div>
   
       <div class=" p-3 card">
-        <div class=" cont-searchs">
-            <div class="wrapper-searchs d-flex flex-wrap
-              align-items-center justify-content-end">
-              <div class="mr-4 btn-clean-filters" 
-                matTooltip="borrar filtros"
-                (click)="clearFilters('all')">
-                <i class="icono-filter material-icons">
-                  filter_list
-                </i>
-                <i class="icono-delete-filter material-icons">
-                  close
-                </i>
-              </div>
-              <div #parent_n_docs
-                class="d-flex align-items-center p-1  
-                  border-success cont-search-num-doc">
-                <i 
-                  (click)="filter()"
-                  class="material-icons">
-                  search
-                </i>
-                <input #search_num_doc
-                   style="width: 150px"
-                   class="ml-1 mr-1 "
-                  (focus)="focusInput(parent_n_docs)"
-                  (blur)="blurInput(parent_n_docs)"
-                  (keydown.enter)="filter()"
-                   data-param_url="DocNum"
-                  type="text"
-                  placeholder="Buscar #Doc">
-              </div>
-  
-              <div #parent_dates
-                class="d-flex align-items-center p-1  ml-3 mr-4 
-                   cont-search-dates">
-                <i
-                  (click)="filter()"
-                  class=" p-1 material-icons">
-                  search
-                </i>
-                <span class="ml-2">Del...</span>
-                <input
-                  #date_1
-                  (focus)="focusInputDate(parent_dates )"
-                  (blur)="blurInputDate(parent_dates )"
-                  type="date" class=" mr-2" placeholder="Inicio"
-                  >
-                  <span>Al...</span>
-                <input 
-                  #date_2
-                  min="{{date_1.value}}"
-                  (focus)="focusInputDate(parent_dates)"
-                  (blur)="blurInputDate(parent_dates)"
-                  type="date" placeholder="Fin">
-              </div>
-              <div #parent_envio
-                class="d-flex align-items-center mr-3 ml-1
-                  p-1 border-success cont-search-envio">
-                <i 
-                  (click)="filter()"
-                  class="material-icons">
-                  search
-                </i>
-                <input #search_lugar_envio
-                   style="width: 130px"
-                   class="ml-1 mr-1 "
-                  (focus)="focusInput(parent_envio)"
-                  (blur)="blurInput(parent_envio)"
-                  (keydown.enter)="filter()"
-                   data-param_url="ShipToCode"
-                  type="text" placeholder="Buscar lugar envio">
-              </div>
-           </div> 
-        </div>
-        <div class="wrapper-table">
-          <table class="table table-striped">
+        <app-filters-table
+          (params_to_filter_emitter)="
+            setParamToFilter($event)
+          "
+          (filter_emitter)="filter()"
+          [filters_config]="filters_config"
+        >
+        </app-filters-table>
+          <div class="wrapper-table">
+          <table class="table">
             <thead>
               <tr>
                 <th>&nbsp;</th>

@@ -1,6 +1,5 @@
-import { Component, OnInit, ElementRef, ViewChild
- } from '@angular/core';
- import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 import * as moment from "moment";
 import {ToastrService} from "ngx-toastr";
 import {GlobalService} from "../../global.service";
@@ -14,7 +13,7 @@ import {CatalogosService} from "../../services/catalogos.service";
 })
 export class BackorderComponent implements OnInit {
 
-  @ViewChild('search_num_doc',{static:false}) 
+  /*@ViewChild('search_num_doc',{static:false}) 
     search_num_doc:ElementRef;
 
   @ViewChild('date_1',{static:false}) 
@@ -24,7 +23,24 @@ export class BackorderComponent implements OnInit {
     date_2:ElementRef;
 
   @ViewChild('search_lugar_envio',{static : true}) 
-    search_lugar_envio:ElementRef;
+    search_lugar_envio:ElementRef;*/
+
+   filters_config = {
+    folio: {
+      param_name:'DocNum',
+      placeholder: '#Pedido'
+    },
+    fecha_inicio: {
+      param_name: 'startDate'
+    },
+    fecha_fin: {
+      param_name: 'endDate'
+    },
+    lugar_envio:{
+      param_name: 'ShipToCode'
+    }
+  };
+  params_to_filter:string = "";
 
     is_loading: boolean = false;
     all_docs: any[];
@@ -35,7 +51,7 @@ export class BackorderComponent implements OnInit {
     prev_link:string ;
     current_page:number = 0;
   
-    filters:any = {
+    /*filters:any = {
       'doc_number': ()=>{
         this.clearNumDoc();
       },
@@ -45,7 +61,7 @@ export class BackorderComponent implements OnInit {
       'entrega': () => {
         this.clearEntrega();
       }
-    };
+    };*/
 
 
   constructor(
@@ -159,7 +175,7 @@ export class BackorderComponent implements OnInit {
   }
 
 
-  focusInput(el: any , el_target = null) {
+  /*focusInput(el: any , el_target = null) {
     el.classList.add("border-m");
   }
 
@@ -241,12 +257,15 @@ export class BackorderComponent implements OnInit {
     }`;
 
     return params;
+  }*/
+  setParamToFilter(value:string){
+    this.params_to_filter = value;
   }
   filter(){
-    let params = this.getParamsToFilter();
-    params = params.substring(1);
-    console.log(params)
-    if(params != ""){
+    //let params = this.getParamsToFilter();
+    let params = this.params_to_filter.substring(1);
+    //console.log(params)
+    //if(params != ""){
 
     let url =`Backorder?${params}`;
 
@@ -274,7 +293,7 @@ export class BackorderComponent implements OnInit {
         this.msgToastError(msg);
       }
     );
-    }
+    //}
   }
 
 }

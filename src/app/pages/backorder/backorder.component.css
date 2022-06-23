@@ -1,3 +1,10 @@
+thead{
+  background-color:#eaeaea;
+}
+.wrapper-table{
+  min-height: 600px;
+  overflow: scroll;
+}
 .container-loader{
     z-index: 20;
   }

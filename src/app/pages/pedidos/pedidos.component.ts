@@ -38,6 +38,28 @@ export class PedidosComponent implements OnInit {
   is_loading: boolean = false;
   all_pedidos: any[];
   user: string;
+
+   filters_config = {
+    folio: {
+      param_name:'DocNum',
+      placeholder: '#Pedido'
+    },
+    fecha_inicio: {
+      param_name: 'startDate'
+    },
+    fecha_fin: {
+      param_name: 'endDate'
+    },
+    lugar_envio:{
+      param_name: 'ShipToCode'
+    },
+    status:{
+      param_name: ""
+    }
+  };
+
+  params_to_filter:string = "";
+
   filterStatus:string = "";
   filter_status_id:string = "";
 
@@ -72,189 +94,194 @@ export class PedidosComponent implements OnInit {
     return moment(date).locale("es").format("DD/MMMM/YYYY");
   }
 
-  loadViewSendMail():void{
-    let emails = this.globalService.getData().EmailAddress
-      .split(";");
-    //console.log(emails);
-    let view = this.dialog.open(
-      SendEmailComponent,
-      {
-        data: {
-          emails
-        },
-        width: '610px'
-      }
-    )
-    .afterClosed()
-    .subscribe(
-      (response:any) =>{
-        console.log(response);
-        if(response){
-          if(response.confirm){
+setParamToFilter(value:string){
+  console.log('param.prod',value);
+  this.params_to_filter = value;
+}
 
-          let params = this.getParamsToFilter();
-          params = params.substring(1);
-          this.sendEmail(
-              "Orders/sendEmail?"+params,
-                response.data.emails
-            );
-          }
-        }
-      }
-    )
-  }
-
-  sendEmail(url:string, email:string){
-    this.is_loading = true;
-    this.catalogosService.Post("",url,{email} )
-    .subscribe(
-      (response:any) => {
-        if(response.status == 200){
-          this.is_loading = false;
-          this.toastr.success( "Email enviado!", "SUCCESS", {
-          positionClass: "toast-top-center",
-          } ) ;
-        }
+loadViewSendMail():void{
+  let emails = this.globalService.getData().EmailAddress
+    .split(";");
+  //console.log(emails);
+  let view = this.dialog.open(
+    SendEmailComponent,
+    {
+      data: {
+        emails
       },
-      error =>{
-        console.log(error);
-        this.is_loading = false;
-        let msg = this.errorToken(error);
-        msg = this.errorMsg(msg, error);
-        this.msgToastError(msg);
-      }
-    );
-  }
-  
+      width: '610px'
+    }
+  )
+  .afterClosed()
+  .subscribe(
+    (response:any) =>{
+      console.log(response);
+      if(response){
+        if(response.confirm){
 
-  loadAll() {
-    this.is_loading = true;
-    this.catalogosService.All("", "Orders").subscribe(
-      (response: any) => {
-        this.is_loading = false;
-        console.log(response);
-        if (response.status == 200) {
-          this.all_pedidos = response.data;
-          this.setPaginateInfo(
-            response
+        let params = this.getParamsToFilter();
+        params = params.substring(1);
+        this.sendEmail(
+            "Orders/sendEmail?"+params,
+              response.data.emails
           );
         }
-      },
-      (error) => {
-        this.is_loading = false;
-        let msg = this.errorToken(error);
-        msg = this.errorMsg(msg, error);
-        this.msgToastError(msg);
-      }
-    );
-  }
-
-  clearPaginate(){
-    this.next_link = null;
-    this.prev_link = null;
-    this.current_page = null;
-  }
-
-  setPaginateInfo(response:any){
-    this.next_link = response.nextLink;
-    this.prev_link = response.previousLink;
-    this.current_page = response.currentPage;
-  }
-
-  handlePaginate(element:any){
-    console.log(element.dataset.target);
-    let action = element.dataset.target;
-    let url = "";
-    if(action == 'prev'){
-      url = this.prev_link;
-    }
-    else if(action == 'next'){
-     url = this.next_link; 
-    }
-   
-    this.is_loading = true;
-    this.catalogosService.All('',url)
-    .subscribe(
-      (response:any) =>{
-        this.is_loading = false;
-        if(response.status == 200){
-          this.all_pedidos = response.data;
-          this.setPaginateInfo(response);
-        }
-      },
-      (error) =>{
-        this.is_loading = false;
-        let msg = this.errorToken(error);
-        msg = this.errorMsg(msg, error);
-        this.msgToastError(msg);
-      }
-    );
-  }
-
-  errorMsg(msg:any,error:any){
-    return msg =
-      msg == "" ? 
-        `Ocurrio un error al procesar la petición "${error.error.msg}"`
-            : msg;
-  }
-
-  errorToken(error: any) {
-    let msg = "";
-    if (error.error) {
-      if (error.error.status == 409) {
-        msg = "Token expirado!";
-        this.router.navigateByUrl("/");
       }
     }
-    return msg;
-  }
+  )
+}
 
-  msgToastError(msg: string): void {
-    this.toastr.error(msg, "Error", {
-      positionClass: "toast-top-center",
-    });
-  }
+sendEmail(url:string, email:string){
+  this.is_loading = true;
+  this.catalogosService.Post("",url,{email} )
+  .subscribe(
+    (response:any) => {
+      if(response.status == 200){
+        this.is_loading = false;
+        this.toastr.success( "Email enviado!", "SUCCESS", {
+        positionClass: "toast-top-center",
+        } ) ;
+      }
+    },
+    error =>{
+      console.log(error);
+      this.is_loading = false;
+      let msg = this.errorToken(error);
+      msg = this.errorMsg(msg, error);
+      this.msgToastError(msg);
+    }
+  );
+}
 
-  show(id: number) {
-    let url = `admin/${this.user.toLowerCase()}/pedido/${id}`;
-    this.router.navigateByUrl(url);
-  }
 
-  focusInput(el: any , el_target = null) {
+loadAll() {
+  this.is_loading = true;
+  this.catalogosService.All("", "Orders").subscribe(
+    (response: any) => {
+      this.is_loading = false;
+      console.log(response);
+      if (response.status == 200) {
+        this.all_pedidos = response.data;
+        this.setPaginateInfo(
+          response
+        );
+      }
+    },
+    (error) => {
+      this.is_loading = false;
+      let msg = this.errorToken(error);
+      msg = this.errorMsg(msg, error);
+      this.msgToastError(msg);
+    }
+  );
+}
+
+clearPaginate(){
+  this.next_link = null;
+  this.prev_link = null;
+  this.current_page = null;
+}
+
+setPaginateInfo(response:any){
+  this.next_link = response.nextLink;
+  this.prev_link = response.previousLink;
+  this.current_page = response.currentPage;
+}
+
+handlePaginate(element:any){
+  console.log(element.dataset.target);
+  let action = element.dataset.target;
+  let url = "";
+  if(action == 'prev'){
+    url = this.prev_link;
+  }
+  else if(action == 'next'){
+   url = this.next_link; 
+  }
+ 
+  this.is_loading = true;
+  this.catalogosService.All('',url)
+  .subscribe(
+    (response:any) =>{
+      this.is_loading = false;
+      if(response.status == 200){
+        this.all_pedidos = response.data;
+        this.setPaginateInfo(response);
+      }
+    },
+    (error) =>{
+      this.is_loading = false;
+      let msg = this.errorToken(error);
+      msg = this.errorMsg(msg, error);
+      this.msgToastError(msg);
+    }
+  );
+}
+
+errorMsg(msg:any,error:any){
+  return msg =
+    msg == "" ? 
+      `Ocurrio un error al procesar la petición "${error.error.msg}"`
+          : msg;
+}
+
+errorToken(error: any) {
+  let msg = "";
+  if (error.error) {
+    if (error.error.status == 409) {
+      msg = "Token expirado!";
+      this.router.navigateByUrl("/");
+    }
+  }
+  return msg;
+}
+
+msgToastError(msg: string): void {
+  this.toastr.error(msg, "Error", {
+    positionClass: "toast-top-center",
+  });
+}
+
+show(id: number) {
+  let url = `admin/${this.user.toLowerCase()}/pedido/${id}`;
+  this.router.navigateByUrl(url);
+}
+
+focusInput(el: any , el_target = null) {
+  el.classList.add("border-m");
+}
+
+blurInput(el: any) {
+  console.log('valor', el.querySelector('input').value);
+  if( el.querySelector('input').value == "")
+    el.classList.remove("border-m");
+}
+focusInputDate( el:any ){
     el.classList.add("border-m");
-  }
+}
+blurInputDate( el:any ){
+  if(el.value == "")
+    el.classList.remove("border-m");
+}
+getValue( element:any ){
+  return element.srcElement ?
+    element.srcElement.value :
+    element.value;
+}
 
-  blurInput(el: any) {
-    console.log('valor', el.querySelector('input').value);
-    if( el.querySelector('input').value == "")
-      el.classList.remove("border-m");
-  }
-  focusInputDate( el:any ){
-      el.classList.add("border-m");
-  }
-  blurInputDate( el:any ){
-    if(el.value == "")
-      el.classList.remove("border-m");
-  }
-  getValue( element:any ){
-    return element.srcElement ?
-      element.srcElement.value :
-      element.value;
-  }
+getData(element:any){
+  return element.srcElement ?
+    element.srcElement.dataset.param_url :
+    element.dataset.param_url;
+}
 
-  getData(element:any){
-    return element.srcElement ?
-      element.srcElement.dataset.param_url :
-      element.dataset.param_url;
-  }
+search(event: any) {
+  
+  let value = this.getValue(event);
 
-  search(event: any) {
-    
-    let value = this.getValue(event);
-
-    let param =  this.getData(event);
-    if(value == "" ||
-      (isNaN(value) && param == 'DocNum'))
+  let param =  this.getData(event);
+  if(value == "" ||
+    (isNaN(value) && param == 'DocNum'))
       return ;
 
     let current_filter = param == "DocNum" ?
@@ -328,11 +355,13 @@ export class PedidosComponent implements OnInit {
 
     return params;
   }
+
   filter(){
-    let params = this.getParamsToFilter();
+    /*let params = this.getParamsToFilter();
     params = params.substring(1);
-    console.log(params)
-    if(params != ""){
+    console.log(params)*/
+    let params = this.params_to_filter.substring(1);
+    //if(params != ""){
 
     let url =`Orders?${params}`;
 
@@ -360,7 +389,7 @@ export class PedidosComponent implements OnInit {
         this.msgToastError(msg);
       }
     );
-    }
+    //}
   }
 
   searchDate(date_1: any, date_2: string = null) {

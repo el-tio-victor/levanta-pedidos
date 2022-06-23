@@ -45,6 +45,7 @@ import {AppRoutes} from './app.routing';
 import {GlobalService} from './global.service';
 //INTERCEPTORS
 import {HeaderInterceptor} from "./header.interceptor";
+import {BackorderComponent} from './pages/backorder/backorder.component';
 import {FacturasComponent} from './pages/facturas/facturas.component';
 import {InicioComponent} from './pages/inicio/inicio.component';
 import {AdminLayoutComponent} from './pages/layouts/admin/admin-layout.component';
@@ -63,12 +64,12 @@ import {ItemVisorPedidosComponent} from './pages/pedido/item-visor-pedidos/item-
 import {PedidoComponent} from './pages/pedido/pedido.component';
 import {ShowByIdComponent} from './pages/pedido/show-by-id/show-by-id.component';
 import {PedidosComponent} from './pages/pedidos/pedidos.component';
+import {FiltersTableComponent} from './pages/shared/compenents/filters-table/filters-table.component';
 import {FooterModule} from './pages/shared/footer/footer.module';
 import {NavbarModule} from './pages/shared/navbar/navbar.module';
 import {SendEmailComponent} from './pages/shared/send-email/send-email.component';
 import {SidebarModule} from './pages/sidebar/sidebar.module';
 import {FormaturlPipe} from './pipes/formaturl.pipe';
-import { BackorderComponent } from './pages/backorder/backorder.component';
 
 
 
@@ -157,6 +158,7 @@ export class MaterialModule { }
     SendEmailComponent,
     FacturasComponent,
     BackorderComponent,
+    FiltersTableComponent,
   ],
 
   providers: [
