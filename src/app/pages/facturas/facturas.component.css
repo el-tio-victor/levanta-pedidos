@@ -4,8 +4,12 @@
 .wrapper-table{
   min-height: 600px;
   overflow: scroll;
+  margin-bottom: 20px;
 }
 
+tbody{
+  font-size: 13px;
+}
 thead{
   background-color:#eaeaea;
 }

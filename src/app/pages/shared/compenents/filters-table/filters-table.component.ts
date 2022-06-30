@@ -27,7 +27,8 @@ export class FiltersTableComponent implements OnInit {
     },
     lugar_envio:{
       param_name: 'ShipToCode'
-    }
+    },
+    status: null
   };
 
   filterStatus:string = "";

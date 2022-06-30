@@ -1,9 +1,11 @@
 <section class="main-content">
     <div class="col-12">
       <div class="header-content">
+        <h5 class="pl-4">
+          {{ cliente }}
+        </h5>
         <div class="d-flex justify-content-end wrapper-header">
-          <div class="cont-actions">
-            
+          <div class="cont-actions">            
           </div>
         </div>
       </div>
@@ -30,8 +32,8 @@
                 <th>Talla</th>
                 <th>Marca</th>
                 <th>Pendiente</th>
-                <th>Cliente</th>
-                <th>Nombre</th>
+                <!--<th>Cliente</th>
+                <th>Nombre</th>-->
                 <th>Comentarios</th>
                 <th>Destino</th>
               </tr>
@@ -60,8 +62,8 @@
                   <td>{{ doc.Talla }}</td>
                   <td>{{ doc.FirmName }}</td>
                   <td>{{ doc.Quantity }}</td>
-                  <td>{{ doc.CardCode }}</td>
-                  <td>{{ doc.CardName }}</td>
+                  <!--<td>{{ doc.CardCode }}</td>
+                  <td>{{ doc.CardName }}</td>-->
                   <td>{{ doc.Comments }}</td>
                   <td>{{ doc.ShipToCode }}</td>
                 </tr>

@@ -23,6 +23,8 @@ export class FacturasComponent implements OnInit {
   all_facturas: any[];
   user: string;
 
+  cliente:string = "";
+
   next_link:string ;
   prev_link:string ;
   current_page:number = 0;
@@ -56,7 +58,15 @@ export class FacturasComponent implements OnInit {
           this.setPaginateInfo(
             response
           );
-          console.log(this.all_facturas);
+
+          if(this.all_facturas.length > 0){
+            this.cliente = 
+                `${
+                  this.all_facturas[0].CardCode
+                } - ${
+                  this.all_facturas[0].CardName
+                }`;
+          }
         }
       },
       (error)=> {

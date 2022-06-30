@@ -314,6 +314,12 @@ export class PedidoComponent implements OnInit {
         if (response.confirm) {
           this.is_loading = true;
           console.log(response);
+
+          response.data.comentario = response.data.comentario  ?
+            response.data.comentario : "";
+          response.data.orden_compra = response.data.orden_compra ?
+            response.data.orden_compra : "";
+
           this.data_to_send.Comments = response.data.comentario;
           this.data_to_send.ShipToCode = 
             response.data.direccion_entrega;

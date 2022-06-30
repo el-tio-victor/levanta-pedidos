@@ -1,9 +1,13 @@
+tbody{
+  font-size: 13px;
+}
 thead{
   background-color:#eaeaea;
 }
 .wrapper-table{
   min-height: 600px;
   overflow: scroll;
+  margin-bottom: 20px;
 }
 .container-loader{
     z-index: 20;

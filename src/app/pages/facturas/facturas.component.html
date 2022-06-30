@@ -1,6 +1,13 @@
 <section class="main-content">
   <div class="col-12">
-    <div class="header-content">
+    <div
+      class="header-content d-flex
+          justify-content-between 
+      align-items-center"
+    >
+      <h5 class="pl-4">
+        {{cliente}}
+      </h5>
       <div class="d-flex justify-content-end wrapper-header">
         <div class="cont-actions">
           <button 
@@ -9,7 +16,7 @@
               btn-just-icon mr-2
             "
             (click)="loadViewSendMail()"
-            matTooltip="Reenviar Pedidos"
+            matTooltip="Reenviar  historial de facturas"
           >
             <i class="material-icons">
               forward_to_inbox
@@ -33,11 +40,13 @@
               <th>&nbsp;</th>
               <th>Factura</th>
               <th>Fecha</th>
-              <th># Cliente</th>
-              <th>Cliente</th>
+              <!--<th># Cliente</th>
+              <th>Cliente</th>-->
               <th>Método Pago</th>
-              <th>Sucursal</th>
-              <th>Orden de Compra</th>
+              <th>Destino</th>
+              <th>OC</th>
+              <th>Comentarios</th>
+              <th>Piezas</th>
               <th>Monto</th>
             </tr>
           </thead>
@@ -59,11 +68,13 @@
                     )
                   }}
                 </td>
-                <td>{{ factura.CardCode }}</td>
-                <td>{{ factura.CardName }}</td>
+                <!--<td>{{ factura.CardCode }}</td>
+                <td>{{ factura.CardName }}</td>-->
                 <td>{{ factura.U_FORMAPAGO }}</td>
                 <td>{{ factura.ShipToCode }}</td>
                 <td>{{ factura.U_ORDENCOMPRA }}</td>
+                <td>{{ factura.Comments }}</td>
+                <td>{{ factura.TotalQuantity }}</td>
                 <td>{{ factura.DocTotal |currency }}</td>
               </tr>
             </ng-container>

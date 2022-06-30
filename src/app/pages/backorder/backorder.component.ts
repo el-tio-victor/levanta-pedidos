@@ -25,6 +25,8 @@ export class BackorderComponent implements OnInit {
   @ViewChild('search_lugar_envio',{static : true}) 
     search_lugar_envio:ElementRef;*/
 
+    cliente:string = "";
+
    filters_config = {
     folio: {
       param_name:'DocNum',
@@ -90,6 +92,15 @@ export class BackorderComponent implements OnInit {
           this.setPaginateInfo(
             response
           );
+          if(this.all_docs.length > 0){
+            console.log('Entro',this.cliente);
+            this.cliente = 
+                `${
+                  this.all_docs[0].CardCode
+                } - ${
+                  this.all_docs[0].CardName
+                }`;
+          }
           console.log(this.all_docs);
         }
       },

@@ -16,20 +16,6 @@ import {
 })
 
 export class PedidosComponent implements OnInit {
-  /*@ViewChild('search_num_ped',{static:false}) 
-    search_num_ped:ElementRef;
-
-  @ViewChild('date_1',{static:false}) 
-    date_1:ElementRef;
-
-  @ViewChild('date_2',{static:false}) 
-    date_2:ElementRef;
-
-  @ViewChild('btn_filter_status',{static : true}) 
-    btn_filter_status:ElementRef;
-
-  @ViewChild('search_lugar_envio',{static : true}) 
-    search_lugar_envio:ElementRef;*/
 
   next_link:string ;
   prev_link:string ;
@@ -59,24 +45,6 @@ export class PedidosComponent implements OnInit {
   };
 
   params_to_filter:string = "";
-
-  /*filterStatus:string = "";
-  filter_status_id:string = "";
-
-  filters:any = {
-    'doc_number': ()=>{
-      this.clearNumDoc();
-    },
-    'date': () =>{
-      this.clearDate();
-    },
-    'status': () => {
-      this.clearStatus();
-    },
-    'entrega': () => {
-      this.clearEntrega();
-    }
-  };*/
 
   constructor(
     private catalogosService: CatalogosService,
@@ -268,11 +236,11 @@ getValue( element:any ){
     element.value;
 }
 
-getData(element:any){
+/*getData(element:any){
   return element.srcElement ?
     element.srcElement.dataset.param_url :
     element.dataset.param_url;
-}
+}*/
 
 /*search(event: any) {
   
