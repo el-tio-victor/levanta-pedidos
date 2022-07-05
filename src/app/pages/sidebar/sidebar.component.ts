@@ -1,10 +1,10 @@
-import {HttpClient} from '@angular/common/http';
-import {Component, NgZone, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import PerfectScrollbar from 'perfect-scrollbar';
-import {GlobalService} from '../../global.service';
-import {MenuService} from '../../services/menu.service';
+import { GlobalService } from '../../global.service';
+import { MenuService } from '../../services/menu.service';
 //import {tap,filter} from "rxjs";
 declare const $: any;
 
@@ -57,19 +57,6 @@ export class SidebarComponent implements OnInit {
     private s_nombre_completo;
     private pinta;
     All:any[] = [
-        /*{
-            id_seccion: 1,
-            imagen: "assignment_ind",
-            nombre_seccion: "Socio de negocios",
-            modulos: null,
-            url: "socios-negocios",
-        },{
-            id_seccion: 2,
-            imagen: "developer_board",
-            nombre_seccion: "Articulos",
-            modulos: null,
-            url: "articulos",
-        },*/
         {
             id_seccion: 3,
             imagen: "shopping_cart",
@@ -110,20 +97,6 @@ export class SidebarComponent implements OnInit {
             ],
             url: "backorder",
         }
-        /*{
-            id_seccion: 4,
-            imagen: "local_shipping",
-            nombre_seccion: "Entrega",
-            modulos: null,
-            url: "entrega",
-        },
-        {
-            id_seccion: 5,
-            imagen: "attach_money",
-            nombre_seccion: "Pagos",
-            modulos: null,
-            url: "pagos",
-        }*/
     ];
     id = 1;
     ps: any;

@@ -13,17 +13,6 @@ import {CatalogosService} from "../../services/catalogos.service";
 })
 export class BackorderComponent implements OnInit {
 
-  /*@ViewChild('search_num_doc',{static:false}) 
-    search_num_doc:ElementRef;
-
-  @ViewChild('date_1',{static:false}) 
-    date_1:ElementRef;
-
-  @ViewChild('date_2',{static:false}) 
-    date_2:ElementRef;
-
-  @ViewChild('search_lugar_envio',{static : true}) 
-    search_lugar_envio:ElementRef;*/
 
     cliente:string = "";
 
@@ -44,6 +33,7 @@ export class BackorderComponent implements OnInit {
   };
   params_to_filter:string = "";
 
+
     is_loading: boolean = false;
     all_docs: any[];
     user: string;
@@ -52,19 +42,10 @@ export class BackorderComponent implements OnInit {
     next_link:string ;
     prev_link:string ;
     current_page:number = 0;
-  
-    /*filters:any = {
-      'doc_number': ()=>{
-        this.clearNumDoc();
-      },
-      'date': () =>{
-        this.clearDate();
-      },
-      'entrega': () => {
-        this.clearEntrega();
-      }
-    };*/
 
+    all_by_style:any;
+    tallas_by_estilo:any;
+  
 
   constructor(
     private catalogosService: CatalogosService,
@@ -82,7 +63,7 @@ export class BackorderComponent implements OnInit {
   private loadAll():void{
 
     this.is_loading = true;
-    this.catalogosService.All("", "Backorder")
+    this.catalogosService.All("", "Backorder?maxpagesize=0")
     .subscribe(
       (response:any) => {
         console.log(response);
@@ -101,7 +82,14 @@ export class BackorderComponent implements OnInit {
                   this.all_docs[0].CardName
                 }`;
           }
-          console.log(this.all_docs);
+
+
+          this.all_by_style = this.orderByKey(
+            this.all_docs, "ItmsGrpNam"
+          );
+
+
+          console.log('por estilo',this.all_by_style);
         }
       },
       (error)=> {
@@ -112,6 +100,63 @@ export class BackorderComponent implements OnInit {
         this.msgToastError(msg);
       }
     );
+  }
+
+
+
+  orderByKey(array,key){
+    //console.log('arr',array);
+    return array.reduce(
+      (result, currentValue) => {
+        //console.log('currentValue ', currentValue);
+        
+        //este valor se agraga para prevenir que se
+        //agrupe por un valor nulo (caso en que agre
+        //gan un serevicio en el pedido cuando lo 
+        //pasan de sap a retail)
+        
+        let key_not_null = currentValue[key] ?
+          key : 'ItemCode';
+
+        (result[currentValue[key_not_null]] =
+          result[currentValue[key_not_null]] || [])
+        .push(currentValue);
+       // console.log('res',result);
+        return result;
+      }, {});
+  }
+
+
+  getTallas(object:any){
+    //console.log(object);
+    let tallas = object.reduce((result,current) => { 
+      if(Array.isArray(result)){
+        if(!result.includes(current['Talla'])){
+          let item_push = current['Talla'] ?
+            current['Talla'] :
+            current['ItemCode']
+          result.push( item_push );
+        }
+      }
+      return result;
+    },[]);
+    //console.log('tallaaaa', tallas)
+    this.tallas_by_estilo = tallas;
+    return tallas;
+  }
+
+  getQuantity(el:any, talla:string){
+    let element_found =
+        el.find(item => item.Talla == talla);
+
+    //se agrega caso para mostrar cuando ingresan
+    //un servicio al pedido
+    if(!element_found){
+      element_found =
+        el.find(item => item.ItemCode == talla);
+    }
+    return element_found ?
+      element_found.Quantity : '-';
   }
 
   errorMsg(msg:any,error:any){

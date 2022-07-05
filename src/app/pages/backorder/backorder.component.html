@@ -11,95 +11,173 @@
       </div>
   
       <div class=" p-3 card">
-        <app-filters-table
-          (params_to_filter_emitter)="
-            setParamToFilter($event)
-          "
-          (filter_emitter)="filter()"
-          [filters_config]="filters_config"
-        >
-        </app-filters-table>
-          <div class="wrapper-table">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>&nbsp;</th>
-                <th>Folio</th>
-                <th>Fecha</th>
-                <th>Articulo</th>
-                <th>Línea</th>
-                <th>Color</th>
-                <th>Talla</th>
-                <th>Marca</th>
-                <th>Pendiente</th>
-                <!--<th>Cliente</th>
-                <th>Nombre</th>-->
-                <th>Comentarios</th>
-                <th>Destino</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ng-container 
-                *ngFor="let doc of all_docs;
-                  let i = index; ">
-                <tr >
-                  <th>{{ i +1 }}</th>
-                  <td>
-                    {{ 
-                      doc.DocNum
-                    }}
-                  </td>
-                  <td>
-                    {{ 
-                      readDate(
-                        doc.DocDate
-                      )
-                    }}
-                  </td>
-                  <td>{{ doc.ItemCode }}</td>
-                  <td>{{ doc.ItmsGrpNam }}</td>
-                  <td>{{ doc.Color }}</td>
-                  <td>{{ doc.Talla }}</td>
-                  <td>{{ doc.FirmName }}</td>
-                  <td>{{ doc.Quantity }}</td>
-                  <!--<td>{{ doc.CardCode }}</td>
-                  <td>{{ doc.CardName }}</td>-->
-                  <td>{{ doc.Comments }}</td>
-                  <td>{{ doc.ShipToCode }}</td>
-                </tr>
-              </ng-container>
-            </tbody>
-          </table>
-          </div>
-          <div class="d-flex justify-content-center">
-            <div class="d-flex align-items-center">
-              <button
-                #btn_prev
-                (click)="handlePaginate(btn_prev)"
-                data-target="prev"
-                class="btn btn-sm btn-round"
-                [disabled]="!prev_link"
+        <app-menu-views
+          [option_active]="'list'"
+          >
+        </app-menu-views>
+
+          <div class="col-md-12 table-cont tab-content">
+            <div id="grid" data-toggle="tab"
+                  class="  tab-pane"
+            >
+
+              <div class="col-pane-grid">
+                <div class="wrapper-pane-grid">
+                <ng-container *ngFor="let prod of 
+                  all_by_style | keyvalue;  index as i">
+                  <div class="m-1 p-1 row-table-cont">
+                  <div class="pl-1 pr-1 d-flex ">
+                    <h5 
+                      class="m-0 mb-1 col-12  title-style">
+                      <strong>{{prod.key}} </strong>
+                    </h5>
+                  </div>
+                  <div class="col-12  d-flex border-bottom">
+                    <div class="color col-2"><strong>Color</strong></div>
+                    <div  class=" col-10 text-center tallas">
+                      <ng-container 
+                        *ngFor="let talla of 
+                          getTallas(prod.value, prod)">
+                        <h5 class="p-0 m-0">
+                          <strong>{{talla}}</strong>
+                        </h5>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class=" ">
+                    <ng-container *ngFor="
+                      let item of orderByKey(
+                        prod.value, 
+                        'Color'
+                        )  |
+                        keyvalue
+                      ">
+                      <div class="col-12 d-flex row-ped">
+                        <div class="col-2  col-color">
+                          <span>
+                            {{item.key}}
+                          </span>
+                        </div>
+                        <div class="col-10 text-center tallas">
+                          <ng-container 
+                            *ngFor="let talla of 
+                            tallas_by_estilo">
+                              <strong class="col-cant">
+                                {{getQuantity(item.value,talla)}}
+                              </strong>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                  </div>
+                </ng-container>
+                <!--<h5 
+                  class="m-0 mb-1 col-12  title-style"
                 >
-                Prev
-              </button>
+                  <strong>Total Productos</strong>
+                  <small class="pl-3">
+                    {{getTotalProds()}}
+                  </small>
+                </h5>-->
+                </div>
+                </div>
+
+            </div>
+
+            <div id="list" data-toggle="tab"
+                  class="active tab-pane"
+            >
+              <app-filters-table
+                (params_to_filter_emitter)="
+                setParamToFilter($event)
+                "
+                (filter_emitter)="filter()"
+                [filters_config]="filters_config"
+              >
+              </app-filters-table> 
+              <div class="wrapper-table">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>&nbsp;</th>
+                      <th>Folio</th>
+                      <th>Fecha</th>
+                      <th>Articulo</th>
+                      <th>Línea</th>
+                      <th>Color</th>
+                      <th>Talla</th>
+                      <th>Marca</th>
+                      <th>Pendiente</th>
+                      <!--<th>Cliente</th>
+                      <th>Nombre</th>-->
+                      <th>Comentarios</th>
+                      <th>Destino</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <ng-container 
+                  *ngFor="let doc of all_docs;
+                    let i = index; ">
+                    <tr >
+                      <th>{{ i +1 }}</th>
+                      <td>
+                        {{ 
+                          doc.DocNum
+                        }}
+                      </td>
+                      <td>
+                        {{ 
+                          readDate(
+                            doc.DocDate
+                          )
+                        }}
+                      </td>
+                      <td>{{ doc.ItemCode }}</td>
+                      <td>{{ doc.ItmsGrpNam }}</td>
+                      <td>{{ doc.Color }}</td>
+                      <td>{{ doc.Talla }}</td>
+                      <td>{{ doc.FirmName }}</td>
+                      <td>{{ doc.Quantity }}</td>
+                      <!--<td>{{ doc.CardCode }}</td>
+                      <td>{{ doc.CardName }}</td>-->
+                      <td>{{ doc.Comments }}</td>
+                      <td>{{ doc.ShipToCode }}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+            <!--<div class="d-flex justify-content-center">
+              <div class="d-flex align-items-center">
+                <button
+                  #btn_prev
+                  (click)="handlePaginate(btn_prev)"
+                  data-target="prev"
+                  class="btn btn-sm btn-round"
+                  [disabled]="!prev_link"
+                  >
+                    Prev
+                </button>
                 <strong 
                   style="font-size: 1.35rem;font-weight: 400"
                   class="pl-3 pr-3"
                   >
                   {{ current_page + 1}}
                 </strong>
-              <button
-                #btn_next
-                (click)="handlePaginate(btn_next)"
-                data-target="next"
-                class="btn btn-sm btn-round "
-                [disabled]="!next_link"
-                >
-                Next
-              </button>
+                <button
+                  #btn_next
+                  (click)="handlePaginate(btn_next)"
+                  data-target="next"
+                  class="btn btn-sm btn-round "
+                  [disabled]="!next_link"
+                  >
+                    Next
+                </button>
+              </div>
+            </div>-->
             </div>
-          </div>
-  
+          </div> 
       </div>
     </div>
     <div

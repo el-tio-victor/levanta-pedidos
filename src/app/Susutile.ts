@@ -68,7 +68,7 @@ export class Susutile {
     ]},
     {e:'input:-webkit-autofill, input:-webkit-autofill:hover,input:-webkit-autofill:focus, textarea:-webkit-autofill, textarea:-webkit-autofill:hover,textarea:-webkit-autofill:focus, select:-webkit-autofill, select:-webkit-autofill:hover,select:-webkit-autofill:focus ',
     reg:[
-      { p:'-webkit-text-fill-color', s: this.tcolor.C01+' !important' },
+      { p:'-webkit-text-fill-color', s: '#737277 !important' },
       { p:'border-bottom', s: 'solid 1px '+this.tcolor.C04+' !important'  },
     ]},
     {e:'input[type=text]:focus, input[type=text]:placeholder',

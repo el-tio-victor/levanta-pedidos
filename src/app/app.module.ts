@@ -64,7 +64,8 @@ import {ItemVisorPedidosComponent} from './pages/pedido/item-visor-pedidos/item-
 import {PedidoComponent} from './pages/pedido/pedido.component';
 import {ShowByIdComponent} from './pages/pedido/show-by-id/show-by-id.component';
 import {PedidosComponent} from './pages/pedidos/pedidos.component';
-import {FiltersTableComponent} from './pages/shared/compenents/filters-table/filters-table.component';
+import {FiltersTableComponent} from './pages/shared/components/filters-table/filters-table.component';
+import {MenuViewsComponent} from './pages/shared/components/menu-views/menu-views.component';
 import {FooterModule} from './pages/shared/footer/footer.module';
 import {NavbarModule} from './pages/shared/navbar/navbar.module';
 import {SendEmailComponent} from './pages/shared/send-email/send-email.component';
@@ -159,6 +160,7 @@ export class MaterialModule { }
     FacturasComponent,
     BackorderComponent,
     FiltersTableComponent,
+    MenuViewsComponent,
   ],
 
   providers: [

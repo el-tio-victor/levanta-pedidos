@@ -1,0 +1,196 @@
+<div class="cont-searchs">
+  <div
+    class="wrapper-searchs d-flex 
+    flex-wrap align-items-center 
+    justify-content-end"
+  >
+    <div
+      class="mr-4 btn-clean-filters"
+      matTooltip="borrar filtros"
+      (click)="clearFilters('all')"
+    >
+      <i class="icono-filter material-icons">
+        filter_list 
+      </i>
+      <i class="icono-delete-filter material-icons">
+        close 
+      </i>
+    </div>
+
+    <div
+      *ngIf="filters_config.fecha_inicio ||
+      filters_config.fecha_fin"
+      #parent_dates
+      class="d-flex align-items-center 
+      p-1 ml-3 mr-3 cont-search-dates"
+    >
+      <span class="ml-2">Del...</span>
+      <input
+        #date_1
+        (focus)="focusInputDate(parent_dates)"
+        (blur)="blurInputDate(parent_dates)"
+        (change)="handleParams()"
+        type="date"
+        class="mr-2"
+        placeholder="Inicio"
+      />
+      <ng-container *ngIf="filters_config.fecha_fin">
+        <span>Al...</span>
+        <input
+          #date_2
+          min="{{ date_1.value }}"
+          (focus)="focusInputDate(parent_dates)"
+          (blur)="blurInputDate(parent_dates)"
+          (change)="handleParams()"
+          type="date"
+          placeholder="Fin"
+        />
+      </ng-container>
+      <i 
+        (click)="handleFilter($event)" 
+        class="p-1 material-icons"
+      >
+        search
+      </i>
+    </div>
+
+    <div
+      *ngIf="filters_config.folio"
+      #parent_n_doc
+      class="d-flex align-items-center 
+      p-1 border-success cont-search-num-fac"
+    >
+      <input
+        #search_num_doc
+        style="width: 130px"
+        class="ml-1 mr-1"
+        (focus)="focusInput(parent_n_doc)"
+        (blur)="blurInput(parent_n_doc)"
+        (change)="handleParams()"
+        (keydown.enter)="handleFilter($event)"
+        data-param_url="Folio"
+        type="text"
+        [placeholder]="filters_config.folio.placeholder"
+      />
+      <i (click)="handleFilter($event)" 
+        class="material-icons"
+      > 
+        search
+      </i>
+    </div>
+
+    <div
+      #parent_envio
+      *ngIf="filters_config.lugar_envio"
+      class="d-flex align-items-center
+      mr-3 ml-1 p-1 border-success cont-search-envio"
+    >
+      <input
+        #search_lugar_envio
+        style="width: 130px"
+        class="ml-1 mr-1"
+        (focus)="focusInput(parent_envio)"
+        (blur)="blurInput(parent_envio)"
+        (keydown.enter)="handleFilter($event)"
+        (change)="handleParams()"
+        data-param_url="ShipToCode"
+        type="text"
+        placeholder="Buscar lugar envio"
+      />
+      <i (click)="handleFilter($event)" 
+        class="material-icons"> search </i>
+    </div>
+    <div
+      *ngIf="filters_config.status"
+      class="d-flex align-items-center
+      dropdown cont-search-status"
+    >
+      <button
+        #btn_filter_status
+        href="#"
+        class="btn bg-white color-primario1 dropdown-toggle"
+        data-toggle="dropdown"
+        aria-expanded="true"
+      >
+        {{ filterStatus == "" ? "Status..." : filterStatus }}
+        <b class="caret"></b>
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <a (click)="setFilterStatus('', '', btn_filter_status)">
+            ..... 
+          </a>
+        </li>
+        <li>
+          <a 
+            (click)="
+              setFilterStatus(
+                'A', 
+                'Abierto',
+                btn_filter_status
+              )"
+          >
+            Abierto
+          </a>
+        </li>
+        <li>
+          <a (click)="setFilterStatus(
+            'EP',
+            'En Proceso',
+            btn_filter_status
+            )"
+          >
+            En Proceso
+          </a>
+        </li>
+        <li>
+          <a
+            (click)="
+              setFilterStatus(
+              'FP',
+              'Facturado Parcialmente',
+              btn_filter_status
+            )
+            "
+          >
+            Factura Parcial
+          </a>
+        </li>
+        <li>
+          <a (click)="setFilterStatus(
+            'F',
+            'Facturado',
+            btn_filter_status
+            )"
+          >
+            Facturado
+          </a>
+        </li>
+        <li>
+          <a (click)="setFilterStatus(
+            'C',
+            'Cancelado',
+            btn_filter_status)"
+          >
+            Cancelado
+          </a>
+        </li>
+        <li>
+          <a (click)="setFilterStatus(
+            'CE',
+            'Cerrado',
+            btn_filter_status
+            )"
+          >
+            Cerrado
+          </a>
+        </li>
+      </ul>
+      <i (click)="handleFilter()" 
+        class="mr-1 material-icons"
+      > 
+        search
+      </i>
+    </div>
+  </div>
+</div>

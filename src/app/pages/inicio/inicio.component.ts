@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
-import { Router } from "@angular/router";
-import { ToastrService } from 'ngx-toastr';
-import { GlobalService } from '../../global.service';
-import { DashboardService } from '../../services/dashboard.service';
+import {HttpClient} from '@angular/common/http';
+import {Component, NgZone, OnInit, ViewChild} from '@angular/core';
+import {Router} from "@angular/router";
+import {ToastrService} from 'ngx-toastr';
+import {GlobalService} from '../../global.service';
+import {DashboardService} from '../../services/dashboard.service';
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -65,6 +65,7 @@ export class InicioComponent implements OnInit {
 
     resolveImg(){
       let pic ="";
+      console.log( this.weather );
       if(!this.weather){
         pic = "default"
       }

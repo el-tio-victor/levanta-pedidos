@@ -1,15 +1,8 @@
-.container-loader{
-  z-index: 20;
-}
-tbody{
-  font-size: 13px;
-}
-thead{
-  background-color: #eaeaea;
-}
-.wrapper-table{
-  min-width: 420px;
-  overflow: scroll;
+
+.cont-searchs{
+  padding-bottom: 5px;
+  /*margin-bottom: 8px;*/
+  border-bottom: solid 1px #eaeaea;
 }
 .cont-search-dates{
   border: solid 2px transparent;
@@ -24,11 +17,11 @@ thead{
   transform: translate(-15px,14px);
   position: absolute;
 }
-.cont-search-num-ped,
+.cont-search-num-fac,
 .cont-search-envio,
 .cont-search-dates {
   position: relative;
-  min-width: 205px
+  min-width: 159px
 }
 
 .btn-clean-filters{
@@ -48,28 +41,28 @@ thead{
   background-color: #efefef!important;
   color: #737277;
 }
-.cont-search-num-ped i:first-child,
-.cont-search-envio i:first-child,
-.cont-search-status i:first-child,
-.cont-search-dates i:first-child {
+.cont-search-num-fac >i,
+.cont-search-envio >i,
+.cont-search-status >i,
+.cont-search-dates >i {
   cursor: pointer;
   transition: all .4s ease-in;
   border-radius: 100%;
   position: relative;
   z-index: 3;
 }
-.cont-search-num-ped i:first-child,
-.cont-search-envio i:first-child{
+.cont-search-num-fac >i,
+.cont-search-envio >i{
   padding: 2px;
 }
-.cont-search-dates i:first-child {
+.cont-search-dates >i {
   font-size: 18px;
   padding: 3px;
 }
-.cont-search-num-ped:hover i:first-child,
-.cont-search-envio:hover i:first-child,
-.cont-search-status:hover i:first-child,
-.cont-search-dates:hover i:first-child {
+.cont-search-num-fac:hover >i,
+.cont-search-envio:hover >i,
+.cont-search-status:hover >i,
+.cont-search-dates:hover >i {
   background-color: #737277;
   color:white;
   transition: all .4s ease-in;
@@ -80,7 +73,7 @@ thead{
   0 4px 23px 0px rgba(0 ,0 ,0 ,0.1), 
   0 8px 10px -5px rgba(153, 153, 153,0.3 )!important;
 }
-.cont-search-num-ped:before ,
+.cont-search-num-fac:before ,
 .cont-search-dates:before ,
 .cont-search-envio:before {
   content: "";
@@ -114,21 +107,7 @@ thead{
 .border-d{
   border: solid 2px #737277;
 }
-
-
-.table tbody tr {
-  transition: all 0.25s ease-out;
-}
-.table tbody tr:hover {
-  cursor: pointer;
-  background-color: #e1e1e1;
-  transform: translate(5px, -5px);
-  transition: all 0.25 ease;
-}
-.btn-primary:hover {
-  color: #737277 !important;
-}
-.cont-search-num-ped input,
+.cont-search-num-fac input,
 .cont-search-envio input,
 .cont-search-dates input {
   position: relative;
