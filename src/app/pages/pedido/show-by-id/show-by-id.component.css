@@ -45,7 +45,7 @@ h4{
 
 .tallas{
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(10px,1fr));
+  grid-template-columns: repeat(auto-fill,minmax(70px,1fr));
 }
 
 #grid{
@@ -54,6 +54,9 @@ h4{
 .table-cont .row-table-cont:nth-child(2n-1){
   background-color: #d8dbdf;
   color: black;
+}
+.title-style{
+  width: 215px;
 }
 .title-style strong {
   font-weight: 700;
