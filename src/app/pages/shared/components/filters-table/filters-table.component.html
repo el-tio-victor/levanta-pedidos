@@ -79,6 +79,30 @@
       </i>
     </div>
 
+
+    <div
+      #parent_style
+      *ngIf="filters_config.style"
+      class="d-flex align-items-center
+             mr-2 ml-2 p-1 border-success cont-search-envio"
+      style="min-width: 100px"
+    >
+      <input
+        #search_style
+        style="width: 90px"
+        class="ml-1 mr-1"
+        (focus)="focusInput(parent_style)"
+        (blur)="blurInput(parent_style)"
+        (keydown.enter)="handleFilter($event)"
+        (change)="handleParams()"
+        data-param_url="ShipToCode"
+        type="text"
+        placeholder="Estilo"
+      />
+      <i (click)="handleFilter($event)" 
+        class="material-icons"> search </i>
+    </div>
+
     <div
       #parent_envio
       *ngIf="filters_config.lugar_envio"
@@ -95,11 +119,12 @@
         (change)="handleParams()"
         data-param_url="ShipToCode"
         type="text"
-        placeholder="Buscar lugar envio"
+        placeholder="Destino"
       />
       <i (click)="handleFilter($event)" 
         class="material-icons"> search </i>
     </div>
+
     <div
       *ngIf="filters_config.status"
       class="d-flex align-items-center
@@ -192,5 +217,6 @@
         search
       </i>
     </div>
+
   </div>
 </div>

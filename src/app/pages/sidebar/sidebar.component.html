@@ -103,7 +103,8 @@
         style="display:none">
         <ul class="nav">
           <li routerLinkActive="active" *ngFor="let mod of item.modulos" class="nav-item">
-            <a routerLink="/admin/{{ duser.username | lowercase }}/{{ mod.s_url }}" class="nav-link">
+            <a *ngIf="validateOcacional(mod.s_modulo)"
+              routerLink="/admin/{{ duser.username | lowercase }}/{{ mod.s_url }}" class="nav-link">
               <span class="sidebar-mini"> <i class="material-icons">&nbsp;</i></span>
               <span class="sidebar-normal">{{ mod.s_modulo }}</span>
             </a>

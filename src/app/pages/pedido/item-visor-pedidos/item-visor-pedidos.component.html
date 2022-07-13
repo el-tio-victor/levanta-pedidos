@@ -71,6 +71,7 @@
             wrapper-input">
             <input
               (change)="changeValueInput(talla,$event)"
+              [disabled]="disabled()"
               class="form-control input-cantidad"
               value=""
               type="number">

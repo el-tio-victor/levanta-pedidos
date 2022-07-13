@@ -25,6 +25,7 @@ export class ItemVisorPedidosComponent implements OnInit {
 
   //private element_by_talla:any;
 
+  user;
   cantidad_stock:string = "N/A";
 
   prods_pedido:any[] = [];
@@ -33,6 +34,17 @@ export class ItemVisorPedidosComponent implements OnInit {
     private globalService:GlobalService,
     private toastr: ToastrService,
   ) {
+    this.user = this.globalService.getData().username;
+    console.log('USER,,,,', this.user );
+  }
+
+  disabled(){
+   if(this.user.toUpperCase() != 'FEQE6410293U2_1'){
+    console.log('disabled', this.user.toLowerCase());
+     return false;
+   }
+   else
+    return true;
   }
 
   ngOnInit(): void {

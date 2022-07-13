@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { GlobalService } from '../../global.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {GlobalService} from '../../global.service';
 
 @Component({
   selector: 'app-page-not-found',
@@ -18,7 +18,7 @@ export class PageNotFoundComponent implements OnInit {
   ) { 
     console.log(this.curService.getData())
 		this.duser = this.curService.getData();
-		this.url = this.duser ? `/admin/${this.duser.username.toLowerCase()}/splash` :
+		this.url = this.duser ? `/admin/${this.duser.username.toLowerCase()}/home` :
 			"/";
 		
   }

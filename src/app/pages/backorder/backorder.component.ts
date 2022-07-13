@@ -18,8 +18,8 @@ export class BackorderComponent implements OnInit {
 
    filters_config = {
     folio: {
-      param_name:'DocNum',
-      placeholder: '#Pedido'
+      param_name:'FolioR1',
+      placeholder: '#Folio R1'
     },
     fecha_inicio: {
       param_name: 'startDate'
@@ -29,6 +29,9 @@ export class BackorderComponent implements OnInit {
     },
     lugar_envio:{
       param_name: 'ShipToCode'
+    },
+    style:{
+      param_name: 'ItemCode'
     }
   };
   params_to_filter:string = "";

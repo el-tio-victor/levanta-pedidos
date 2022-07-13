@@ -28,7 +28,8 @@ export class FiltersTableComponent implements OnInit {
     lugar_envio:{
       param_name: 'ShipToCode'
     },
-    status: null
+    status: null,
+    style:null
   };
 
   filterStatus:string = "";
@@ -49,6 +50,12 @@ export class FiltersTableComponent implements OnInit {
   @ViewChild('date_2',{static:false}) 
     date_2:ElementRef;
   @Output() date_2_emitter = new
+   EventEmitter<string>();
+
+
+  @ViewChild('search_style',{static:false}) 
+    search_style:ElementRef;
+  @Output() search_stylee_emitter = new
    EventEmitter<string>();
 
   @ViewChild('btn_filter_status',{static : false}) 
@@ -77,6 +84,9 @@ export class FiltersTableComponent implements OnInit {
     'status': () => {
       this.clearStatus();
     },
+    'style': () => {
+      this.clearStyle();
+    },
   };
 
   constructor(
@@ -101,6 +111,11 @@ export class FiltersTableComponent implements OnInit {
     let param_ship_to_code = ship_to_code == "" ?
       "" :
       `&ShipToCode=${ship_to_code}`;
+
+    let style = this.search_style ?
+      this.search_style.nativeElement.value : "";
+    let param_style = style == "" ? "" :
+      `&ItemCode=${style}`;
 
     let date_end = this.date_2.nativeElement.value;
     let param_date_end = 
@@ -128,6 +143,8 @@ export class FiltersTableComponent implements OnInit {
       param_doc_num
     }${
       param_filter_status
+    }${
+      param_style
     }`;
 
     return params;
@@ -178,12 +195,22 @@ export class FiltersTableComponent implements OnInit {
     this.search_lugar_envio.nativeElement.value="";
   }
 
+  clearStyle(){
+    if(this.search_style){
+    this.search_style.nativeElement
+    .parentNode.classList.remove('border-m');
+    this.search_style.nativeElement.value="";
+    }
+  }
+
   clearStatus(){
-    this.btn_filter_status.nativeElement.classList
-    .remove('active-filter-status');
-    this.filterStatus = "";
-    this.filter_status_id = "";
-    this.handleParams(); 
+    if(this.btn_filter_status){
+      this.btn_filter_status.nativeElement.classList
+      .remove('active-filter-status');
+      this.filterStatus = "";
+      this.filter_status_id = "";
+      this.handleParams(); 
+    }
   }
 
   handleFilter(event: MouseEvent){
@@ -191,6 +218,7 @@ export class FiltersTableComponent implements OnInit {
   }
 
   handleParams(){
+    console.log('handle param');
     let params = this.getParamsToFilter();
     this.params_to_filter_emitter.emit(params);
 
@@ -207,6 +235,9 @@ export class FiltersTableComponent implements OnInit {
   }
   handleStatus(value:string){
     this.btn_filterstatus_emitter.emit(value);
+  }
+  handleStyle(value:string){
+    this.search_stylee_emitter.emit(value)
   }
   handleShiptToCode(value:string){
     this.search_lugar_envio_emitter.emit(value);

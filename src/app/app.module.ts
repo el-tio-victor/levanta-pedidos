@@ -71,6 +71,7 @@ import {NavbarModule} from './pages/shared/navbar/navbar.module';
 import {SendEmailComponent} from './pages/shared/send-email/send-email.component';
 import {SidebarModule} from './pages/sidebar/sidebar.module';
 import {FormaturlPipe} from './pipes/formaturl.pipe';
+import { HomeComponent } from './pages/home/home.component';
 
 
 
@@ -114,7 +115,7 @@ import {FormaturlPipe} from './pipes/formaturl.pipe';
     CommonModule,
 
   ],
-  declarations: [],
+  declarations: [HomeComponent],
   imports: [NoopAnimationsModule,FormsModule]
 })
 export class MaterialModule { }

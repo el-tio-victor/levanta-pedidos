@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, NgZone, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import {HttpClient} from '@angular/common/http';
+import {Component, NgZone, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 import PerfectScrollbar from 'perfect-scrollbar';
-import { GlobalService } from '../../global.service';
-import { MenuService } from '../../services/menu.service';
+import {GlobalService} from '../../global.service';
+import {MenuService} from '../../services/menu.service';
 //import {tap,filter} from "rxjs";
 declare const $: any;
 
@@ -56,7 +56,9 @@ export class SidebarComponent implements OnInit {
     s_foto_avatar;
     private s_nombre_completo;
     private pinta;
-    All:any[] = [
+    All:any[] ;
+
+    all_modules = [
         {
             id_seccion: 3,
             imagen: "shopping_cart",
@@ -88,7 +90,7 @@ export class SidebarComponent implements OnInit {
         {
             id_seccion: 5,
             imagen: "warehouse",
-            nombre_seccion: "Back Order",
+            nombre_seccion: "Backorder",
             modulos: [
               {
                 s_modulo:"Historial",
@@ -98,6 +100,7 @@ export class SidebarComponent implements OnInit {
             url: "backorder",
         }
     ];
+
     id = 1;
     ps: any;
     isMobileMenu() {
@@ -117,19 +120,32 @@ export class SidebarComponent implements OnInit {
 
         this.s_nombre_completo = this.duser.username;
         this.s_foto_avatar = 'assets/img/default-avatar.png';    
-        // console.log("entro aqui");  
-        // console.log(this.duser); 
-        /*this.Service.All(this.duser.s_token).subscribe((response: any)=>{ 
-    	if (response.status == 'fail') {
-    		return false;
-    	}else if(response.status == 'success'){
-        this.All = response.data.menu;
-        // console.log(this.All);
-        // console.log(response.data);
         
-    	}
-    })*/
-        
+        if(this.duser.rol == 'admin'){
+          this.All = this.all_modules;
+        }
+        else{
+          
+          console.log(this.duser.modules);
+
+          let res = []
+          this.duser.modules.forEach(
+            (element)=>{
+              console.log(element);
+              res.push(this.all_modules.filter(
+                (item) =>{
+                  console.log(item.nombre_seccion, element)
+                  console.log(item.nombre_seccion.includes(element))
+                  return item.nombre_seccion.toUpperCase().includes(
+                    element.toUpperCase()
+                  )
+                }
+              )[0]);
+            }
+          );
+          this.All = res;
+            console.log(res);
+        }
         }
     aberHijo(id,elem){
         //cuando no tiene modulos la seccion
@@ -166,6 +182,14 @@ export class SidebarComponent implements OnInit {
         }
             
             
+    }
+
+    validateOcacional( mod ){
+      if(this.duser.username.toUpperCase() == 'FEQE6410293U2_1'
+        && mod == 'Historial')
+        return false; 
+      else
+        return true;
     }
     
     getVar(variable){

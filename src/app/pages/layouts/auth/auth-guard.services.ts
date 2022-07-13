@@ -1,17 +1,30 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'; 
-import { UserService } from './user.service';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {GlobalService} from '../../../global.service';
+import {UserService} from './user.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
-  constructor(private userService : UserService, private router: Router) { }
+	private duser;
+  private username:string;
+  
+  constructor(
+    private userService : UserService, 
+    private router: Router,
+	  private curService: GlobalService,
+  ) {
+    this.duser = this.curService.getData();
+    this.username = this.duser.username.toLowerCase();
+  }
 
   canActivate(route: ActivatedRouteSnapshot, state : RouterStateSnapshot) {
 
+    console.log('Rutaaaa', route.routeConfig.path );
+    let path = route.routeConfig.path;
     //window.alert(this.userService.isValid());
-    if(this.userService.isValid()!=true) {
-      this.router.navigate(['/']);
+    if(this.userService.isValid( path )!=true) {
+      this.router.navigateByUrl('/admin/dimeo_1/home');
       //window.alert("No puedes ver esta pagina");
       return false;
     } 
