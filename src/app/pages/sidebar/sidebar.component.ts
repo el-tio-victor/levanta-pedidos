@@ -66,11 +66,13 @@ export class SidebarComponent implements OnInit {
             modulos: [
               {
                 s_modulo:"Nuevo",
-                s_url: "pedido"
+                s_url: "pedido",
+                action: "CREAR"
               },
               {
                 s_modulo:"Historial",
-                s_url: "pedidos"
+                s_url: "pedidos",
+                action: "LEER"
               },
             ],
             url: "pedidos",
@@ -82,7 +84,8 @@ export class SidebarComponent implements OnInit {
             modulos: [
               {
                 s_modulo:"Historial",
-                s_url: "facturas"
+                s_url: "facturas",
+                action: "LEER"
               },
             ],
             url: "Facturas",
@@ -94,7 +97,8 @@ export class SidebarComponent implements OnInit {
             modulos: [
               {
                 s_modulo:"Historial",
-                s_url: "backorder"
+                s_url: "backorder",
+                action: "LEER"
               },
             ],
             url: "backorder",
@@ -120,32 +124,42 @@ export class SidebarComponent implements OnInit {
 
         this.s_nombre_completo = this.duser.username;
         this.s_foto_avatar = 'assets/img/default-avatar.png';    
-        
-        if(this.duser.rol == 'admin'){
-          this.All = this.all_modules;
-        }
-        else{
           
-          console.log(this.duser.modules);
 
-          let res = []
+          let res:any = []
           this.duser.modules.forEach(
-            (element)=>{
-              console.log(element);
+            (element,index)=>{
+
+              /* En el array res almaceno los modulos que el usuario
+              * loggeado tien habliltados */
               res.push(this.all_modules.filter(
                 (item) =>{
-                  console.log(item.nombre_seccion, element)
-                  console.log(item.nombre_seccion.includes(element))
+                  console.log('toadd',item.nombre_seccion, item,element)
+                  console.log(item.nombre_seccion.toUpperCase().includes(
+                    element.name.toUpperCase()));
                   return item.nombre_seccion.toUpperCase().includes(
-                    element.toUpperCase()
+                    element.name.toUpperCase()
                   )
                 }
               )[0]);
+
+             //en la posición actual del array res creo una nuva llave
+              //con las acciones permitidas del modo actual
+             res[index].modules = res[index].modulos.reduce(
+                (result,curr)=>{
+                  if(element.actions.includes(
+                    curr.action
+                  )){
+                    result.push(curr)
+                  }
+                  return result;
+                },
+                []
+              );
             }
           );
+          
           this.All = res;
-            console.log(res);
-        }
         }
     aberHijo(id,elem){
         //cuando no tiene modulos la seccion

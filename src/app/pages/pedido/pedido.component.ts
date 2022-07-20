@@ -72,6 +72,16 @@ export class PedidoComponent implements OnInit {
     this.data_to_send.Company = "U_GP_TEST"
     this.data_to_send.U_IsWeb = "Y";
 
+    if(this.globalService.getData('pedido')){
+      if(this.globalService.getData('storage_user_pedido') ==
+         this.datauser.username){
+        this.data_to_view = JSON.parse(this.globalService.getData('pedido'));
+      }
+      else{
+        this.globalService.removeItemData('pedido');
+      }
+    }
+
     console.log(this.data_to_send);
   }
 
@@ -138,6 +148,19 @@ export class PedidoComponent implements OnInit {
         }
       }
 
+      /* Guardo en localstorage usuario y pedido*/
+      this.globalService.setData(
+        'pedido',
+        JSON.stringify(
+          this.data_to_view
+          )
+      );
+      this.globalService.setData(
+        'storage_user_pedido',
+        this.datauser.username
+      );
+      //** End **//
+
       this.toastr.success("Producto Agregado al carrito", "SUCCESS", {
         positionClass: "toast-top-center",
       });
@@ -155,6 +178,7 @@ export class PedidoComponent implements OnInit {
      this.data_to_view = {};
     this.prods_pedido = [] ;
     this.clearProds();
+    this.globalService.removeItemData('pedido');
   }
 
 
@@ -354,6 +378,7 @@ export class PedidoComponent implements OnInit {
                     }/pedidos`;
               localStorage.removeItem('Comment');
               localStorage.removeItem('orden_compra');
+              this.globalService.removeItemData('pedido');
                 this.toastr.success(
                   "Pedido agregado correctamente.", 
                   "SUCCESS", 

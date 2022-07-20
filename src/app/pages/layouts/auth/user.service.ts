@@ -10,23 +10,39 @@ export class UserService {
       let a = JSON.parse(localStorage.getItem("nesdata"));
       let rol = a.rol;
       let modules = a.modules;
-      console.log(rol,modules);
-      if( rol == 'admin' || path.includes('admin')){
-        console.log(  );
+
+      //el primer caso es para la ruta inicial de admin
+      if(  path.includes('admin')){
         return true;
       }
       else {
-        let output = false
-        console.log('else');
-        modules.forEach(element => {
-          console.log(element, path);
-          if(element.toLowerCase().includes(
-            path.toLowerCase()
-          )){
-            output =  true;
+        //cuando renderiza el resto de rutas 
+
+        let output = false;
+        
+        /* Primero recorro todos los modulos para extraer las
+        * coincidencias con el path actual*/
+        let current_module = modules.filter(
+          item => {
+            //para el caso de ver detalle 
+            if(path.toLowerCase().includes(":id")){
+              path = path.replace('/:id','');
+            }
+            return item.name.toLowerCase().includes(
+              path.toLowerCase()
+            )
           }
-        });
-        return output;
+        )[0];
+
+        /* Para despues validar si el path actual tiene permiso*/
+        if(( path.slice(-1).toUpperCase() == "S" || path.includes(":id") )
+          ||
+          path == 'backorder'){
+          return current_module.actions.includes('LEER');
+        }
+        else{
+          return current_module.actions.includes('CREAR');
+        }
       }
       
   }

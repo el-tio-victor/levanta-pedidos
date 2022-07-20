@@ -28,7 +28,7 @@
                   <div class="m-1 p-1 row-table-cont">
                   <div class="pl-1 pr-1 d-flex ">
                     <h5 
-                      class="m-0 mb-1 title-style">
+                      class="col-2 m-0 mb-1 title-style">
                       <strong>{{prod.key}} </strong>
                     </h5>
                     <div  class=" col-10 text-center tallas">
@@ -49,8 +49,8 @@
                         )  |
                         keyvalue
                       ">
-                      <div class="col-12 d-flex row-ped">
-                        <div class="  col-color">
+                      <div class="col-12 p-0 d-flex row-ped">
+                        <div class="col-2  col-color">
                           <span>
                             {{item.key}}
                           </span>
@@ -99,6 +99,7 @@
                     <tr>
                       <th>&nbsp;</th>
                       <th>Folio</th>
+                      <th>Orden Compra</th>
                       <th>Fecha</th>
                       <th>Articulo</th>
                       <th>Línea</th>
@@ -119,6 +120,11 @@
                       <td>
                         {{ 
                           doc.DocNum
+                        }}
+                      </td>
+                      <td>
+                        {{ 
+                          doc.U_ORDENCOMPRA
                         }}
                       </td>
                       <td>

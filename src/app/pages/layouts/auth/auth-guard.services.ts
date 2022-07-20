@@ -20,11 +20,10 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state : RouterStateSnapshot) {
 
-    console.log('Rutaaaa', route.routeConfig.path );
     let path = route.routeConfig.path;
     //window.alert(this.userService.isValid());
     if(this.userService.isValid( path )!=true) {
-      this.router.navigateByUrl('/admin/dimeo_1/home');
+      this.router.navigateByUrl(`/admin/${this.username}/home`);
       //window.alert("No puedes ver esta pagina");
       return false;
     } 

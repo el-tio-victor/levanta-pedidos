@@ -27,14 +27,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     is_loading= false;
 
     empresas:any[] =[{
-      name:"PRUEBAS",
-      value:"U_GP_TEST"
-     /*name:"GP",
-     value:"GP_BD"*/
+      /*name:"PRUEBAS",
+      value:"U_GP_TEST"*/
+     name:"GP",
+     value:"GP_BD"
     }];
 
-    empresa_selected_default="U_GP_TEST";
-    //empresa_selected_default="GP_BD";
+    //empresa_selected_default="U_GP_TEST";
+    empresa_selected_default="GP_BD";
 
     pinta : any;
     obj = {company:"", username: "", password: "" }

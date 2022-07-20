@@ -176,7 +176,7 @@
             </div>
             <div class="card-body">
               <app-menu-views></app-menu-views>
-              <div class=" col-md-12 col-lg-10 m-auto table-cont tab-content">
+              <div class=" col-md-12  m-auto table-cont tab-content">
                 <div id="grid" 
                      data-toggle="tab"
                   class=" active tab-pane">
@@ -187,14 +187,14 @@
                   <div class="m-1 p-1 row-table-cont">
                   <div class="pl-1 pr-1 d-flex ">
                     <h5 
-                      class="m-0 mb-1  title-style">
+                      class="col-2 m-0 mb-1  title-style">
                       <strong>{{prod.key}} </strong>
                     </h5>
                     <div  class=" col-10 text-center tallas">
                       <ng-container 
                         *ngFor="let talla of 
                           getTallas(prod.value, prod)">
-                        <h5 class="p-0 m-0">
+                        <h5 class="p-0 m-0 text-ellipsis">
                           <strong>{{talla}}</strong>
                         </h5>
                       </ng-container>

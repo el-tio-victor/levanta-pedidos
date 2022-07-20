@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ToastrService} from "ngx-toastr";
+import {GlobalService} from "../../../../../global.service";
 
 @Component({
   selector: 'app-update-pedido',
@@ -18,14 +19,15 @@ export class UpdatePedidoComponent implements OnInit {
   input_value = 0;
 
   constructor(
-    private toastr : ToastrService
+    private toastr : ToastrService,
+    private globalService:GlobalService,
   ) { }
 
   ngOnInit(): void {
+    this.isValidValues();
   }
 
   turnIcon(el_target:any,el_btn){
-    console.log(el_target.classList.contains('show'));
     let has_show = el_target.classList.contains('show');
 
     el_btn.classList.toggle('rotate') ;
@@ -33,8 +35,6 @@ export class UpdatePedidoComponent implements OnInit {
 
 
  updateCantidad(value:number ,estilo:string, itemcode:string,element:any){
-    console.log(this.data);
-    console.log(estilo)
     /** this.data.items[estilo].prods */
 
     if(this.timer_aux)
@@ -45,20 +45,20 @@ export class UpdatePedidoComponent implements OnInit {
 
       let index_found = self.findIndex(estilo, itemcode );
 
-      /*if( isNaN(value) || value <= 0 ){
-        
-        self.toastr.info("La cantidad debe ser mayor a 0!!!", "INFO", {
-          positionClass: "toast-top-center",
-        });
-
-        self.data.items[estilo]['prods'][index_found]
-        .Quantity = value;
-        return ;
-      }*/
       if(index_found > -1){
         self.data.items[estilo]['prods'][index_found].Quantity =
         value;
       } 
+      
+      /* gUARDO en local storage el pedido */
+      console.log(self.data);
+      self.globalService.setData(
+        'pedido',
+        JSON.stringify(
+          self.data.items
+          )
+      );
+
       self.isValidValues();
     },500);
 
@@ -71,9 +71,7 @@ export class UpdatePedidoComponent implements OnInit {
         let  result = this.data.items[i].prods.find(
           item => isNaN( parseInt(item.Quantity)) || item.Quantity < 0
         );  
-        console.log('aquiiiiii',result);
         if( result ){
-          console.log('entro despues de aqui');
           
           this.is_valid_edicion_ped_emit.emit(false);
           return;

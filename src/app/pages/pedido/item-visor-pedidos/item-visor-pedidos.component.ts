@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ToastrService} from "ngx-toastr";
-import {GlobalService} from "../../../global.service";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ToastrService } from "ngx-toastr";
+import { GlobalService } from "../../../global.service";
 
 
 @Component({
@@ -40,7 +40,6 @@ export class ItemVisorPedidosComponent implements OnInit {
 
   disabled(){
    if(this.user.toUpperCase() != 'FEQE6410293U2_1'){
-    console.log('disabled', this.user.toLowerCase());
      return false;
    }
    else
