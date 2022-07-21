@@ -99,7 +99,7 @@
                     <tr>
                       <th>&nbsp;</th>
                       <th>Folio</th>
-                      <th>Orden Compra</th>
+                      <th>Pedido</th>
                       <th>Fecha</th>
                       <th>Articulo</th>
                       <th>Línea</th>
@@ -107,7 +107,7 @@
                       <th>Talla</th>
                       <th>Marca</th>
                       <th>Pendiente</th>
-                      <th>Comentarios</th>
+                      <th>OC</th>
                       <th>Destino</th>
                   </tr>
                 </thead>
@@ -124,7 +124,7 @@
                       </td>
                       <td>
                         {{ 
-                          doc.U_ORDENCOMPRA
+                          doc.U_SO1_01FOLIORETAIL1
                         }}
                       </td>
                       <td>
@@ -142,7 +142,7 @@
                       <td>{{ doc.Quantity }}</td>
                       <!--<td>{{ doc.CardCode }}</td>
                       <td>{{ doc.CardName }}</td>-->
-                      <td>{{ doc.Comments }}</td>
+                      <td>{{ doc.U_ORDENCOMPRA }}</td>
                       <td>{{ doc.ShipToCode }}</td>
                     </tr>
                   </ng-container>

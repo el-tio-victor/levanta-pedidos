@@ -17,7 +17,6 @@ export class UserService {
       }
       else {
         //cuando renderiza el resto de rutas 
-
         let output = false;
         
         /* Primero recorro todos los modulos para extraer las
@@ -34,11 +33,22 @@ export class UserService {
           }
         )[0];
 
-        /* Para despues validar si el path actual tiene permiso*/
+        /* Para despues validar si el path actual tiene permiso
+        *  es una validación particular primero valido para ver las tablas
+        *  de pedidos, facturas y backorder y ver detalle de cada item*/
         if(( path.slice(-1).toUpperCase() == "S" || path.includes(":id") )
           ||
-          path == 'backorder'){
-          return current_module.actions.includes('LEER');
+          (path == 'backorder'  )){
+          console.log(path);
+          return current_module.actions.includes('LEER') 
+        }
+        /* Luego la validación para el modulo de pedidos en este caso en particular 
+        * si se permite ingresar a la ruta de pedido para que el usuario pueda consultar el
+        * stock la validación se aplica a la hora de habilitar o deshabilitar los inputs
+        * si es que tiene o no permisos */
+        else if(path == "pedido"){
+          return current_module.actions.includes('LEER') ||
+            current_module.actions.includes('CREAR');
         }
         else{
           return current_module.actions.includes('CREAR');

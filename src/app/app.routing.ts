@@ -33,7 +33,7 @@ export const AppRoutes: Routes = [
       },
       
       {
-        path: 'pedido/:id',
+        path: 'pedidos/:id',
         component: ShowByIdComponent,
         canActivate: [AuthGuardService]
       },

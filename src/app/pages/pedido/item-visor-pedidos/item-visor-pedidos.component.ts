@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ToastrService } from "ngx-toastr";
-import { GlobalService } from "../../../global.service";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ToastrService} from "ngx-toastr";
+import {GlobalService} from "../../../global.service";
 
 
 @Component({
@@ -18,6 +18,8 @@ export class ItemVisorPedidosComponent implements OnInit {
   @Input() descripcion_articulo:string = "";
   @Input() icono_articulo:string = "";
   private timer_event:any;
+  private modules;
+  input_disabled = true;
 
   @Output() prod_add_emit:EventEmitter<any> =
     new EventEmitter();
@@ -35,11 +37,10 @@ export class ItemVisorPedidosComponent implements OnInit {
     private toastr: ToastrService,
   ) {
     this.user = this.globalService.getData().username;
-    console.log('USER,,,,', this.user );
   }
 
   disabled(){
-   if(this.user.toUpperCase() != 'FEQE6410293U2_1'){
+   if(this.globalService.getData() != 'FEQE6410293U2_1'){
      return false;
    }
    else
@@ -47,6 +48,14 @@ export class ItemVisorPedidosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.modules = this.globalService.getData().modules; 
+    console.log('modules,,,,', this.modules );
+    let modul_ped = this.modules.filter(
+      item=> item.name.toLowerCase()=='pedidos')[0];
+    console.log(modul_ped);
+    if(modul_ped.actions.includes('CREAR')){
+      this.input_disabled = false
+    }
   }
 
 

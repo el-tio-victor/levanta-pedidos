@@ -134,9 +134,6 @@ export class SidebarComponent implements OnInit {
               * loggeado tien habliltados */
               res.push(this.all_modules.filter(
                 (item) =>{
-                  console.log('toadd',item.nombre_seccion, item,element)
-                  console.log(item.nombre_seccion.toUpperCase().includes(
-                    element.name.toUpperCase()));
                   return item.nombre_seccion.toUpperCase().includes(
                     element.name.toUpperCase()
                   )
@@ -145,13 +142,19 @@ export class SidebarComponent implements OnInit {
 
              //en la posición actual del array res creo una nuva llave
               //con las acciones permitidas del modo actual
+              //esto para validar las acciones dentro de cada módulo
              res[index].modules = res[index].modulos.reduce(
                 (result,curr)=>{
+                  //agregue dentro del if el true como hack ya que la validación
+                  //para crear un pedido la hago en el input de cantidad y
+                  //aprovechando que crear pedido es la unica ruta de crear
+                  console.log(curr.action);
                   if(element.actions.includes(
                     curr.action
-                  )){
+                  ) || element.actions.includes('LEER')){
                     result.push(curr)
                   }
+
                   return result;
                 },
                 []
