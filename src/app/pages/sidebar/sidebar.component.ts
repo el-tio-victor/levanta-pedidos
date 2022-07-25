@@ -102,6 +102,19 @@ export class SidebarComponent implements OnInit {
               },
             ],
             url: "backorder",
+        },
+        {
+            id_seccion: 2,
+            imagen: "user",
+            nombre_seccion: "Usuarios",
+            /*modulos: [
+              {
+                s_modulo:"Historial",
+                s_url: "backorder",
+                action: "LEER"
+              },
+            ],*/
+            url: "users",
         }
     ];
 
@@ -129,11 +142,13 @@ export class SidebarComponent implements OnInit {
           let res:any = []
           this.duser.modules.forEach(
             (element,index)=>{
-
+              console.log(element)
+              if(element.name.toUpperCase() != 'USUARIOS'){
               /* En el array res almaceno los modulos que el usuario
               * loggeado tien habliltados */
               res.push(this.all_modules.filter(
                 (item) =>{
+                  console.log('consolaso',res);
                   return item.nombre_seccion.toUpperCase().includes(
                     element.name.toUpperCase()
                   )
@@ -159,6 +174,8 @@ export class SidebarComponent implements OnInit {
                 },
                 []
               );
+              
+              }
             }
           );
           

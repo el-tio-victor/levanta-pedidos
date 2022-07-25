@@ -46,7 +46,9 @@ import {GlobalService} from './global.service';
 //INTERCEPTORS
 import {HeaderInterceptor} from "./header.interceptor";
 import {BackorderComponent} from './pages/backorder/backorder.component';
+import {ConfigsModule} from './pages/configs/configs.module';
 import {FacturasComponent} from './pages/facturas/facturas.component';
+import {HomeComponent} from './pages/home/home.component';
 import {InicioComponent} from './pages/inicio/inicio.component';
 import {AdminLayoutComponent} from './pages/layouts/admin/admin-layout.component';
 import {AuthGuardService} from './pages/layouts/auth/auth-guard.services';
@@ -71,7 +73,6 @@ import {NavbarModule} from './pages/shared/navbar/navbar.module';
 import {SendEmailComponent} from './pages/shared/send-email/send-email.component';
 import {SidebarModule} from './pages/sidebar/sidebar.module';
 import {FormaturlPipe} from './pipes/formaturl.pipe';
-import { HomeComponent } from './pages/home/home.component';
 
 
 
@@ -115,8 +116,8 @@ import { HomeComponent } from './pages/home/home.component';
     CommonModule,
 
   ],
-  declarations: [HomeComponent],
-  imports: [NoopAnimationsModule,FormsModule]
+  declarations: [],
+  imports: [NoopAnimationsModule,]
 })
 export class MaterialModule { }
 
@@ -138,7 +139,7 @@ export class MaterialModule { }
     FooterModule,
     ToastrModule.forRoot(),
     DragDropModule,
-    TagInputModule,
+    TagInputModule,FormsModule, ConfigsModule
   ],
   declarations: [
     AppComponent,
@@ -162,6 +163,7 @@ export class MaterialModule { }
     BackorderComponent,
     FiltersTableComponent,
     MenuViewsComponent,
+    HomeComponent,
   ],
 
   providers: [
