@@ -1,16 +1,21 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { ConfigsRoutingModule } from './configs-routing.module';
-import { UsuariosComponent } from './usuarios/usuarios.component';
-import { UsuarioComponent } from './usuarios/usuario/usuario.component';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {SharedsModule} from "./../shareds/shareds.module";
+import {ConfigsRoutingModule} from './configs-routing.module';
+import {UsuarioComponent} from './usuarios/usuario/usuario.component';
+import {UsuariosComponent} from './usuarios/usuarios.component';
 
 
 @NgModule({
-  declarations: [UsuariosComponent, UsuarioComponent],
+  entryComponents:[
+  ],
+  declarations: [UsuariosComponent,
+    UsuarioComponent,
+  ],
   imports: [
     CommonModule,
-    ConfigsRoutingModule
+    ConfigsRoutingModule,
+    SharedsModule,
   ]
 })
 export class ConfigsModule { }

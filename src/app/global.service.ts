@@ -203,5 +203,31 @@ export class GlobalService {
       $('body').append(style);
 
     }
+    
  
+  errorMsg(msg:any,error:any){
+    return msg =
+      msg == "" ? 
+        `Ocurrio un error al procesar la petición "${error.error.msg}"`
+            : msg;
+  }
+
+
+  errorToken(error: any) {
+    let msg = "";
+    if (error.error) {
+      if (error.error.status == 409) {
+        msg = "Token expirado!";
+        this.router.navigateByUrl("/");
+      }
+    }
+    return msg;
+  }
+
+  msgToastError(msg: string): void {
+    this.toastr.error(msg, "Error", {
+      positionClass: "toast-bottom-left",
+    });
+  }
+  
 }

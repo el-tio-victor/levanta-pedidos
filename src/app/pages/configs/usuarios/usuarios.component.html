@@ -10,4 +10,12 @@
     >
     </table>
   </div>
+
+  <div
+    *ngIf="is_loading"
+    class="container-loader d-flex 
+    justify-content-center align-items-center"
+  >
+    <app-loader [width]="'70'"></app-loader>
+  </div>
 </section>

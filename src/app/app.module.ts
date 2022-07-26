@@ -41,7 +41,6 @@ import {TagInputModule} from "ngx-chips";
 import {ToastrModule} from 'ngx-toastr';
 import {AppComponent} from './app.component';
 import {AppRoutes} from './app.routing';
-//MODULOS 
 import {GlobalService} from './global.service';
 //INTERCEPTORS
 import {HeaderInterceptor} from "./header.interceptor";
@@ -54,7 +53,6 @@ import {AdminLayoutComponent} from './pages/layouts/admin/admin-layout.component
 import {AuthGuardService} from './pages/layouts/auth/auth-guard.services';
 import {AuthLayoutComponent} from './pages/layouts/auth/auth-layout.component';
 import {UserService} from './pages/layouts/auth/user.service';
-import {LoaderComponent} from './pages/loader/loader.component';
 import {LoginComponent} from './pages/login/login.component';
 import {PageNotFoundComponent} from "./pages/page-not-found/page-not-found.component";
 import {DetailPedidoComponent} from './pages/pedido/detail-pedido/detail-pedido.component';
@@ -71,6 +69,8 @@ import {MenuViewsComponent} from './pages/shared/components/menu-views/menu-view
 import {FooterModule} from './pages/shared/footer/footer.module';
 import {NavbarModule} from './pages/shared/navbar/navbar.module';
 import {SendEmailComponent} from './pages/shared/send-email/send-email.component';
+//MODULOS 
+import {SharedsModule} from './pages/shareds/shareds.module';
 import {SidebarModule} from './pages/sidebar/sidebar.module';
 import {FormaturlPipe} from './pipes/formaturl.pipe';
 
@@ -139,14 +139,16 @@ export class MaterialModule { }
     FooterModule,
     ToastrModule.forRoot(),
     DragDropModule,
-    TagInputModule,FormsModule, ConfigsModule
+    TagInputModule,
+    FormsModule,
+    ConfigsModule,
+    SharedsModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
     LoginComponent,
-    LoaderComponent,
     InicioComponent,
     FormaturlPipe,
     PageNotFoundComponent,
@@ -164,6 +166,8 @@ export class MaterialModule { }
     FiltersTableComponent,
     MenuViewsComponent,
     HomeComponent,
+  ],
+  exports:[
   ],
 
   providers: [

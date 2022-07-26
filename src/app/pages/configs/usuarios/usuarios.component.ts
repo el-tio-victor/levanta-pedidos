@@ -12,6 +12,8 @@ declare var $: any;
   styleUrls: ["./usuarios.component.css"],
 })
 export class UsuariosComponent implements OnInit {
+
+  is_loading:boolean = false;
   usuarios: any[];
   user_data:any;
   constructor(
@@ -21,11 +23,13 @@ export class UsuariosComponent implements OnInit {
     private router: Router
   ) {
     this.user_data = this.globalService.getData();
+    this.is_loading = true;
   }
 
   ngOnInit(): void {
     this.catalogosService.All("", "sapusers?maxpagesize=1000").subscribe(
       (response: any) => {
+        this.is_loading = false;
         console.log(response);
         this.usuarios = response.data;
 
@@ -137,7 +141,13 @@ export class UsuariosComponent implements OnInit {
           ],
         });
       },
-      (error) => console.log(error)
+      (error) => {
+        console.log(error)
+        this.is_loading = false;
+        let msg = this.globalService.errorToken(error);
+        msg = this.globalService.errorMsg(msg,error);
+        this.globalService.msgToastError(msg);
+      }
     );
   }
 }

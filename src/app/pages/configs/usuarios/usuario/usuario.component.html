@@ -1,9 +1,9 @@
-<section class="bg-danger main-content">
+<section class=" main-content">
   <div class="col-12 col-xl-11 ml-auto 
-    mr-auto mb-5 mt-0 p-3 bg-white">
+    mr-auto mb-5 mt-0 p-3 ">
     <div *ngIf="user" class="col-12 d-flex border" >
       <div class=" info-user">
-        <div class="user-user">
+        <div class="bg-white user-user">
           <div class="d-flex justify-content-center img-user">
             <span class="pic-user material-icons">
               account_circle
@@ -32,15 +32,43 @@
             <strong class="lbl-user">Rol:</strong>
             {{user.rol}}
           </p>
-          <p class="pb-3 border-bottom border-dark">
+          <p class="pb-3 border-bottom border-white">
             <strong class="lbl-user">Estatus:</strong>
             {{user.active == '1' ? 'Activo' : 'Inactivo'}}
           </p>
         </div>
       </div>
-      <div class="modules-user">
+      <div class="card modules-user">
+        <div class="card-header">
+          <h5 class="card-title">
+            Modulos
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class=" d-flex flex-wrap card-body-wrapper">
+            <div *ngFor="let item of modules" 
+              class=" m-2   bg-white card-module">
+              <h4 class="ml-1 mr-1 pt-2 pb-2 border-bottom">
+                {{item.name}}
+              </h4>
+              <div class=" p-3">
+                <p *ngFor="let action of item.actions" class="m-0">
+                  {{action}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+
+  <div
+    *ngIf="is_loading"
+    class="container-loader d-flex 
+    justify-content-center align-items-center"
+  >
+    <app-loader [width]="'70'"></app-loader>
   </div>
 
 </section>
