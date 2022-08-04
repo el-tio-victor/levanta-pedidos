@@ -1,4 +1,7 @@
 
+::ng-deep .mat-date-range-input-mirror{
+  display: none!important;
+}
 .cont-searchs{
   padding-bottom: 5px;
   /*margin-bottom: 8px;*/
@@ -21,7 +24,8 @@
 .cont-search-envio,
 .cont-search-dates {
   position: relative;
-  min-width: 159px
+  min-width: 159px;
+  max-width: 280px;
 }
 
 .btn-clean-filters{
@@ -32,10 +36,8 @@
   width: 43px;
   height: 43px;
 }
-.btn-clean-filters:hover{
-  color: #737277;
-  transition: all .3s;
-  background-color: #efefef;
+.btn-clean-filters i{
+  font-size: 34px;
 }
 .btn-clean-filters:hover .icono-delete-filter{
   background-color: #efefef!important;

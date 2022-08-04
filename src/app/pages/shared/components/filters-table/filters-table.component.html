@@ -5,17 +5,21 @@
     justify-content-end"
   >
     <div
-      class="mr-4 btn-clean-filters"
+      class="mr-1 btn-clean-filters"
       matTooltip="borrar filtros"
       (click)="clearFilters('all')"
     >
-      <i class="icono-filter material-icons">
-        filter_list 
-      </i>
-      <i class="icono-delete-filter material-icons">
+      <i class=" material-icons text-danger">
         close 
       </i>
     </div>
+
+  <button class="mb-3 btn btn-md bg-primario1"
+      (click)="handleFilter($event)" 
+    >
+      <i class="material-icons">filter_list</i>
+      filtrar
+    </button>
 
     <div
       *ngIf="filters_config.fecha_inicio ||
@@ -24,7 +28,27 @@
       class="d-flex align-items-center 
       p-1 ml-3 mr-3 cont-search-dates"
     >
-      <span class="ml-2">Del...</span>
+      <mat-form-field appearance="fill">
+          <mat-label>Ingresa fechas</mat-label>
+         <mat-date-range-input [rangePicker]="picker"
+           >
+           <input #date_1 matStartDate
+            (change)="handleParams()"
+           placeholder="fecha inicio"
+           (dateChange)="datesChange( date_1,date_2)"
+           >
+           <input 
+            (change)="handleParams()"
+           #date_2 matEndDate placeholder="fecha fin"
+           (dateChange)="datesChange( date_1,
+            date_2)"
+           >
+        </mat-date-range-input>
+        <mat-hint>YYYY-MM-DD – YYYY-MM-DD</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <!--<span class="ml-2">Del...</span>
       <input
         #date_1
         (focus)="focusInputDate(parent_dates)"
@@ -51,7 +75,7 @@
         class="p-1 material-icons"
       >
         search
-      </i>
+      </i>-->
     </div>
 
     <div
@@ -60,7 +84,7 @@
       class="d-flex align-items-center 
       p-1 border-success cont-search-num-fac"
     >
-      <input
+      <!--<input
         #search_num_doc
         style="width: 130px"
         class="ml-1 mr-1"
@@ -76,7 +100,20 @@
         class="material-icons"
       > 
         search
-      </i>
+      </i>-->
+      <mat-form-field appearance="fill">
+        <mat-label>
+          {{filters_config.folio.placeholder}} 
+        </mat-label>
+       <input matInput 
+        #search_num_doc
+        (change)="handleParams()"
+        (keydown.enter)="handleFilter($event)"
+        autocomplete="off"
+        data-param_url="Folio"
+        type="text"
+       >
+      </mat-form-field>
     </div>
 
 
@@ -87,7 +124,7 @@
              mr-2 ml-2 p-1 border-success cont-search-envio"
       style="min-width: 100px"
     >
-      <input
+      <!--<input
         #search_style
         style="width: 90px"
         class="ml-1 mr-1"
@@ -98,9 +135,22 @@
         data-param_url="ShipToCode"
         type="text"
         placeholder="Estilo"
-      />
+        />
       <i (click)="handleFilter($event)" 
-        class="material-icons"> search </i>
+      class="material-icons"> search </i>-->
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>
+          Estilo
+        </mat-label>
+        <input matInput 
+          #search_style
+          (keydown.enter)="handleFilter($event)"
+          (change)="handleParams()"
+          type="text"
+        >
+      </mat-form-field>
     </div>
 
     <div
@@ -109,7 +159,7 @@
       class="d-flex align-items-center
       mr-3 ml-1 p-1 border-success cont-search-envio"
     >
-      <input
+      <!--<input
         #search_lugar_envio
         style="width: 130px"
         class="ml-1 mr-1"
@@ -122,7 +172,20 @@
         placeholder="Destino"
       />
       <i (click)="handleFilter($event)" 
-        class="material-icons"> search </i>
+      class="material-icons"> search </i>-->
+
+      <mat-form-field appearance="fill">
+        <mat-label>
+          Destino 
+        </mat-label>
+        <input matInput 
+          #search_lugar_envio
+          (keydown.enter)="handleFilter($event)"
+          (change)="handleParams()"
+          data-param_url="ShipToCode"
+          type="text"
+        >
+      </mat-form-field>
     </div>
 
     <div
@@ -133,7 +196,8 @@
       <button
         #btn_filter_status
         href="#"
-        class="btn bg-white color-primario1 dropdown-toggle"
+        class=" mb-4 btn bg-light color-primario1
+        dropdown-toggle"
         data-toggle="dropdown"
         aria-expanded="true"
       >
@@ -211,11 +275,11 @@
           </a>
         </li>-->
       </ul>
-      <i (click)="handleFilter()" 
+      <!--<i (click)="handleFilter()" 
         class="mr-1 material-icons"
       > 
         search
-      </i>
+      </i>-->
     </div>
 
   </div>

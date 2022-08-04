@@ -4,11 +4,50 @@ import {
   OnInit, Output,
   ViewChild
 } from '@angular/core';
+import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter
+} from "@angular/material-moment-adapter";
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE
+} from "@angular/material/core";
+import * as _moment from "moment";
+import {default as _rollupMoment} from "moment";
+
+
+
+const moment = _rollupMoment || _moment;
+export const MY_FORMATS = {
+  parse: {
+    dateInput: "YYYY-MM-DD",
+          
+  },
+  display: {
+    dateInput: "YYYY-MM-DD",
+    monthYearLabel: "MMM YYYY",
+    dateA11yLabel: "LL",
+    monthYearA11yLabel: "MMMM YYYY",
+  },
+  
+};
+
 
 @Component({
   selector: 'app-filters-table',
   templateUrl: './filters-table.component.html',
-  styleUrls: ['./filters-table.component.css']
+  styleUrls: ['./filters-table.component.css'],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+                            
+    },
+    {provide:MAT_DATE_LOCALE, useValue:"es-MX"},
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS  },
+          
+  ],
 })
 export class FiltersTableComponent implements OnInit {
 
@@ -42,6 +81,8 @@ export class FiltersTableComponent implements OnInit {
   @Output() search_num_doc_emitter = new
    EventEmitter<string>();
 
+  @ViewChild('picker',{static:false}) 
+    picker:ElementRef;
   @ViewChild('date_1',{static:false}) 
     date_1:ElementRef;
   @Output() date_1_emitter = new
@@ -221,7 +262,13 @@ export class FiltersTableComponent implements OnInit {
     console.log('handle param');
     let params = this.getParamsToFilter();
     this.params_to_filter_emitter.emit(params);
+  }
 
+  datesChange(inicio,fin){
+    console.log('inicio----',inicio.value,
+                'fin----',fin.value);
+    console.log(this.picker, this.date_1.nativeElement.value);
+    this.handleParams();
   }
 
   handleNumDoc(value:string){

@@ -339,6 +339,7 @@ export class BackorderComponent implements OnInit {
       (response:any)=>{
         this.is_loading = false;
         if(response.status == 200){
+          console.log('Alls',response)
           this.all_docs = response.data;
           this.setPaginateInfo(
                   response
