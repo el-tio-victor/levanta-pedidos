@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
-import { GlobalService } from "../../../../global.service";
-import { CatalogosService } from "../../../../services/catalogos.service";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
+import {GlobalService} from "../../../../global.service";
+import {CatalogosService} from "../../../../services/catalogos.service";
 
 @Component({
   selector: 'app-usuario',
@@ -15,6 +15,7 @@ export class UsuarioComponent implements OnInit {
   user:any[];
   modules:any[];
   id:string;
+  action:string;
   is_loading:boolean = false;
 
   constructor(
@@ -25,12 +26,22 @@ export class UsuarioComponent implements OnInit {
     private getParamRoute:ActivatedRoute,
   ) {
     this.data_user = this.globalService.getData();
+
     this.id = this.getParamRoute.snapshot
     .paramMap.get('id');
-    this.is_loading = true;
+    this.action = this.getParamRoute.snapshot
+    .paramMap.get('action');
+    console.log('action',this.action);
   }
 
   ngOnInit(): void {
+    if(this.id){
+      this.is_loading = true;
+      this.loadUser();
+    }
+  }
+
+  loadUser():void{
     this.catalogosService.Id("","sapusers",this.id)
     .subscribe(
       (response:any) =>{
@@ -49,6 +60,8 @@ export class UsuarioComponent implements OnInit {
         this.globalService.msgToastError(msg);
       }
     );
+
   }
+
 
 }

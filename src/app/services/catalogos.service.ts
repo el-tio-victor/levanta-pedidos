@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { GlobalService } from '../global.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {GlobalService} from '../global.service';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +46,7 @@ export class CatalogosService {
         'Token': s_token
      });
     let options = { headers: headers };
-    return this.http.put(GlobalService.HOST+url+'/'+id, data, options);            
+    return this.http.patch(GlobalService.HOST+url+'/'+id, data, options);
   }
 
   Post(s_token:string, url: string, data: any) {

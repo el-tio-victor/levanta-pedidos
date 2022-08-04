@@ -1,0 +1,110 @@
+<section class="main-content">
+  <header class=" m-2">
+    <div class="pt-3 pb-3 col-12 col-xl-11 
+      ml-auto mr-auto d-flex justify-content-end">
+      <a >
+        <button (click)="viewFormCreate()"
+          class="btn btn-sm btn-primary "
+          >
+          <i class="material-icons">
+            person
+          </i>
+          Nuevo
+        </button>
+      </a>
+    </div>
+  </header>
+  <div class="col-12 col-xl-11 ml-auto mr-auto mb-5 mt-0 p-3">
+    <div class="d-flex  justify-content-around flex-wrap  border">
+      <div *ngIf="view_form" 
+         [formGroup]="formModulo"
+        class=" card card-form">
+        <div class="bg-light card-header">
+          <div class=" form-group">
+            <input placeholder="Nombre:"
+            type="text" class="form-control"
+            formControlName="name"
+            >
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="
+            d-flex justify-content-between 
+            align-items-center"
+          >
+            <label for="">Acciones</label>
+            <button 
+              class="btn btn-sm btn-success 
+              btn-round btn-fab "
+              (click)="addAction()">
+              <i class="material-icons">add</i>
+            </button>
+          </div>
+          <div>
+            <p *ngFor="let item of print_actions" class="m-0">
+              {{item}}
+            </p>
+          </div>
+          <div *ngFor="let action of actions.controls; index as i"
+            class="d-flex  align-items-center form-group">
+            <div [formGroup]="action" 
+              class="col-12 d-flex align-items-center">
+            <button *ngIf="action_create" (click)="removeAction(i)"
+              class=" mr-1 btn btn-sm btn-round btn-fab btn-danger"
+            >
+              <i class="material-icons">
+                close
+              </i>
+            </button>
+
+            <mat-form-field class="col-10">
+              <input *ngIf="action_create; else inputEdit;" matInput 
+                 formControlName="name"
+                class="form-control" autocomplete="off"
+                placeholder="acción {{i+1}}"
+                type="">
+
+              <ng-template #inputEdit>
+              <input matInput 
+                formControlName="actionName"
+                class="form-control" autocomplete="off"
+                placeholder="acción {{i+1}}"
+                type="">
+              </ng-template>
+            </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button *ngIf="formModulo.status=='VALID'" 
+             (click)="send()"
+            class="btn-success btn">
+            Guardar
+          </button>
+        </div>
+      </div>
+      <div *ngFor="let item of modulos" 
+        class="m-5 card card-view ">
+        <div class="d-flex justify-content-between bg-gray card-header">
+          <h5 class=" text-white card-title">
+            {{item.name}}
+          </h5>
+          <a  (click)="viewFormCreate(item)">
+            <i class="material-icons text-light">edit</i>
+          </a>
+        </div>
+        <div class="card-body">
+          <h5 *ngFor="let action of item.actions" class="p-2">
+            {{action.name}}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="is_loading"
+    class="container-loader d-flex justify-content-center align-items-center"
+  >
+    <app-loader [width]="'70'"></app-loader>
+  </div>
+</section>

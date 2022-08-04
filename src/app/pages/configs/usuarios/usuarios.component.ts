@@ -130,9 +130,15 @@ export class UsuariosComponent implements OnInit {
                 let actions = 
                   `<a  href='#/admin/${
                       self.user_data.username
-                    }/usuario/${row.id}' class=''>
+                    }/usuarios/view/${row.id}' class='pl-3'>
                   <i class='material-icons'>visibility</i>
-                  </a>`;
+                  </a> 
+                  <a  href='#/admin/${
+                      self.user_data.username
+                    }/usuarios/edit/${row.id}' class='pl-3'>
+                  <i class='material-icons'>edit</i>
+                  </a>
+                  `;
                 return actions;
               },
             },

@@ -1,0 +1,13 @@
+.wrap-roles{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(330px,1fr));
+}
+.btn-v{
+  cursor: pointer;
+}
+.card-rol{
+  width: 334px;
+}
+
+.item-action{
+}

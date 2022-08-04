@@ -27,6 +27,9 @@ export class UserService {
             if(path.toLowerCase().includes(":id")){
               path = path.replace('/:id','');
             }
+            if(path.toLowerCase().includes(":action")){
+              path = path.replace('/:action','');
+            }
             return item.name.toLowerCase().includes(
               path.toLowerCase()
             )

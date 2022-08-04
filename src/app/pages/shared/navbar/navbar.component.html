@@ -29,8 +29,18 @@
               <i class="material-icons mr-1">person</i>
               Usuarios
             </a>
-            <a class="dropdown-item" href="#">You have 5 new tasks</a>
-            <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+            <a class="dropdown-item"
+              routerLink="/admin/{{duser.username}}/modulos"
+            >
+              <i class="material-icons mr-1">event_seat</i>
+              Modulos
+            </a>
+            <a class="dropdown-item"
+              routerLink="/admin/{{duser.username}}/roles"
+            >
+              <i class="material-icons mr-1">groups</i>
+              Roles
+            </a>
             <a class="dropdown-item" href="#">Another Notification</a>
             <a class="dropdown-item" href="#">Another One</a>
           </div>

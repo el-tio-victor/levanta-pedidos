@@ -1,4 +1,18 @@
 <section class="main-content">
+  <header class=" m-2">
+    <div class="pt-3 pb-3 col-12 col-xl-11 ml-auto mr-auto d-flex justify-content-end">
+      <a routerLink="/admin/{{user_data.username}}/usuarios/new">
+        <button
+          class="btn btn-sm btn-primary"
+          >
+          <i class="material-icons">
+            person
+          </i>
+          Nuevo
+        </button>
+      </a>
+    </div>
+  </header>
   <div class="col-12 col-xl-11 ml-auto mr-auto
     mb-5 mt-0 p-3 bg-white  material-datatables">
     <table

@@ -1,0 +1,103 @@
+<section class="main-content">
+  <header class=" m-2">
+    <div class="pt-3 pb-3 col-12 col-xl-11 
+      ml-auto mr-auto d-flex justify-content-start">
+      <a routerLink="/admin/{{datauser.username.toLowerCase()}}/roles">
+        <button 
+          class="btn  btn-primary bg-primario1 btn-round btn-fab "
+          >
+          <i class="material-icons">
+            arrow_back
+          </i>
+        </button>
+      </a>
+    </div>
+  </header>
+  <div class="col-12 col-xl-11 ml-auto mr-auto mb-5 mt-0 p-3">
+    <div class="d-flex col-12">
+      <div class="col-4  p-4">
+        <div [formGroup]="form_rol"
+          class=" form-rol">
+          <div class="form-group">
+            <mat-form-field>
+              <input formControlName="name"
+              type="text" placeholder="Nombre" matInput>
+            </mat-form-field>
+          </div>
+          <div class="actions-group">
+            <label for="">Acciones</label>
+            <div 
+              cdkDropList
+              #actionsRol="cdkDropList"
+              [cdkDropListData]="actions.controls"
+              [cdkDropListConnectedTo]="actionsModules"
+              (cdkDropListDropped)="drop($event)"
+              class=" p-2 d-flex flex-wrap justify-content-around
+              bg-primario3 actions-wrapper"
+            >
+              <div class="d-flex item-action"
+                *ngFor="let action of actions.controls; index as i;"
+              >
+                <div  cdkDrag
+                  class="d-flex flex-column p-2 m-2 bg-white rounded">
+                  <small>
+                    {{action.value.name_module}}
+                  </small>
+                  <strong class="">
+                    {{action.value.name}}
+                  </strong>
+                  <i 
+                    class="material-icons bg-danger
+                     text-white btn-delete"
+                    (click)="removeAction(i)"
+                  >
+                    close
+                  </i>
+                 </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-8 pt-4 pb-4  ">
+        <div *ngIf="modules" class="modules-wrapper">
+          <div *ngFor=" let item of modules" 
+            class=" m-2 p-2 module">
+            <h5
+              class="mb-0"
+            >{{item.name}}</h5>
+            <div
+              cdkDropList
+              #actionsModules="cdkDropList"
+              [cdkDropListData]="item.actions"
+              [cdkDropListConnectedTo]="actionsRol"
+              (cdkDropListDropped)="drop($event)"
+              class="p-2 wrapper-items-module-actions"
+            >
+              <ng-container
+                  *ngFor="let action of item.actions" 
+              >
+                <p
+                  cdkDrag
+                  *ngIf="printeable(action.id)"
+                  class="pl-2 pr-2 pt-4 pb-4 bg-primario1 m-1
+                          text-white"
+                >
+                  {{action.name}}
+                </p>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ml-3 mr-3">
+      <button *ngIf="form_rol.status==='VALID'"
+        class="btn btn-block btn-success"
+        (click)="send()"
+        >
+        {{id == 0 ? 'Guardar' : 'Actualizar'}}
+      </button>
+    </div>
+  </div>
+</section>

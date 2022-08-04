@@ -1,0 +1,183 @@
+<section class="main-content">
+  <div class="col-12 col-xl-11 ml-auto mr-auto mb-5 mt-0 p-3">
+    <div [formGroup]="userForm" class="cont-form">
+      <div class="p-3 border-bottom togglebutton">
+        <label>
+          <input
+            type="checkbox"
+            [checked]="userForm.get('active').value == '1' ? true : false"
+            (change)="changeActive($event)"
+          />
+          <span class="toggle"></span>
+          Activo
+        </label>
+      </div>
+      <div class="col-12 d-flex">
+        <div class="col-6 p-4 grals-form">
+          <div class="form-group">
+            <label for="">Nombre</label>
+            <input
+              type="text"
+              formControlName="first_name"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="">Apellido</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="last_name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="">Email</label>
+            <input type="email" class="form-control" formControlName="email" />
+            <label
+              *ngIf="
+                (userForm.get('email')?.dirty ||
+                  userForm.get('email')?.touched) &&
+                userForm.get('email')?.errors?.email
+              "
+              class="error text-danger"
+              for=""
+              >email no valido</label
+            >
+          </div>
+          <div class="form-group">
+            <label for="">USERNAME</label>
+            <input
+              type="text"
+              formControlName="username"
+              class="form-control"
+            />
+            <label
+              *ngIf="
+                (userForm.get('usename')?.dirty ||
+                  userForm.get('username')?.touched) &&
+                userForm.get('username')?.errors?.required
+              "
+              class="error text-danger"
+              for=""
+              >Campo username requerido</label
+            >
+          </div>
+          <div class="form-group">
+            <label for="">PASSWORD</label>
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+            />
+            <label
+              *ngIf="
+                (userForm.get('password')?.dirty ||
+                  userForm.get('password')?.touched) &&
+                userForm.get('password')?.errors?.required
+              "
+              class="error text-danger"
+              for=""
+              >Campo password requerido</label
+            >
+          </div>
+          <div class="form-group">
+            <mat-form-field appearance="fill">
+              <mat-label>Selecciona rol</mat-label>
+              <mat-select
+                placeholder=""
+                formControlName="rolId"
+                ngClass="mat-select simple"
+              >
+                <mat-option *ngFor="let rol of roles" [value]="rol.id">
+                  {{ rol.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <label
+              *ngIf="
+                (rolId?.dirty || rolId?.touched) && rolId?.errors?.required
+              "
+              class="error-rolId text-danger"
+              for=""
+              >Campo Rol requerido</label
+            >
+          </div>
+        </div>
+        <div class="col-6 m-2 p-4 t other">
+          <div class="form-group">
+            <label for="">RFC</label>
+            <div class="d-flex">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="FederalTaxID"
+              />
+              <button
+                class="ml-2 btn btn-info btn-sm"
+                (click)="loadDirecciones()"
+              >
+                <i class="material-icons">arrow_forward</i>
+              </button>
+            </div>
+            <label
+              *ngIf="
+                (userForm.get('FederalTaxId')?.dirty ||
+                  userForm.get('FederalTaxId')?.touched) &&
+                userForm.get('FederalTaxId')?.errors?.required
+              "
+              class="error text-danger"
+              for=""
+              >El RFC es requerido</label
+            >
+          </div>
+          <div class="p-2 form-group bg-dark cont-direcciones-entrega">
+            <label for="">Direcciones Entrega</label>
+            <label
+              *ngIf="branches?.errors?.required"
+              class="d-block error text-danger"
+              for=""
+              >Agrega al menos una dirección.</label
+            >
+            <div class="d-flex justify-content-around flex-wrap">
+              <div *ngFor="let item of direcciones_entrega" class="p-1 m-1">
+                <div class="card-header">
+                  <h5 class="card-title">
+                    {{ item.ShipToCode }}
+                  </h5>
+                  <div class="togglebutton">
+                    <label>
+                      <input
+                        type="checkbox"
+                        [checked]="isChecked(item.ShipToCode)"
+                        [attr.data-branch]="item.ShipToCode"
+                        (change)="changeSelectDireccion($event)"
+                      />
+                      <span class="toggle"></span>
+                      Agregado
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p m-2 pt-4 p-2 border-top footer-form">
+        <button
+          *ngIf="userForm.status != 'INVALID'"
+          (click)="send()"
+          class="btn btn-block btn-success"
+        >
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="is_loading"
+    class="container-loader d-flex justify-content-center align-items-center"
+  >
+    <app-loader [width]="'70'"></app-loader>
+  </div>
+</section>

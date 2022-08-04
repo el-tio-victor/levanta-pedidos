@@ -154,12 +154,6 @@ export class Susutile {
       { p:'border-radius', s:'50px' },
       { p:'opacity', s:'1 !important' },
     ]},
-    {e:'.btn-primary:hover, .btn-primary:focus',
-    reg:[
-      { p:'color', s: this.tcolor.C05 },
-      { p:'background-color', s: this.tcolor.C01+' !important' },
-      { p:'border-color', s: this.tcolor.C01+' !important' },
-    ]},
     {e:'.btn-danger, .btn-danger.disabled, .btn-danger:disabled',
     reg:[
       { p:'border-color', s: this.tcolor.C07 },
