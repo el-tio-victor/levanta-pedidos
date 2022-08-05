@@ -13,17 +13,18 @@ export class HeaderVisorPedidosComponent implements OnInit {
 
   @Output() public handleClickOutput = new EventEmitter<MouseEvent>();
   @Output() public handleClickCleanOutput = new EventEmitter<MouseEvent>();
+  @Output() is_saved_order = new EventEmitter<boolean>();
 
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.show);
   }
 
   handleClick(event:MouseEvent){
-    console.log('click en boton de header');
     this.handleClickOutput.emit(event);
+    this.handleClickCleanOutput.emit(event);
+    this.is_saved_order.emit(true);
   }
   isDisabledBtnSave(){
     if(this.prods_pedido){
@@ -35,6 +36,7 @@ export class HeaderVisorPedidosComponent implements OnInit {
 
   handleClickClean(event:MouseEvent){
     this.handleClickCleanOutput.emit(event);
+    this.is_saved_order.emit(true);
     console.log('clean');
   }
 }

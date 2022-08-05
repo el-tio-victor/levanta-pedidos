@@ -2,6 +2,7 @@ import {Component, OnInit, TemplateRef, ViewChild} from "@angular/core";
 import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import Swal from "sweetalert2";
 import * as XLSX from "XLSX";
 import {GlobalService} from "../../global.service";
 import {CatalogosService} from "../../services/catalogos.service";
@@ -23,6 +24,7 @@ export class PedidoComponent implements OnInit {
   colores_disponibles: any[] = [];
   prods_pedido: any[] = [];
   is_loading = false;
+  is_saved_order:boolean=true;
   descripcion_articulo: string = "";
   descripcion_estilo: string;
   icono_articulo: string = "";
@@ -85,6 +87,16 @@ export class PedidoComponent implements OnInit {
     console.log(this.data_to_send);
   }
 
+  alertOrderNotSaved(){
+    if(!this.is_saved_order){
+      Swal.fire(
+        'Hay un pedido o actualización no agregada al carrito',
+        '',
+        'info'
+      );
+    }
+  }
+
   getValueColor(key: string, codigo_color: string) {
     let index = this.colores_disponibles.findIndex(
       (item) => item.codigo == codigo_color
@@ -92,6 +104,10 @@ export class PedidoComponent implements OnInit {
     if (index != -1) {
       return this.colores_disponibles[index][key];
     } else return codigo_color;
+  }
+
+  setIsSavedOrder(estatus:boolean):void{
+    this.is_saved_order = estatus;
   }
 
   removeToCart(style:string){

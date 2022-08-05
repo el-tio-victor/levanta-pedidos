@@ -7,6 +7,7 @@
           <mat-select
             [(ngModel)]="estilo_select"
             placeholder="Selecciona Estilo"
+            (click)="alertOrderNotSaved()"
             (selectionChange)="changeSelectEstilo($event)"
             ngClass="mat-select simple"
           >
@@ -122,6 +123,7 @@
           [prods_pedido]="prods_pedido"
           (handleClickOutput)="addToCart()"
           (handleClickCleanOutput)="clearProds()"
+          (is_saved_order)="setIsSavedOrder($event)"
           >
         </app-header-visor-pedidos>
         <div class="body-visor-pedidos mt-2 mb-2">
@@ -134,6 +136,7 @@
               [nombre_color_esp]="getValueColor('espaniol', item)"
               [code_exa_color]="getValueColor('exadecimal', item)"
               (prod_add_emit)="addProd($event)"
+              (is_saved_order)="setIsSavedOrder($event)"
               [descripcion_articulo]="descripcion_articulo"
               [icono_articulo]="icono_articulo"
             >

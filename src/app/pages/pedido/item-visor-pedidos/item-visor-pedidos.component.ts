@@ -24,6 +24,9 @@ export class ItemVisorPedidosComponent implements OnInit {
   @Output() prod_add_emit:EventEmitter<any> =
     new EventEmitter();
 
+  @Output() is_saved_order:EventEmitter<boolean> =
+    new EventEmitter();
+
 
   //private element_by_talla:any;
 
@@ -99,13 +102,19 @@ export class ItemVisorPedidosComponent implements OnInit {
       null ; 
   }
 
+  /** Cada que se registra un cambio en el input de cantidad de piezas
+  * emito ese cambio para posteriormente agregarlo al objeto con las
+  * cantidaddes de cada producto**/
   changeValueInput(talla:string,el){
     console.log(
       el.target.value
     );
+    //HAgo una busqueda del elemnto por su talla
+    //para despues con esos datos formar la matriz
+    //de productos agregados
     let element_by_talla = this.getByTalla(talla);
     console.log(this.prods_pedido);
-    element_by_talla = this.getByTalla(talla);
+    //element_by_talla = this.getByTalla(talla);
     console.log(element_by_talla);
     let ItemCode =  element_by_talla ?
       element_by_talla.ItemCode :
@@ -144,7 +153,10 @@ export class ItemVisorPedidosComponent implements OnInit {
       SalPackUn: element_by_talla.SalPackUn,
     }; 
 
+
     this.prod_add_emit.emit(item);
+    this.is_saved_order.emit(false);
+
     console.log( ItemCode );
     console.log(el.target.value);
 
