@@ -48,34 +48,6 @@
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
-      <!--<span class="ml-2">Del...</span>
-      <input
-        #date_1
-        (focus)="focusInputDate(parent_dates)"
-        (blur)="blurInputDate(parent_dates)"
-        (change)="handleParams()"
-        type="date"
-        class="mr-2"
-        placeholder="Inicio"
-      />
-      <ng-container *ngIf="filters_config.fecha_fin">
-        <span>Al...</span>
-        <input
-          #date_2
-          min="{{ date_1.value }}"
-          (focus)="focusInputDate(parent_dates)"
-          (blur)="blurInputDate(parent_dates)"
-          (change)="handleParams()"
-          type="date"
-          placeholder="Fin"
-        />
-      </ng-container>
-      <i 
-        (click)="handleFilter($event)" 
-        class="p-1 material-icons"
-      >
-        search
-      </i>-->
     </div>
 
     <div
@@ -84,23 +56,6 @@
       class="d-flex align-items-center 
       p-1 border-success cont-search-num-fac"
     >
-      <!--<input
-        #search_num_doc
-        style="width: 130px"
-        class="ml-1 mr-1"
-        (focus)="focusInput(parent_n_doc)"
-        (blur)="blurInput(parent_n_doc)"
-        (change)="handleParams()"
-        (keydown.enter)="handleFilter($event)"
-        data-param_url="Folio"
-        type="text"
-        [placeholder]="filters_config.folio.placeholder"
-      />
-      <i (click)="handleFilter($event)" 
-        class="material-icons"
-      > 
-        search
-      </i>-->
       <mat-form-field appearance="fill">
         <mat-label>
           {{filters_config.folio.placeholder}} 
@@ -108,7 +63,6 @@
        <input matInput 
         #search_num_doc
         (change)="handleParams()"
-        (keydown.enter)="handleFilter($event)"
         autocomplete="off"
         data-param_url="Folio"
         type="text"
@@ -146,7 +100,6 @@
         </mat-label>
         <input matInput 
           #search_style
-          (keydown.enter)="handleFilter($event)"
           (change)="handleParams()"
           type="text"
         >
@@ -176,11 +129,10 @@
 
       <mat-form-field appearance="fill">
         <mat-label>
-          Destino 
+          Sucursal 
         </mat-label>
         <input matInput 
           #search_lugar_envio
-          (keydown.enter)="handleFilter($event)"
           (change)="handleParams()"
           data-param_url="ShipToCode"
           type="text"

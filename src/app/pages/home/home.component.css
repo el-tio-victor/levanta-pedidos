@@ -1,3 +1,6 @@
+h1 strong{
+  border-bottom: solid .76rem #999;
+}
 .cont-main{
   height: 60vh;
 }

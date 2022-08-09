@@ -1,15 +1,15 @@
 import {
-  Component,
-  OnInit
+    Component,
+    OnInit
 } from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {Router} from "@angular/router";
+import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import * as moment from "moment";
-import {ToastrService} from "ngx-toastr";
-import {GlobalService} from "../../global.service";
-import {CatalogosService} from "../../services/catalogos.service";
+import { ToastrService } from "ngx-toastr";
+import { GlobalService } from "../../global.service";
+import { CatalogosService } from "../../services/catalogos.service";
 import {
-  SendEmailComponent
+    SendEmailComponent
 } from "../shared/send-email/send-email.component";
 
 @Component({
@@ -129,6 +129,14 @@ export class FacturasComponent implements OnInit {
       }
     );
   }
+
+getComentario(comment:string){
+  if(!comment) comment ="";
+  let comment_ext = comment.match(/\[\*\-(.*)\-\*\]/)
+  
+  return comment_ext ? comment_ext[1]: "";
+}
+
 
 
   sendEmail(url:string, email:string){

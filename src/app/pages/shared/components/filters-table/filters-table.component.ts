@@ -259,7 +259,7 @@ export class FiltersTableComponent implements OnInit {
   }
 
   handleParams(){
-    console.log('handle param');
+    console.log('handle param',this.getParamsToFilter());
     let params = this.getParamsToFilter();
     this.params_to_filter_emitter.emit(params);
   }

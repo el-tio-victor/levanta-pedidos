@@ -90,7 +90,8 @@ export class BackorderComponent implements OnInit {
           this.all_by_style = this.orderByKey(
             this.all_docs, "ItmsGrpNam"
           );
-
+          if(this.all_by_style['SERVICIO'])
+            delete this.all_by_style['SERVICIO'];
 
           console.log('por estilo',this.all_by_style);
         }
@@ -130,9 +131,9 @@ export class BackorderComponent implements OnInit {
   }
 
 
-  getTallas(object:any){
+  getTallas( convert ){
     //console.log(object);
-    let tallas = object.reduce((result,current) => { 
+    /*let tallas = object.reduce((result,current) => { 
       if(Array.isArray(result)){
         if(!result.includes(current['Talla'])){
           let item_push = current['Talla'] ?
@@ -144,7 +145,8 @@ export class BackorderComponent implements OnInit {
       return result;
     },[]);
     //console.log('tallaaaa', tallas)
-    this.tallas_by_estilo = tallas;
+    this.tallas_by_estilo = tallas;*/
+   let tallas =convert ? convert.split(',') : [];
     return tallas;
   }
 
@@ -203,7 +205,6 @@ export class BackorderComponent implements OnInit {
   }
 
   handlePaginate(element:any){
-    console.log(element.dataset.target);
     let action = element.dataset.target;
     let url = "";
     if(action == 'prev'){
@@ -318,17 +319,17 @@ export class BackorderComponent implements OnInit {
     return params;
   }*/
   setParamToFilter(value:string){
+    console.log('set',value)
     this.params_to_filter = value;
   }
   filter(){
     //let params = this.getParamsToFilter();
     let params = this.params_to_filter.substring(1);
-    //console.log(params)
     //if(params != ""){
 
-    let url =`Backorder?${params}`;
+    let url = params != "" ?`Backorder?${params}` :
+      `Backorder?maxpagesize=0` ;
 
-    console.log(params);
    this.is_loading = true;
     //this.clearFilters('status');
    this.catalogosService.All(

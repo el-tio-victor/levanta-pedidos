@@ -74,6 +74,19 @@ loadViewSendMail():void{
   )
 }
 
+getComentario(comment:string){
+  if(!comment) comment ="";
+  let comment_ext = comment.match(/\[\*\-(.*)\-\*\]/)
+  
+  return comment_ext ? comment_ext[1]: "";
+}
+
+getPendiente(cant_solicitada, cant_surtida){
+  if(!cant_surtida)
+    cant_surtida = 0;
+  return parseInt(cant_solicitada) - parseInt(cant_surtida);
+}
+
 sendEmail(url:string, email:string){
   this.is_loading = true;
   this.catalogosService.Post("",url,{email} )
@@ -186,8 +199,8 @@ errorMsg(msg:any,error:any){
     ,0);
   }
  
-  getTallas(object:any){
-    let tallas = object.reduce((result,current) => { 
+  getTallas(convert,estilo = ""){
+    /*let tallas = object.reduce((result,current) => { 
       if(Array.isArray(result)){
         if(!result.includes(current['U_Talla'])){
           let item_push = current['U_Talla'] ?
@@ -198,8 +211,13 @@ errorMsg(msg:any,error:any){
       }
       return result;
     },[]);
-    //console.log('tallaaaa', tallas)
     this.tallas_by_estilo = tallas;
+    return tallas;*/
+   let tallas =convert ? convert.split(',') : [];
+   if(tallas.length == 0 && (estilo.toUpperCase() == "SERVICIO"
+                            || estilo.toUpperCase() == "EMBALAJE")){
+       tallas.push('EMBALAJE');
+     }
     return tallas;
   }
 

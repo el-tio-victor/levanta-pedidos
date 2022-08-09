@@ -34,7 +34,7 @@
                     <div  class=" col-10 text-center tallas">
                       <ng-container 
                         *ngFor="let talla of 
-                          getTallas(prod.value, prod)">
+                          getTallas(prod.value[0].Tallas)">
                         <h5 class="p-0 m-0">
                           <strong>{{talla}}</strong>
                         </h5>
@@ -58,7 +58,7 @@
                         <div class="col-10 text-center tallas">
                           <ng-container 
                             *ngFor="let talla of 
-                            tallas_by_estilo">
+                            getTallas(prod.value[0].Tallas)">
                               <strong class="col-cant">
                                 {{getQuantity(item.value,talla)}}
                               </strong>
@@ -100,15 +100,14 @@
                       <th>&nbsp;</th>
                       <th>Folio</th>
                       <th>Pedido</th>
+                      <th>OC</th>
                       <th>Fecha</th>
-                      <th>Articulo</th>
-                      <th>Línea</th>
+                      <th>SKU</th>
+                      <!--<th>Línea</th>-->
                       <th>Color</th>
                       <th>Talla</th>
-                      <th>Marca</th>
                       <th>Pendiente</th>
-                      <th>OC</th>
-                      <th>Destino</th>
+                      <th>Sucursal</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -127,6 +126,7 @@
                           doc.U_SO1_01FOLIORETAIL1
                         }}
                       </td>
+                      <td>{{ doc.U_ORDENCOMPRA }}</td>
                       <td>
                         {{ 
                           readDate(
@@ -135,14 +135,12 @@
                         }}
                       </td>
                       <td>{{ doc.ItemCode }}</td>
-                      <td>{{ doc.ItmsGrpNam }}</td>
+                      <!--<td>{{ doc.ItmsGrpNam }}</td>-->
                       <td>{{ doc.Color }}</td>
                       <td>{{ doc.Talla }}</td>
-                      <td>{{ doc.FirmName }}</td>
                       <td>{{ doc.Quantity }}</td>
                       <!--<td>{{ doc.CardCode }}</td>
                       <td>{{ doc.CardName }}</td>-->
-                      <td>{{ doc.U_ORDENCOMPRA }}</td>
                       <td>{{ doc.ShipToCode }}</td>
                     </tr>
                   </ng-container>

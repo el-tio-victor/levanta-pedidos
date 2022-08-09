@@ -40,11 +40,9 @@
               <th>&nbsp;</th>
               <th>Factura</th>
               <th>Fecha</th>
-              <!--<th># Cliente</th>
-              <th>Cliente</th>-->
+              <th>OC</th>
               <th>Método Pago</th>
               <th>Destino</th>
-              <th>OC</th>
               <th>Comentarios</th>
               <th>Piezas</th>
               <th>Monto</th>
@@ -68,12 +66,10 @@
                     )
                   }}
                 </td>
-                <!--<td>{{ factura.CardCode }}</td>
-                <td>{{ factura.CardName }}</td>-->
+                <td>{{ factura.U_ORDENCOMPRA }}</td>
                 <td>{{ factura.U_FORMAPAGO }}</td>
                 <td>{{ factura.ShipToCode }}</td>
-                <td>{{ factura.U_ORDENCOMPRA }}</td>
-                <td>{{ factura.Comments }}</td>
+                <td>{{ getComentario(factura.Comments) }}</td>
                 <td>{{ factura.TotalQuantity }}</td>
                 <td>{{ factura.DocTotal |currency }}</td>
               </tr>

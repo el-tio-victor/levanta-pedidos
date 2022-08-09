@@ -43,10 +43,11 @@
             <tr>
               <th>&nbsp;</th>
               <th>Pedido</th>
+              <th>OC</th>
               <th>Fecha</th>
               <th>Piezas</th>
               <th>Total</th>
-              <th>Destino</th>
+              <th>Sucursal</th>
               <th>Comentarios</th>
               <th>Estatus</th>
             </tr>
@@ -58,6 +59,7 @@
               <tr (click)="show(pedido.DocEntry)">
                 <th>{{ i +1 }}</th>
                 <td>{{ pedido.DocNum }}</td>
+                <td>{{ pedido.U_ORDENCOMPRA }}</td>
                 <td>{{ readDate(
                           pedido.DocDate
                         )
@@ -66,7 +68,7 @@
                 <td>{{ pedido.TotalQty }}</td>
                 <td>{{ pedido.DocTotal | currency}}</td>
                 <td>{{ pedido.ShipToCode }}</td>
-                <td>{{ pedido.Comments }}</td>
+                <td>{{ getComentario(pedido.Comments) }}</td>
                 <td>{{ pedido.DocumentStatus }}</td>
               </tr>
             </ng-container>

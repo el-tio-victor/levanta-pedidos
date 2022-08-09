@@ -28,13 +28,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     empresas:any[] =[{
       name:"PRUEBAS",
-      value:"U_GP_TEST"
-     /*name:"GP",
-     value:"GP_BD"*/
+      value:"U_GP_TEST"},
+      {name:"GP",
+     value:"GP_BD"
     }];
 
-    empresa_selected_default="U_GP_TEST";
-    //empresa_selected_default="GP_BD";
+    //empresa_selected_default="U_GP_TEST";
+    empresa_selected_default="GP_BD";
 
     pinta : any;
     obj = {company:"", username: "", password: "" }
@@ -248,7 +248,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.curService.setData('nesdata',JSON.stringify(response.data));
             this.curService.setData('company',this.obj.company);
             this.router.navigateByUrl(
-              '/admin/'+response.data.username.toLowerCase()+'/pedido');
+              '/admin/'+response.data.username.toLowerCase()+'/home');
               
           }
           else{

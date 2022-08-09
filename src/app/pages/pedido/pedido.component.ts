@@ -90,7 +90,7 @@ export class PedidoComponent implements OnInit {
   alertOrderNotSaved(){
     if(!this.is_saved_order){
       Swal.fire(
-        'Hay un pedido o actualización no agregada al carrito',
+        'Hay un articulo sin agregar al carrito',
         '',
         'info'
       );
@@ -356,7 +356,7 @@ export class PedidoComponent implements OnInit {
           console.log(response);
 
           response.data.comentario = response.data.comentario  ?
-            response.data.comentario : "";
+             "[*-"+response.data.comentario+"-*]" : "";
           response.data.orden_compra = response.data.orden_compra ?
             response.data.orden_compra : "";
 

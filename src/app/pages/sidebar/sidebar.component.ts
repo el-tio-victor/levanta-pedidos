@@ -83,7 +83,7 @@ export class SidebarComponent implements OnInit {
             nombre_seccion: "Facturas",
             modulos: [
               {
-                s_modulo:"Historial",
+                s_modulo:"Facturación",
                 s_url: "facturas",
                 action: "LEER"
               },
@@ -96,7 +96,7 @@ export class SidebarComponent implements OnInit {
             nombre_seccion: "Backorder",
             modulos: [
               {
-                s_modulo:"Historial",
+                s_modulo:"Por surtir",
                 s_url: "backorder",
                 action: "LEER"
               },

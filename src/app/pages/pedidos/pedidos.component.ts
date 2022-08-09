@@ -67,6 +67,13 @@ setParamToFilter(value:string){
   this.params_to_filter = value;
 }
 
+getComentario(comment:string){
+  if(!comment) comment ="";
+  let comment_ext = comment.match(/\[\*\-(.*)\-\*\]/)
+  
+  return comment_ext ? comment_ext[1]: "";
+}
+
 loadViewSendMail():void{
   let emails = this.globalService.getData().EmailAddress
     .split(";");

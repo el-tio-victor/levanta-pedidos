@@ -36,11 +36,21 @@
                 <div class="d-flex  
                   row-line"
                 >
-                  <h4 class="label-row color-primario1">
-                    ID:
-                  </h4>
-                  <div class="ml-3">
-                    <p class="mb-1">{{pedido.DocNum}}</p>
+                  <div class="d-flex col-6 p-0">
+                    <h4 class="label-row color-primario1">
+                      ID:
+                    </h4>
+                    <div class="ml-3">
+                      <p class="mb-1">{{pedido.DocNum}}</p>
+                    </div>
+                  </div>
+                  <div class="col-6 d-flex p-0">
+                    <h4 class="label-row color-primario1">
+                      OC:
+                    </h4>
+                    <div class="ml-3">
+                      <p class="mb-1">{{pedido.U_ORDENCOMPRA}}</p>
+                    </div>
                   </div>
                 </div>
                 <div class="d-flex  
@@ -75,7 +85,7 @@
                   </h4>
                   <div class="ml-3">
                     <p class="mb-1">
-                      {{pedido.Comments}}
+                      {{getComentario(pedido.Comments)}}
                     </p>
                   </div>
                 </div>
@@ -141,7 +151,7 @@
             <div class="card">
               <div class="card-body">
                 <div class="d-flex flex-nowrap">
-                  <div class="col-6  p-0">
+                  <div class="col-12  p-0">
                     <div class="col-12 p-0 d-flex">
                       <h4 
                         class="card-header 
@@ -150,13 +160,33 @@
                           local_shipping
                         </i>
                       </h4>
-                      <div class="pl-2 pt-3 pb-3">
-                        <h4 class="color-primario1">
-                          Dirección Entrega
-                        </h4>
-                        <p class="pl-2 pr-2">
-                          {{pedido.Address2}}
-                        </p>
+                      <div class="pl-2 pt-3 pb-3 col-11 d-flex">
+                        <div class="col-6">
+                          <h4 class="color-primario1">
+                            Dirección Entrega
+                          </h4>
+                          <p class="pl-2 pr-2">
+                            {{pedido.Address2}}
+                          </p>
+                        </div>
+                        <div class="col-6 d-flex flex-column p-0">
+                          <div class="d-flex">
+                            <h4 class="abel-row color-primario1">
+                              Total Unitario:
+                            </h4>
+                            <p class="m-0 pl-3">
+                              {{ pedido.DocTotal  | currency }}
+                            </p>
+                          </div>
+                          <div class="d-flex">
+                            <h4 class="abel-row color-primario1">
+                              Total Piezas:
+                            </h4>
+                            <p class="m-0 pl-4">
+                              {{getTotalProds()}}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -175,11 +205,12 @@
               <i class="material-icons">sell</i>
             </div>
             <div class="card-body">
-              <app-menu-views></app-menu-views>
+              <app-menu-views [option_active]="'list'">
+              </app-menu-views>
               <div class=" col-md-12  m-auto table-cont tab-content">
                 <div id="grid" 
                      data-toggle="tab"
-                  class=" active tab-pane">
+                  class="  tab-pane">
                 <div class="col-pane-grid">
                 <div class="wrapper-pane-grid">
                 <ng-container *ngFor="let prod of 
@@ -193,7 +224,7 @@
                     <div  class=" col-10 text-center tallas">
                       <ng-container 
                         *ngFor="let talla of 
-                          getTallas(prod.value, prod)">
+                          getTallas(prod.value[0].U_Tallas,prod.key)">
                         <h5 class="p-0 m-0 text-ellipsis">
                           <strong>{{talla}}</strong>
                         </h5>
@@ -217,7 +248,7 @@
                         <div class="col-10 text-center tallas">
                           <ng-container 
                             *ngFor="let talla of 
-                            tallas_by_estilo">
+                            getTallas(prod.value[0].U_Tallas,item.key)">
                               <strong class="col-cant">
                                 {{getQuantity(item.value,talla)}}
                               </strong>
@@ -239,86 +270,66 @@
                 </div>
                 </div>
                 </div>
-                <div id="list" class=" tab-pane">
+                <div id="list" class=" active tab-pane">
                   
-                  <div class="d-flex bg-light">
-                          <strong class="text-center"
-                            style="width:50px;font-weight:600;">
-                          </strong>
-                          <strong class="text-center"
-                            style="width:100px;font-weight:600;">
-                            Cantidad
-                          </strong>
-                          <strong class="text-center" 
-                            style="width:100px;font-weight:600;">
-                            Estilo
-                          </strong>
-                          <strong 
-                            class="text-center"
-                            style="width:220px;font-weight:600;">
-                            Color
-                          </strong>
-                          <strong class="text-center"
-                            style="width:100px;font-weight:600;">
-                            Talla
-                          </strong>
-                          <strong class="text-center"
-                            style="width:300px;font-weight:600;">
-                            Descripción
-                          </strong>
-                          <strong class="text-center"
-                            style="width:200px;font-weight:600;">
-                            Factura
-                          </strong>
-                          <strong class="text-center"
-                            style="width:100px;font-weight:600;">
-                            Piezas
-                          </strong>
-                  </div>
-                    <div class="">
-                      <ng-container 
-                        *ngFor="let item of 
-                        productsList; index as num_row">
-                        <div class="d-flex text-center">
-                        <strong style="width:50px;font-weight:600;">
-                          {{num_row+1}}
-                        </strong>
-                        <p class="p-0 m-0" style="width:100px">
+                  <table class="text-center table">
+                    <thead class="bg-light">
+                      <tr>
+                        <th></th>
+                        <th>Estilo</th>
+                        <th>Color</th>
+                        <th>Talla</th>
+                        <th>Cantidad Solicitada</th>
+                        <th>Cantidad Surtida</th>
+                        <th>Cantidad Pendiente</th>
+                        <th>Factura</th>
+                      </tr>
+                    </thead>
+                    <tbody >
+                      <tr *ngFor="let item of 
+                        productsList; index as num_row
+                      ">
+                        <td>{{num_row+1}}</td>
+                        <td> 
+                          {{item.ItmsGrpNam}}
+                        </td>
+                        <td>
+                          {{item.NameColor}}
+                        </td>
+                        
+                        <td>
+                          {{item.U_Talla}}
+                        </td>
+                        <td>
                         {{
                             item.Quantity
                         }}
-                        </p>
-                        <p class="p-0 m-0" style="width:100px">
-                        {{item.ItmsGrpNam}}
-                        </p>
-                        
-                        <p class="p-0 m-0" style="width:220px">
-                          {{item.NameColor}}
-                        </p>
-                        
-                        <p class="p-0 m-0" style="width:100px">
-                          {{item.U_Talla}}
-                        </p>
-                        <p class="p-0 m-0 text-ellipsis" style="width:300px">
-                            {{item.ItemDescription}}
-                        </p>
-                        <p class="p-0 m-0 text-ellipsis" style="width:200px">
+                        </td>
+                        <td>
+                            {{item.BillQuantity ? item.BillQuantity : 0}}
+                        </td>
+                        <td>
+                          {{
+                            getPendiente(item.Quantity,item.BillQuantity)
+                          }}
+                        </td>
+                        <td>
                             {{item.BillFolio}}
-                        </p>
-                        <p class="p-0 m-0 text-ellipsis" style="width:100px">
-                            {{item.BillQuantity}}
-                        </p>
-                        </div>
-                      </ng-container>
-                      <div class="d-flex text-center">
-                        <strong style="width:50px;font-weight:600;">
-                          Totales
-                        </strong>
-                        <p class="p-0 m-0" style="width:100px">
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td>Totales</td>
+                        <td></td><td></td><td></td><td></td>
+                        <td> 
                           {{ getTotalProds() }} 
-                        </p>
-                      </div>
-                    </div>
+                        </td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  
+                    
                 </div>
               </div>
             </div>

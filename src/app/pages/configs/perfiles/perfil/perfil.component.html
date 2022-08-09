@@ -30,7 +30,7 @@
               cdkDropList
               #actionsRol="cdkDropList"
               [cdkDropListData]="actions.controls"
-              [cdkDropListConnectedTo]="actionsModules"
+              [cdkDropListConnectedTo]=""
               (cdkDropListDropped)="drop($event)"
               class=" p-2 d-flex flex-wrap justify-content-around
               bg-primario3 actions-wrapper"
@@ -81,7 +81,7 @@
                   cdkDrag
                   *ngIf="printeable(action.id)"
                   class="pl-2 pr-2 pt-4 pb-4 bg-primario1 m-1
-                          text-white"
+                          text-white drag-item"
                 >
                   {{action.name}}
                 </p>

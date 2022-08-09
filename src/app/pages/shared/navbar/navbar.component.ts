@@ -1,9 +1,9 @@
-import {Location} from '@angular/common';
-import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {NavigationEnd, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
-import {GlobalService} from '../../../global.service';
-import {ROUTES} from '../.././sidebar/sidebar.component';
+import { Location } from '@angular/common';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { GlobalService } from '../../../global.service';
+import { ROUTES } from '../.././sidebar/sidebar.component';
 const misc: any = {
     navbar_menu_visible: 0,
     active_collapse: true,
@@ -17,7 +17,7 @@ declare var $: any;
 })
 
 export class NavbarComponent implements OnInit {
-    private duser;
+    duser;
     nombreUsuario:any='';
     private listTitles: any[];
     location: Location;

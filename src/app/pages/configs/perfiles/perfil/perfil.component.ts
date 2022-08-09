@@ -111,14 +111,12 @@ export class PerfilComponent implements OnInit {
   }
 
   removeAction(index:number):void{
-    console.log(this.actions.value[index]);
-    this.addToModule(this.actions.value[index]);
+    //this.addToModule(this.actions.value[index]);
     this.actions.removeAt(index);
   }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      console.log('in the same');
       moveItemInArray(
         event.container.data,
         event.previousIndex,
@@ -141,6 +139,8 @@ export class PerfilComponent implements OnInit {
     let index = this.modules.findIndex(
       el => el.id === element.id_module
     );
+    console.log(index);
+    console.log(this.modules[index].actions)
     this.modules[index].actions.push({
       id: element.actionId,
       name: element.name
