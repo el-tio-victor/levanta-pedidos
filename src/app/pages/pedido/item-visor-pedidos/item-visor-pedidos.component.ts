@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ToastrService} from "ngx-toastr";
+import Swal from "sweetalert2";
 import {GlobalService} from "../../../global.service";
 
 
@@ -115,7 +116,7 @@ export class ItemVisorPedidosComponent implements OnInit {
     let element_by_talla = this.getByTalla(talla);
     console.log(this.prods_pedido);
     //element_by_talla = this.getByTalla(talla);
-    console.log(element_by_talla);
+    console.log('element_by_talla',element_by_talla);
     let ItemCode =  element_by_talla ?
       element_by_talla.ItemCode :
       null;
@@ -144,6 +145,25 @@ export class ItemVisorPedidosComponent implements OnInit {
       el.target.blur;
       return;
     } 
+
+    if(el.target.value % this.determinaCantidadxTalla(element_by_talla)){
+      Swal.fire({
+        'title' : 'Recuerda los valores permitidos...',
+        'html' : `<p>Tallas XS-XL multiplos de ${
+          element_by_talla.SalPackUn
+          } </p><p>Para el resto de tallas multiplos de 5</p>`,
+        'icon': 'info'
+      });
+      let index = this.getIndex(ItemCode);
+      el.target.value =  index == -1 ?
+        "" : 
+        this.prods_pedido[index].Quantity;
+
+      el.target.blur;
+      return;
+
+    }
+    
     let item = {
       ItemCode,
       Quantity:el.target.value,
@@ -163,6 +183,12 @@ export class ItemVisorPedidosComponent implements OnInit {
 
     this.addItem(item);
     console.log(this.prods_pedido);
+  }
+
+  determinaCantidadxTalla(item:any){
+    let tallas_x_caja = ['XS','S','M','L','XL'];
+    return tallas_x_caja.includes(item.U_Talla) ?
+      item.SalPackUn : 5;
   }
 
   private getIndex(itemCode:any){
