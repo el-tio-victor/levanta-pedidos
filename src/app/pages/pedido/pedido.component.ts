@@ -502,6 +502,28 @@ export class PedidoComponent implements OnInit {
     return Object.keys(this.data_to_view).length;
   }
 
+  
+  countItems():any{
+     let items = Object.values(this.data_to_view)
+    .reduce(function (result,actual) {
+      
+        let sum_prods = 0;
+        if(Array.isArray(actual['prods']))
+          {
+
+           sum_prods = actual['prods'].reduce((res,act) => {
+            return   parseInt(res) + parseInt(act.Quantity)
+        },0)
+          }
+
+      if(typeof result === "number")
+      return  result + sum_prods ;
+
+    }, 0 );
+
+    return items  ? items : 0;
+  }
+
   isDisabledBtnClear() {
     if (this.itemsAgrupados) {
       if (Object.keys(this.itemsAgrupados).length > 0) return false;
