@@ -86,6 +86,11 @@
         <div 
           *ngIf="!isEmptyCart()"
           class="d-flex align-items-center">
+          <strong class="mr-4">
+            <b>
+            $ {{ getMonto() | number:'.0-2'}}
+            </b>
+          </strong>
           <button 
             matTooltip="Eliminar Pedido"
             [matTooltipPosition]="'above'"

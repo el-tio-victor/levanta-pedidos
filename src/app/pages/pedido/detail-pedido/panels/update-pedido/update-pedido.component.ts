@@ -67,9 +67,10 @@ export class UpdatePedidoComponent implements OnInit {
   isValidValues(){
     
       for (const i in this.data.items) {
-        console.log(this.data.items[i].prods);
+        console.log('isValidValue',this.data.items[i].prods);
         let  result = this.data.items[i].prods.find(
-          item => isNaN( parseInt(item.Quantity)) || item.Quantity < 0
+          item => isNaN( parseInt(item.Quantity)) || item.Quantity < 0 ||
+            (item.Quantity%this.globalService.determinaCantidadxTalla(item))
         );  
         if( result ){
           
@@ -79,7 +80,6 @@ export class UpdatePedidoComponent implements OnInit {
       }
       this.is_valid_edicion_ped_emit.emit(true);
   }
-
 
   deleteStyle(estilo:string){
       delete this.data.items[estilo]

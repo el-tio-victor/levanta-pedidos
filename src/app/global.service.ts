@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {Susutile} from './Susutile';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Susutile } from './Susutile';
 
 declare var jQuery:any;
 declare var $:any;
@@ -98,6 +98,13 @@ export class GlobalService {
         this.router.navigateByUrl('/');
       }
     }
+
+
+  determinaCantidadxTalla(item:any){
+    let tallas_x_caja = ['XS','S','M','L','XL'];
+    return tallas_x_caja.includes(item.U_Talla) ?
+      item.SalPackUn : 5;
+  }
 
     getSessionUP(){
       this.cargaCss();

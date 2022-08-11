@@ -146,7 +146,7 @@ export class ItemVisorPedidosComponent implements OnInit {
       return;
     } 
 
-    if(el.target.value % this.determinaCantidadxTalla(element_by_talla)){
+    if(el.target.value % this.globalService.determinaCantidadxTalla(element_by_talla)){
       Swal.fire({
         'title' : 'Recuerda los valores permitidos...',
         'html' : `<p>Tallas XS-XL multiplos de ${
@@ -171,25 +171,21 @@ export class ItemVisorPedidosComponent implements OnInit {
       Talla: element_by_talla.U_Talla,
       U_HEX: element_by_talla.U_HEX,
       SalPackUn: element_by_talla.SalPackUn,
+      Price: element_by_talla.Price,
     }; 
 
 
     this.prod_add_emit.emit(item);
     this.is_saved_order.emit(false);
 
-    console.log( ItemCode );
-    console.log(el.target.value);
+    //console.log( ItemCode );
+    //console.log(el.target.value);
 
 
     this.addItem(item);
-    console.log(this.prods_pedido);
+    //console.log(this.prods_pedido);
   }
 
-  determinaCantidadxTalla(item:any){
-    let tallas_x_caja = ['XS','S','M','L','XL'];
-    return tallas_x_caja.includes(item.U_Talla) ?
-      item.SalPackUn : 5;
-  }
 
   private getIndex(itemCode:any){
     return this.prods_pedido.findIndex(

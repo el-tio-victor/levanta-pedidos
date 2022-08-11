@@ -32,6 +32,7 @@ export class PedidoComponent implements OnInit {
 
   AddressName: string = "";
   Addresses: any[];
+  monto_total;
 
   tallas: string[] = [];
 
@@ -49,11 +50,12 @@ export class PedidoComponent implements OnInit {
     private catalogosService: CatalogosService,
     private globalService: GlobalService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
   ) {
     this.datauser = this.globalService.getData();
     this.estilos = this.datauser.itemGroups;
     this.Addresses = this.datauser.Addresses;
+
 
     //Armo el objeto a enviar con los productos que se
     //seleccionarán posteriormente
@@ -506,14 +508,15 @@ export class PedidoComponent implements OnInit {
   countItems():any{
      let items = Object.values(this.data_to_view)
     .reduce(function (result,actual) {
-      
         let sum_prods = 0;
         if(Array.isArray(actual['prods']))
           {
-
-           sum_prods = actual['prods'].reduce((res,act) => {
+           
+            sum_prods = actual['prods'].reduce((res,act) => {
+             //console.log(act, self.monto_total);
+             //self.monto_total = act.Quantity * act.Price;
             return   parseInt(res) + parseInt(act.Quantity)
-        },0)
+            },0)
           }
 
       if(typeof result === "number")
@@ -524,6 +527,29 @@ export class PedidoComponent implements OnInit {
     return items  ? items : 0;
   }
 
+  getMonto(){
+     let items = Object.values(this.data_to_view)
+    .reduce(function (result,actual) {
+        let sum_prods = 0;
+        if(Array.isArray(actual['prods']))
+          {
+           
+            sum_prods = actual['prods'].reduce((res,act) => {
+             let monto_total = act.Quantity * act.Price;
+            return   res + monto_total
+            },0)
+          }
+
+      if(typeof result === "number")
+      return  result + sum_prods ;
+
+    }, 0 );
+
+    return items  ? items : 0;
+
+  }
+
+
   isDisabledBtnClear() {
     if (this.itemsAgrupados) {
       if (Object.keys(this.itemsAgrupados).length > 0) return false;
@@ -531,5 +557,7 @@ export class PedidoComponent implements OnInit {
     return true;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.monto_total = 0;
+  }
 }
