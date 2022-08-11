@@ -81,6 +81,29 @@ export class DetailPedidoComponent implements OnInit {
     return items  ? items : 0;
   }
 
+
+  getMonto(){
+     let items = Object.values(this.data.items)
+    .reduce(function (result,actual) {
+        let sum_prods = 0;
+        if(Array.isArray(actual['prods']))
+          {
+           
+            sum_prods = actual['prods'].reduce((res,act) => {
+             let monto_total = act.Quantity * act.Price;
+            return   res + monto_total
+            },0)
+          }
+
+      if(typeof result === "number")
+      return  result + sum_prods ;
+
+    }, 0 );
+
+    return items  ? items : 0;
+
+  }
+
   setDireccionEntrega(value:any){
     this.direccion_entrega = value;
   }
