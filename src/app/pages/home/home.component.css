@@ -1,3 +1,9 @@
+h1{
+  font-family: "Biko_regular",Helvetica, sans-serif!important;
+  font-size: 5.2rem!important;
+  font-weight: 700;
+
+}
 h1 strong{
   border-bottom: solid .76rem #999;
 }

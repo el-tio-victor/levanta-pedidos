@@ -11,14 +11,20 @@
     </h3>
     <h4 
       *ngIf="index_step != 1"
-      class="mt-3 d-flex justify-content-center
+      class="mt-3 d-flex justify-content-around
+       align-items-center
        rounded bg-white cont-counter">
-      <strong class="counter-items">
-        {{countItems()}}
-      </strong>
-      <small class="ml-1 color-primario1 label-counter">
-        Piezas
+      <small>
+        $ {{getMonto() | number:'.0-2'}}
       </small>
+      <div>
+        <strong class="badge badge-primary bg-primario1">
+          {{countItems()}}
+        </strong>
+        <small class="ml-1 color-primario1 label-counter">
+          Piezas
+        </small>
+        </div>
     </h4>
     <button 
       (click)="onNoClick(false)"

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ToastrService} from "ngx-toastr";
+import Swal from "sweetalert2";
 import {GlobalService} from "../../../global.service";
 
 
@@ -115,7 +116,7 @@ export class ItemVisorPedidosComponent implements OnInit {
     let element_by_talla = this.getByTalla(talla);
     console.log(this.prods_pedido);
     //element_by_talla = this.getByTalla(talla);
-    console.log(element_by_talla);
+    console.log('element_by_talla',element_by_talla);
     let ItemCode =  element_by_talla ?
       element_by_talla.ItemCode :
       null;
@@ -144,6 +145,25 @@ export class ItemVisorPedidosComponent implements OnInit {
       el.target.blur;
       return;
     } 
+
+    if(el.target.value % this.globalService.determinaCantidadxTalla(element_by_talla)){
+      Swal.fire({
+        'title' : 'Recuerda los valores permitidos...',
+        'html' : `<p>Tallas XS-XL multiplos de ${
+          element_by_talla.SalPackUn
+          } </p><p>Para el resto de tallas multiplos de 5</p>`,
+        'icon': 'info'
+      });
+      let index = this.getIndex(ItemCode);
+      el.target.value =  index == -1 ?
+        "" : 
+        this.prods_pedido[index].Quantity;
+
+      el.target.blur;
+      return;
+
+    }
+    
     let item = {
       ItemCode,
       Quantity:el.target.value,
@@ -151,19 +171,21 @@ export class ItemVisorPedidosComponent implements OnInit {
       Talla: element_by_talla.U_Talla,
       U_HEX: element_by_talla.U_HEX,
       SalPackUn: element_by_talla.SalPackUn,
+      Price: element_by_talla.Price,
     }; 
 
 
     this.prod_add_emit.emit(item);
     this.is_saved_order.emit(false);
 
-    console.log( ItemCode );
-    console.log(el.target.value);
+    //console.log( ItemCode );
+    //console.log(el.target.value);
 
 
     this.addItem(item);
-    console.log(this.prods_pedido);
+    //console.log(this.prods_pedido);
   }
+
 
   private getIndex(itemCode:any){
     return this.prods_pedido.findIndex(
